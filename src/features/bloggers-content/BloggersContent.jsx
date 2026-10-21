@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { SiteCases, SiteFooter, SitePlatforms } from '../../shared/ui/site-sections'
 import introPanels from '../../assets/figma/bloggers/intro-panels.png'
 import growthPanels from '../../assets/figma/bloggers/growth-panels.png'
@@ -17,19 +18,20 @@ const caseImages = import.meta.glob('../../assets/figma/bloggers/case-*.png', {
   import: 'default',
 })
 
-function PhoneVideo({ className, src, poster, label }) {
+function PhoneVideo({ className, src, poster, label, videoRef, isSynced }) {
   return (
     <div className={`bloggers-hero__phone ${className}`}>
       <img className="bloggers-hero__phone-frame" src={phoneFrame} alt="" aria-hidden="true" />
+      <img className="bloggers-hero__phone-video" src={poster} alt="" aria-hidden="true" />
       <video
-        className="bloggers-hero__phone-video"
+        ref={videoRef}
+        className={`bloggers-hero__phone-video bloggers-hero__phone-video--motion${isSynced ? ' is-synced' : ''}`}
         src={src}
         poster={poster}
-        autoPlay
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
         aria-label={label}
       />
       <span className="bloggers-hero__phone-camera" aria-hidden="true" />
@@ -38,6 +40,46 @@ function PhoneVideo({ className, src, poster, label }) {
 }
 
 function BloggersHero() {
+  const leftVideoRef = useRef(null)
+  const rightVideoRef = useRef(null)
+  const [isSynced, setIsSynced] = useState(false)
+
+  useEffect(() => {
+    const videos = [leftVideoRef.current, rightVideoRef.current]
+    let startFrame = null
+    let started = false
+    let cancelled = false
+
+    const startTogether = () => {
+      if (started || videos.some((video) => video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA)) return
+      started = true
+      startFrame = requestAnimationFrame(() => {
+        videos.forEach((video) => { video.currentTime = 0 })
+        Promise.all(videos.map((video) => video.play()))
+          .then(() => {
+            if (!cancelled) setIsSynced(true)
+          })
+          .catch(() => {
+            if (cancelled) return
+            videos.forEach((video) => video.pause())
+            started = false
+          })
+      })
+    }
+
+    videos.forEach((video) => video.addEventListener('loadeddata', startTogether))
+    startTogether()
+
+    return () => {
+      cancelled = true
+      if (startFrame !== null) cancelAnimationFrame(startFrame)
+      videos.forEach((video) => {
+        video.removeEventListener('loadeddata', startTogether)
+        video.pause()
+      })
+    }
+  }, [])
+
   return (
     <section className="bloggers-hero" aria-labelledby="bloggers-title">
       <div className="bloggers-hero__glow" aria-hidden="true" />
@@ -47,8 +89,8 @@ function BloggersHero() {
       </div>
       <img className="bloggers-hero__poster bloggers-hero__poster--left" src={leftPoster} alt="" />
       <img className="bloggers-hero__poster bloggers-hero__poster--right" src={rightPoster} alt="" />
-      <PhoneVideo className="bloggers-hero__phone--left" src={rightVideo} poster={leftPoster} label="Видео блогера в левой карточке" />
-      <PhoneVideo className="bloggers-hero__phone--right" src={leftVideo} poster={rightPoster} label="Видео блогера в правой карточке" />
+      <PhoneVideo className="bloggers-hero__phone--left" src={rightVideo} poster={leftPoster} label="Видео блогера в левой карточке" videoRef={leftVideoRef} isSynced={isSynced} />
+      <PhoneVideo className="bloggers-hero__phone--right" src={leftVideo} poster={rightPoster} label="Видео блогера в правой карточке" videoRef={rightVideoRef} isSynced={isSynced} />
       <div className="bloggers-hero__content">
         <h1 id="bloggers-title">Зарабатывайте на своём блоге <span>уже при 1000 подписчиков</span></h1>
         <p>Платформа с рекламными проектами для блогеров и UGC-креаторов</p>
