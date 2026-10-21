@@ -45,7 +45,7 @@ function LoopingVideo({ src, label, className }) {
 export function PublishersFormats() {
   return (
     <section className="publishers-formats" aria-labelledby="publishers-formats-title">
-      <h2 id="publishers-formats-title">Все платформы и <span>форматы</span></h2>
+      <h2 id="publishers-formats-title">Все платформы и <span>форматы</span></h2>
 
       {imageDevices.map((device) => <ImageDevice key={device.name} device={device} />)}
 

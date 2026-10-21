@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 
 import { TintLabPage } from './pages/tint-lab'
 import './index.css'
+import './shared/lib/installTypography'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

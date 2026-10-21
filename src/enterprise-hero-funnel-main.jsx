@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+import './shared/lib/installTypography'
 import { EnterpriseHeroFunnelPage } from './pages/enterprise-hero-funnel/EnterpriseHeroFunnelPage'
 
 if ('scrollRestoration' in window.history) {

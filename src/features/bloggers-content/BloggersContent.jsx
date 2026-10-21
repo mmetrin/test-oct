@@ -54,7 +54,7 @@ function BloggersHero() {
         <p>Платформа с рекламными проектами для блогеров и UGC-креаторов</p>
         <div className="bloggers-hero__stats" aria-label="Getblogger в цифрах">
           <div><strong>300+</strong><span>ведущих рекламодателей России</span></div>
-          <div><strong>10 <small>лет</small></strong><span>на рынке</span></div>
+          <div><strong>10 <small>лет</small></strong><span>на рынке</span></div>
           <div><strong>150+ <small>тыс.</small></strong><span>блогеров уже вместе с нами</span></div>
         </div>
         <a className="bloggers-hero__join" href="#download-app">Присоединиться к Getblogger</a>
