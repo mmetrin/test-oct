@@ -13,8 +13,6 @@ const gateHead = `
   html[data-mts-auth="ok"] #mts-access { display: none; }
   #mts-access { position: fixed; inset: 0; z-index: 2147483647; display: grid; place-items: center; padding: 24px; background: #f6f7fb; font-family: Arial, sans-serif; }
   #mts-access form { width: min(100%, 380px); padding: 40px; border: 1px solid #e8e9ef; border-radius: 24px; background: #fff; box-shadow: 0 22px 70px #1d1d3514; }
-  #mts-access h1 { margin: 0 0 10px; color: #1a1a1f; font-size: 30px; line-height: 1.15; }
-  #mts-access p { margin: 0 0 28px; color: #666977; font-size: 15px; line-height: 1.5; }
   #mts-access label { display: block; margin-bottom: 8px; color: #373944; font-size: 14px; font-weight: 600; }
   #mts-access input { box-sizing: border-box; width: 100%; height: 48px; padding: 0 14px; border: 1px solid #cfd1da; border-radius: 10px; background: #fff; color: #1a1a1f; font: inherit; }
   #mts-access input:focus { border-color: #e30613; outline: 2px solid #e3061333; }
@@ -27,10 +25,8 @@ const gateHead = `
 </script>`
 
 const gateBody = `
-<div id="mts-access" role="dialog" aria-modal="true" aria-labelledby="mts-access-title">
+<div id="mts-access" role="dialog" aria-modal="true" aria-label="Доступ к сайту">
   <form id="mts-access-form">
-    <h1 id="mts-access-title">МТС Ads</h1>
-    <p>Введите пароль для просмотра сайта.</p>
     <label for="mts-access-password">Пароль</label>
     <input id="mts-access-password" type="password" autocomplete="current-password" required>
     <button type="submit">Открыть сайт</button>
