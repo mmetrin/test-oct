@@ -1,0 +1,176 @@
+.contacts-page {
+  --contacts-bg: #f7fafd;
+  --contacts-text: #000814;
+  --contacts-muted: #677fa2;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--contacts-bg);
+  color: var(--contacts-text);
+  font-family: 'MTS Wide', Arial, sans-serif;
+}
+
+.contacts-page a { color: inherit; text-decoration: none; }
+.contacts-page p, .contacts-page h1 { margin: 0; }
+
+.contacts-page__intro {
+  position: relative;
+  height: 403px;
+  padding-top: 162px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 960px 520px at 5% 94%, rgb(164 188 226 / 47%), transparent 75%),
+    radial-gradient(ellipse 980px 410px at 58% 53%, rgb(255 218 218 / 44%), transparent 76%),
+    #f7fafd;
+  text-align: center;
+}
+.contacts-page__intro::before {
+  position: absolute;
+  inset: -100px -12%;
+  background: url('../../assets/figma/contacts/glow.png') center / cover no-repeat;
+  content: '';
+  opacity: .13;
+  filter: blur(65px);
+  -webkit-mask-image: radial-gradient(ellipse 75% 80% at 50% 50%, #000 35%, transparent 100%);
+  mask-image: radial-gradient(ellipse 75% 80% at 50% 50%, #000 35%, transparent 100%);
+  pointer-events: none;
+  transform: rotate(180deg);
+}
+.contacts-page__intro h1 { position: relative; font: 500 50px/1.1 'MTS Wide', Arial, sans-serif; }
+
+.contacts-page__map-section {
+  position: relative;
+  height: 1100px;
+  background: radial-gradient(ellipse 75% 65% at 65% 45%, #f5f8fb, #e7eef4);
+}
+.contacts-page__map {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 950ms ease-in-out;
+}
+.contacts-page__map-section[data-map-ready='true'] .contacts-page__map { opacity: 1; pointer-events: auto; }
+.contacts-page__place-label {
+  position: absolute;
+  z-index: 1;
+  top: calc(50% - 90px);
+  left: calc(50% + 201px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 180px;
+  padding: 10px 13px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 13%);
+  font-family: 'MTS Text', Arial, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: opacity 700ms ease-in-out, box-shadow 180ms ease;
+}
+.contacts-page__map-section[data-map-ready='true'] .contacts-page__place-label { opacity: 1; pointer-events: auto; }
+.contacts-page__place-label:hover { box-shadow: 0 6px 20px rgb(0 0 0 / 18%); }
+.contacts-page__place-icon {
+  display: flex;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: #ff0032;
+  color: #fff;
+}
+.contacts-page__place-icon svg { width: 16px; height: 16px; }
+.contacts-page__place-label strong, .contacts-page__place-label small { display: block; white-space: nowrap; }
+.contacts-page__place-label strong { font-size: 15px; font-weight: 600; line-height: 18px; }
+.contacts-page__place-label small { margin-top: 2px; color: #788292; font-size: 12px; line-height: 15px; }
+.contacts-page__cards {
+  position: absolute;
+  z-index: 2;
+  top: -120px;
+  left: 50%;
+  width: min(1440px, calc(100% - 48px));
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.contacts-card {
+  position: relative;
+  border-radius: 40px;
+  background: var(--contacts-bg);
+  box-shadow: 0 10px 40px rgb(0 0 0 / 14%);
+  pointer-events: auto;
+}
+.contacts-card--main { min-height: 407px; padding: 40px; }
+.contacts-card__heading { font: 400 17px/24px 'MTS Wide', Arial, sans-serif; }
+.contacts-card__columns {
+  display: grid;
+  grid-template-columns: 308px minmax(0, 1fr);
+  gap: 140px;
+  width: 100%;
+  margin-top: 60px;
+}
+.contacts-card__emails, .contacts-card__office { display: flex; flex-direction: column; gap: 32px; }
+.contacts-card__office { max-width: 600px; }
+.contacts-detail { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.contacts-detail__label { font: 400 17px/24px 'MTS Wide', Arial, sans-serif; }
+.contacts-detail__value { font: 500 24px/28px 'MTS Wide', Arial, sans-serif; }
+.contacts-detail__value--link { color: #0070e5 !important; }
+.contacts-detail__value--link:hover, .contacts-detail__address:hover { text-decoration: underline; }
+.contacts-detail__hours { display: flex; width: 260px; align-items: center; gap: 8px; }
+.contacts-detail__rule { display: block; flex: 0 0 95px; width: 95px; height: 1px; }
+.contacts-detail__address { color: var(--contacts-text) !important; }
+.contacts-card--marketolog {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  width: 495px;
+  min-height: 223px;
+  padding: 40px;
+}
+@media (max-width: 1400px) {
+  .contacts-page__place-label { top: calc(50% + 7px); left: calc(50% + 160px); transform: translate(calc(-100% - 16px), -50%); }
+  .contacts-card--marketolog { position: relative; width: 100%; min-height: 0; gap: 24px; margin-top: 16px; }
+}
+.contacts-footer { position: relative; z-index: 1; margin-top: -212px; }
+@media (max-width: 1200px) {
+  .contacts-card__columns { gap: 60px; }
+  .contacts-card--marketolog { width: 410px; }
+}
+@media (max-width: 1100px) {
+  .contacts-page__place-label { top: calc(50% + 65px); left: calc(50% - 20px); }
+}
+@media (max-width: 960px) {
+  .contacts-page__map-section { height: 950px; }
+  .contacts-page__cards { top: -100px; }
+  .contacts-card--main { min-height: 0; }
+  .contacts-card__columns { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .contacts-card--marketolog { position: relative; width: 100%; margin-top: 16px; min-height: 0; gap: 24px; }
+  .contacts-footer { margin-top: -160px; }
+}
+@media (max-width: 650px) {
+  .contacts-page__place-label { top: calc(50% + 235px); left: calc(50% + 30px); min-width: 170px; padding: 8px 10px; }
+  .contacts-page__intro { height: 317px; padding-top: 124px; }
+  .contacts-page__intro h1 { font-size: 36px; }
+  .contacts-page__map-section { height: 850px; }
+  .contacts-page__cards { top: -95px; width: calc(100% - 32px); }
+  .contacts-card { border-radius: 28px; }
+  .contacts-card--main, .contacts-card--marketolog { padding: 24px; }
+  .contacts-card__heading, .contacts-detail__label { font-size: 14px; line-height: 20px; }
+  .contacts-card__columns { display: flex; flex-direction: column; gap: 32px; margin-top: 28px; }
+  .contacts-card__emails, .contacts-card__office { gap: 20px; }
+  .contacts-detail { gap: 4px; }
+  .contacts-detail__value { font-size: 19px; line-height: 25px; }
+  .contacts-detail__hours { width: auto; }
+  .contacts-footer { margin-top: -120px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contacts-page__map, .contacts-page__place-label { transition-duration: 0ms; }
+}

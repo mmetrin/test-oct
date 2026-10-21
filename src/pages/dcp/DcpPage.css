@@ -1,0 +1,12 @@
+html:has(.dcp-page),
+body:has(.dcp-page) {
+  overflow-x: clip;
+}
+
+.dcp-page {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #000814;
+  color: #ffffff;
+}

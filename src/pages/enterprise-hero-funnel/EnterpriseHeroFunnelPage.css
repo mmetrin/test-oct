@@ -1,0 +1,129 @@
+.enterprise-hero-funnel-page {
+  background: #f7fafd;
+}
+
+.enterprise-hero-funnel-page__tabs {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+  padding: 0 24px;
+}
+
+.enterprise-hero-funnel-page__tabs > .audience-segment-section__tabs {
+  width: auto;
+}
+
+.enterprise-hero-funnel-page__tabs .segmented-control {
+  justify-content: space-between;
+  width: min(882px, calc(100vw - 48px));
+  padding: 6px;
+  background: #eaf0f6;
+  backdrop-filter: none;
+}
+
+.enterprise-hero-funnel-page__tabs .segmented-control__item {
+  border: 1px solid transparent;
+  color: #000814;
+}
+
+.enterprise-hero-funnel-page__tabs .segmented-control__item.is-active {
+  border: 1px solid #ff0032;
+  border-radius: var(--New-group-border-radius-card, 40px);
+  background: #fff;
+}
+
+.enterprise-hero-funnel-page .funnel-stage-section__button,
+.enterprise-hero-funnel-page .enterprise-lead-scene__form .lead-showcase-section__submit.action-button {
+  border: 1px solid #ff0032;
+  background: #fff;
+  color: #ff0032;
+}
+
+.enterprise-hero-funnel-page .funnel-stage-section__button:hover,
+.enterprise-hero-funnel-page .enterprise-lead-scene__form .lead-showcase-section__submit.action-button:hover:not(:disabled) {
+  background: #fff;
+}
+
+.enterprise-hero-funnel-page__tabs .segmented-control__item:hover:not(:disabled):not(.is-active) {
+  background: #dce7f1;
+}
+
+.enterprise-hero-funnel-page .funnel-stage-section {
+  z-index: auto;
+  height: auto;
+  min-height: 0;
+  margin-top: 70px;
+  padding-bottom: 100px;
+  background: transparent;
+}
+
+.enterprise-hero-funnel-page .funnel-stage-section__scene {
+  position: relative;
+  top: auto;
+  height: 730px;
+  background: transparent;
+}
+
+.enterprise-hero-funnel-page .funnel-stage-section__next-preview {
+  display: none;
+}
+
+.enterprise-hero-funnel-page .funnel-stage-section__container--reveal,
+.enterprise-hero-funnel-page .funnel-stage-section__container--reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  transition: none;
+  will-change: auto;
+}
+
+.enterprise-hero-funnel-page .funnel-stage-section__dynamic-content > * {
+  animation: none;
+  will-change: auto;
+}
+
+.enterprise-hero-funnel-page .funnel-stage-section__stages li:not(.is-active) {
+  color: #405a73;
+}
+
+.enterprise-hero-funnel-page .funnel-stage-section__container {
+  padding-top: 0;
+}
+
+@media (min-width: 841px) {
+  .enterprise-hero-funnel-page .funnel-stage-section__funnel-export {
+    top: calc(118px - max(0px, calc((100vh - 730px) / 2)));
+    left: calc(50% + 170px);
+    width: 570px;
+    height: auto;
+  }
+
+  .enterprise-hero-funnel-page .funnel-stage-section__stages {
+    left: 212px;
+  }
+}
+
+@media (max-width: 599px) {
+  .enterprise-hero-funnel-page__tabs {
+    display: none;
+  }
+
+  .enterprise-hero-funnel-page .funnel-stage-section__scene {
+    height: auto;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 840px) {
+  .enterprise-hero-funnel-page__tabs {
+    justify-content: flex-start;
+    margin-top: 0;
+    padding: 0 20px;
+    overflow-x: auto;
+  }
+
+  .enterprise-hero-funnel-page__tabs .segmented-control {
+    flex: 0 0 auto;
+    width: max-content;
+  }
+}

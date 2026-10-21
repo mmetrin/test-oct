@@ -1,0 +1,27 @@
+// Each slot moves farther from the focused card and deeper into the scene.
+export const carouselSettings = {
+  cardWidth: 324,
+  horizontalSlots: [0, 215, 455, 655, 830, 990],
+  verticalSlots: [0, 14, 34, 54, 72, 88],
+  depthSlots: [120, 30, -90, -190, -270, -340],
+  rotationSlots: [0, 18, 48, 64, 72, 76],
+  scaleSlots: [1.16, 0.92, 0.8, 0.68, 0.58, 0.5],
+  blurSlots: [0, 1.6, 7, 10, 13, 15],
+  opacitySlots: [1, 1, 0.68, 0.42, 0.18, 0],
+  lightFadeSlots: [0, 0.12, 0.42, 0.68, 0.82, 0.88],
+  perspective: 850,
+  transitionDuration: 650,
+  mobile: {
+    cardWidth: 238,
+    horizontalSlots: [0, 115, 250, 365, 475, 570],
+    verticalSlots: [0, 12, 28, 44, 58, 70],
+    depthSlots: [100, 10, -90, -180, -260, -330],
+    rotationSlots: [0, 30, 55, 68, 74, 78],
+    scaleSlots: [1.11, 0.85, 0.72, 0.6, 0.52, 0.46],
+    blurSlots: [0, 1.7, 6, 9, 12, 14],
+    opacitySlots: [1, 1, 0.62, 0.38, 0.16, 0],
+    lightFadeSlots: [0, 0.16, 0.48, 0.72, 0.84, 0.9],
+    perspective: 900,
+    transitionDuration: 480,
+  },
+}

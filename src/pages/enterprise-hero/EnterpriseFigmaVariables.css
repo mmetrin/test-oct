@@ -1,0 +1,55 @@
+/* Figma hv9SzQ7vp47O3o0eAU0Rxq — Theme: Day (red), Platform: Desktop. */
+.enterprise-hero-page {
+  --mts-bg-base: rgb(247 250 253);
+  --mts-txt-primary: rgb(0 8 20 / 93%);
+  --mts-bg-dark: rgb(234 240 246);
+  --mts-bg-dark-2: rgb(241 245 249);
+  --mts-bg-states-link-action: rgb(0 112 229);
+  --mts-bg-states-link-action-hover: rgb(0 112 229);
+  --mts-bg-states-action: rgb(255 0 50);
+  --mts-bg-states-action-hover: rgb(228 0 46);
+  --mts-txt-secondary: rgb(103 127 162);
+  --mts-txt-light-blue: rgb(64 90 115);
+  --mts-bg-states-action-active: rgb(255 41 83);
+  --mts-bg-light-primary: rgb(203 233 255);
+  --mts-txt-primary-on-light: rgb(0 8 20);
+  --mts-txt-primary-on-dark: rgb(255 255 255);
+  --mts-neutral-1: rgb(154 154 154 / 10%);
+  --mts-stroke-neutral-0: rgb(103 131 173 / 28%);
+  --mts-bg-neutral-0: rgb(239 240 245);
+  --mts-bg-logo-monochrome: rgb(147 173 200);
+  --mts-bg-light-color: rgb(247 250 253);
+  --mts-white: rgb(255 255 255);
+  --mts-border-radius-big-card-border-radius: 40px;
+  --mts-border-radius-mini-card-border-radius: 20px;
+}
+
+.enterprise-hero-page[data-mts-theme='night'] {
+  --mts-bg-base: rgb(0 6 15);
+  --mts-txt-primary: rgb(255 255 255 / 93%);
+  --mts-bg-dark: rgb(11 17 25);
+  --mts-bg-dark-2: rgb(8 13 22);
+  --mts-bg-states-link-action: rgb(54 154 254);
+  --mts-bg-states-link-action-hover: rgb(54 154 254);
+  --mts-bg-states-action: rgb(54 154 254);
+  --mts-bg-states-action-hover: rgb(11 87 163);
+  --mts-txt-secondary: rgb(127 140 159);
+  --mts-txt-light-blue: rgb(235 241 246);
+  --mts-bg-states-action-active: rgb(109 176 243);
+  --mts-bg-light-primary: rgb(203 233 255);
+  --mts-txt-primary-on-light: rgb(0 8 20);
+  --mts-txt-primary-on-dark: rgb(255 255 255);
+  --mts-neutral-1: rgb(154 154 154 / 10%);
+  --mts-stroke-neutral-0: rgb(255 255 255 / 12%);
+  --mts-bg-neutral-0: rgb(255 255 255 / 12%);
+  --mts-bg-logo-monochrome: rgb(147 173 200);
+  --mts-bg-light-color: rgb(247 250 253);
+  --mts-white: rgb(255 255 255);
+}
+
+@media (max-width: 760px) {
+  .enterprise-hero-page {
+    --mts-border-radius-big-card-border-radius: 32px;
+    --mts-border-radius-mini-card-border-radius: 20px;
+  }
+}

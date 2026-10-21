@@ -1,0 +1,56 @@
+.audience-transfer-impulses {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  mask-image: linear-gradient(to bottom, transparent, #000 95px, #000 245px, transparent 365px);
+  pointer-events: none;
+  opacity: 1;
+}
+
+.audience-transfer-impulses__particle {
+  position: absolute;
+  width: var(--impulse-length);
+  height: 1px;
+  transform-origin: left center;
+  opacity: 0;
+  background: linear-gradient(90deg, rgb(var(--impulse-color) / 100%), rgb(var(--impulse-color) / 42%) 35%, transparent);
+}
+
+.audience-transfer-impulses__particle::before {
+  content: '';
+  position: absolute;
+  top: -0.25px;
+  left: 0;
+  width: 1.5px;
+  height: 1.5px;
+  border-radius: 50%;
+  background: #b8d5ff;
+  box-shadow: 0 0 2px rgb(var(--impulse-color) / 25%);
+}
+
+/* A few blue leading beads add depth without turning every stream into a dot. */
+.audience-transfer-impulses__particle--bead::before {
+  top: -1.25px;
+  left: -1px;
+  width: 3.5px;
+  height: 3.5px;
+  background: radial-gradient(circle at 35% 30%, #d9e9ff, #80b3ff 48%, #679ff2);
+  box-shadow: 0 0 5px rgb(128 179 255 / 55%);
+}
+
+.audience-segment-section__content--visible .audience-transfer-impulses__particle {
+  animation: audience-transfer-impulse var(--impulse-duration) linear var(--flow-start) infinite;
+}
+
+@keyframes audience-transfer-impulse {
+  0% { transform: translateX(0); opacity: 0; }
+  28% { opacity: 0.5; }
+  65% { opacity: 0.3; }
+  100% { transform: translateX(-160px); opacity: 0; }
+}
+
+@media (max-width: 840px), (prefers-reduced-motion: reduce) {
+  .audience-transfer-impulses { display: none; }
+  .audience-transfer-impulses,
+  .audience-transfer-impulses__particle { animation: none !important; }
+}

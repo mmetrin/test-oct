@@ -1,0 +1,195 @@
+.audience-segment-section {
+  position: relative;
+  z-index: 4;
+  overflow: hidden;
+  background: #f7fafd;
+  color: #000814;
+}
+
+.audience-segment-section__tabs {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.audience-segment-section__stage {
+  position: relative;
+  min-height: 1248px;
+}
+
+.audience-segment-section__video-scene {
+  position: absolute;
+  top: 280px;
+  left: 0;
+  width: 100%;
+  height: 968px;
+  overflow: hidden;
+}
+
+.audience-segment-section__video {
+  position: absolute;
+  top: -157px;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 154px);
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(1.1);
+}
+
+.audience-segment-section__video-blur-left {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 12%, transparent 52%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 12%, transparent 52%);
+  pointer-events: none;
+}
+
+.audience-segment-section__fade {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.audience-segment-section__fade--top {
+  top: 0;
+  height: 507px;
+  background: linear-gradient(180deg, #f7fafd 0%, rgb(247 250 253 / 0%) 100%);
+}
+
+.audience-segment-section__fade--bottom {
+  bottom: 0;
+  height: 434px;
+}
+
+.audience-segment-section__logo-trail {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.audience-segment-section__logo-trail--one { top: 610px; left: calc(50% + 0px); width: 250px; }
+.audience-segment-section__logo-trail--two { top: 560px; left: calc(50% - 350px); width: 150px; }
+.audience-segment-section__logo-trail--three { top: 520px; left: calc(50% - 170px); width: 240px; transform: rotate(2deg); }
+.audience-segment-section__logo-trail--four { top: 680px; left: calc(50% - 490px); width: 190px; }
+.audience-segment-section__logo-trail--five { top: 480px; left: min(calc(50% + 450px), calc(100% - 180px)); width: 180px; }
+.audience-segment-section__logo-trail--six { top: 560px; left: calc(50% + 350px); width: 240px; transform: rotate(-2deg); }
+
+.audience-segment-section__content {
+  position: relative;
+  z-index: 3;
+  width: min(1440px, calc(100% - 80px));
+  min-height: 1248px;
+  margin: 0 auto;
+  padding-top: 263px;
+}
+
+.audience-segment-section__wordmark {
+  position: absolute;
+  top: 263px;
+  left: 0;
+  display: block;
+  width: 688px;
+  height: auto;
+  aspect-ratio: 1376 / 974;
+  object-fit: contain;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 750ms ease, transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.audience-segment-section__data-title {
+  width: min(900px, 100%);
+  margin: 0 0 0 auto;
+  font-family: 'MTS Wide', Arial, sans-serif;
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: right;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 750ms ease 80ms, transform 900ms cubic-bezier(0.22, 1, 0.36, 1) 80ms;
+}
+
+.audience-segment-section__data-title span,
+.audience-segment-section__data-title strong { display: block; }
+.audience-segment-section__data-title span { color: #7f8c9f; }
+.audience-segment-section__data-title strong { color: #000814; font: inherit; }
+
+.audience-segment-section__captions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  width: min(806px, 100%);
+  margin: 30px 0 0 auto;
+  font-family: 'MTS Text', Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 24px;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 750ms ease 160ms, transform 900ms cubic-bezier(0.22, 1, 0.36, 1) 160ms;
+}
+
+.audience-segment-section__captions p { margin: 0; }
+
+.audience-segment-section__stage--visible .audience-segment-section__wordmark,
+.audience-segment-section__stage--visible .audience-segment-section__data-title,
+.audience-segment-section__stage--visible .audience-segment-section__captions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 1200px) {
+  .audience-segment-section__content { width: calc(100% - 80px); }
+  .audience-segment-section__wordmark { width: min(47.8vw, 688px); }
+  .audience-segment-section__data-title { font-size: clamp(32px, 3.7vw, 44px); }
+  .audience-segment-section__captions { width: min(64%, 806px); }
+}
+
+@media (max-width: 840px) {
+  .audience-segment-section__tabs { justify-content: flex-start; overflow-x: auto; padding-bottom: 4px; }
+  .audience-segment-section__tabs .segmented-control { flex-shrink: 0; white-space: nowrap; }
+  .audience-segment-section__stage,
+  .audience-segment-section__content { min-height: 940px; }
+  .audience-segment-section__content { width: calc(100% - 40px); padding-top: 80px; }
+  .audience-segment-section__data-title { width: 100%; font-size: clamp(30px, 6vw, 40px); text-align: left; }
+  .audience-segment-section__wordmark { top: 290px; width: min(60vw, 450px); }
+  .audience-segment-section__captions { position: absolute; top: 640px; left: 0; width: min(100%, 680px); margin: 0; }
+  .audience-segment-section__video-scene { top: 150px; height: 790px; }
+  .audience-segment-section__video { left: 50%; width: max(100%, 1200px); transform: translateX(-50%); }
+  .audience-segment-section__fade--top { height: 330px; }
+  .audience-segment-section__fade--bottom { height: 300px; bottom: 0; }
+  .audience-segment-section__logo-trail { opacity: .6; }
+}
+
+@media (max-width: 599px) {
+  .audience-segment-section__tabs { display: none; }
+  .audience-segment-section__stage,
+  .audience-segment-section__content { min-height: 920px; }
+  .audience-segment-section__content { padding-top: 64px; }
+  .audience-segment-section__data-title { font-size: clamp(28px, 8vw, 36px); }
+  .audience-segment-section__wordmark { top: 280px; width: min(82vw, 360px); }
+  .audience-segment-section__captions { top: 610px; grid-template-columns: 1fr; gap: 16px; font-size: 15px; line-height: 21px; }
+  .audience-segment-section__video-scene { top: 145px; height: 775px; }
+  .audience-segment-section__video { width: 1190px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .audience-segment-section__wordmark,
+  .audience-segment-section__data-title,
+  .audience-segment-section__captions {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

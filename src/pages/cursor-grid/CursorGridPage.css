@@ -1,0 +1,117 @@
+.cursor-grid-page {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: 100svh;
+  overflow: hidden;
+  color: #071c32;
+  background:
+    radial-gradient(circle at 12% 80%, #c5e7ff 0%, transparent 47%),
+    radial-gradient(circle at 88% 82%, #fff0e8 0%, transparent 43%),
+    linear-gradient(135deg, #f3f9ff 0%, #dceefd 50%, #fff5ee 100%);
+}
+
+.cursor-grid-page__effect {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cursor-grid-page__effect .cursor-grid {
+  position: absolute;
+  inset: 0;
+}
+
+.cursor-grid-page__layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: clamp(18px, 3vh, 32px);
+  width: min(1280px, calc(100% - 80px));
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: clamp(42px, 7vh, 72px) 0 clamp(46px, 7vh, 72px);
+  pointer-events: none;
+}
+
+.cursor-grid-page__title {
+  margin: 0;
+  font: 500 clamp(32px, 3.4vw, 48px)/1.18 'MTS Wide', Arial, sans-serif;
+  letter-spacing: -0.035em;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.cursor-grid-page__title span,
+.cursor-grid-page__title strong {
+  display: block;
+}
+
+.cursor-grid-page__title span {
+  color: #73869d;
+}
+
+.cursor-grid-page__title strong {
+  color: #071c32;
+  font: inherit;
+}
+
+.cursor-grid-page__visual {
+  display: grid;
+  min-height: 0;
+  place-items: center;
+}
+
+.cursor-grid-page__people {
+  display: block;
+  width: auto;
+  height: min(46svh, 470px);
+  max-width: 100%;
+  object-fit: contain;
+  user-select: none;
+}
+
+.cursor-grid-page__captions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(36px, 7vw, 100px);
+  font: 400 clamp(15px, 1.3vw, 18px)/1.5 'MTS Text', Arial, sans-serif;
+}
+
+.cursor-grid-page__captions p {
+  max-width: 530px;
+  margin: 0;
+}
+
+.cursor-grid-page__captions p:last-child {
+  justify-self: end;
+  text-align: right;
+}
+
+@media (max-width: 700px) {
+  .cursor-grid-page__layout {
+    grid-template-rows: auto auto auto;
+    gap: 26px;
+    width: calc(100% - 40px);
+    padding: 38px 0 44px;
+  }
+
+  .cursor-grid-page__title {
+    font-size: clamp(27px, 7vw, 36px);
+  }
+
+  .cursor-grid-page__people {
+    height: min(35svh, 300px);
+  }
+
+  .cursor-grid-page__captions {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .cursor-grid-page__captions p:last-child {
+    justify-self: start;
+    text-align: left;
+  }
+}

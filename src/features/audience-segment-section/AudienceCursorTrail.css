@@ -1,0 +1,59 @@
+.audience-data-scene__cursor-halo {
+  position: absolute;
+  z-index: 5;
+  left: 430px;
+  top: -165px;
+  width: 360px;
+  height: 280px;
+  pointer-events: none;
+  border-radius: 50%;
+  background: transparent;
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  mask-image: radial-gradient(ellipse, #000 15%, rgb(0 0 0 / 75%) 40%, transparent 72%);
+  opacity: 0;
+  transition: opacity 350ms ease;
+}
+
+.audience-data-scene__cursor-halo[data-visible='true'] { opacity: 1; }
+
+.audience-data-scene__cursor-zone {
+  position: absolute;
+  z-index: 5;
+  top: -30px;
+  /* Keep interactive glyphs outside the orbit, including their leftward drift. */
+  left: 610px;
+  /* Include the space to the right of the partner logos. */
+  width: 1050px;
+  height: 380px;
+  overflow: hidden;
+  pointer-events: auto;
+  mask-image:
+    linear-gradient(90deg, transparent, #000 130px, #000 calc(100% - 55px), transparent),
+    linear-gradient(to bottom, transparent, #000 100px, #000 245px, transparent);
+  mask-composite: intersect;
+}
+
+.audience-data-scene__cursor-mark {
+  position: absolute;
+  pointer-events: none;
+  white-space: pre;
+  color: #80b3ff;
+  text-shadow: 0 0 8px rgb(128 179 255 / 48%);
+  font: 11px/14px ui-monospace, SFMono-Regular, Consolas, monospace;
+  letter-spacing: 2px;
+  animation: audience-data-cursor-trail 1.8s ease-out forwards;
+}
+
+@keyframes audience-data-cursor-trail {
+  0% { opacity: 0; transform: translate(0, -50%); }
+  12% { opacity: calc(0.65 * var(--mark-opacity, 1)); }
+  45% { opacity: calc(0.38 * var(--mark-opacity, 1)); }
+  100% { opacity: 0; transform: translate(calc(-1 * var(--mark-drift)), -50%); }
+}
+
+@media (max-width: 840px), (prefers-reduced-motion: reduce) {
+  .audience-data-scene__cursor-halo,
+  .audience-data-scene__cursor-zone { display: none; }
+  .audience-data-scene__cursor-mark { animation: none; }
+}

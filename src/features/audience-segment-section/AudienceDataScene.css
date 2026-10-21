@@ -1,0 +1,113 @@
+.audience-data-scene {
+  --flow-start: 0s;
+  --data-artwork-gradient: linear-gradient(180deg, #b1d9f7 0%, #a4cff1 52%, #80b2dd 100%);
+  position: absolute;
+  inset: 0;
+  isolation: isolate;
+  pointer-events: none;
+}
+
+.audience-data-scene--with-intro {
+  --flow-start: 2.4s;
+}
+
+.audience-data-scene__label {
+  position: absolute;
+  z-index: 2;
+  top: 20.52px;
+  left: 0;
+  width: 363.175px;
+  height: 286.16px;
+  object-fit: contain;
+  opacity: 1;
+}
+
+.audience-data-scene__orbit {
+  position: absolute;
+  z-index: 2;
+  top: -164.3365px;
+  left: 16.72px;
+  /* Keep the exported orbit's proportions at its final size. */
+  width: 850px;
+  height: auto;
+  object-fit: contain;
+  transform-origin: center;
+  transform: scale(1);
+  opacity: 0.7;
+}
+
+.audience-data-scene__intro-decoration {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  opacity: 0;
+}
+
+.audience-data-scene__orb {
+  position: absolute;
+  top: 180px;
+  left: 580px;
+  width: 280px;
+  height: 280px;
+  border-radius: 100px;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: 252px;
+}
+
+.audience-data-scene__orb img { width: 100%; height: 100%; object-fit: cover; }
+
+.audience-data-scene__ring { position: absolute; top: 31px; left: 571px; width: 298px; height: 298px; object-fit: cover; }
+
+.audience-data-scene__plus-image { position: absolute; top: 33px; left: 50%; width: 252px; height: 252px; margin-left: -126px; object-fit: contain; }
+
+.audience-data-scene__plus { position: absolute; top: 159px; left: 50%; width: 230px; margin-left: -115px; }
+
+.audience-data-scene__plus span {
+  position: absolute;
+  width: 230px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #8fddff 28%, #eeeff2 50%, #8fddff 72%, transparent);
+  box-shadow: 0 0 10px rgb(143 221 255 / 52%);
+}
+
+.audience-data-scene__plus span:last-child { transform: rotate(-90deg); }
+
+.audience-segment-section__content--visible .audience-data-scene__intro-decoration {
+  animation: audience-data-intro var(--flow-start) linear both;
+}
+
+@keyframes audience-data-intro {
+  0%, 20% { opacity: 0; }
+  55%, 73% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@media (min-width: 841px) and (max-width: 1487px) {
+  .audience-segment-section__content { container-type: inline-size; }
+  .audience-data-scene {
+    width: 1440px;
+    transform: scale(calc(100cqw / 1440px));
+    transform-origin: top left;
+  }
+}
+
+@media (max-width: 840px) {
+  .audience-data-scene {
+    position: relative;
+    inset: auto;
+    height: 520px;
+    container-type: inline-size;
+  }
+  .audience-data-scene__label { width: min(280px, 75vw); height: auto; top: 0; }
+  .audience-data-scene__orbit,
+  .audience-data-scene__intro-decoration { display: none; }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .audience-data-scene .audience-data-scene__label,
+  .audience-data-scene .audience-data-scene__orbit { animation: none; opacity: 1; }
+  .audience-data-scene .audience-data-scene__orbit { transform: scale(1); opacity: 0.7; }
+  .audience-data-scene .audience-data-scene__intro-decoration { animation: none; display: none; }
+}

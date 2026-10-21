@@ -1,0 +1,41 @@
+/* Figma 10113:105765. The 2576px canvas keeps the intentionally overflowing devices. */
+.publishers-content {
+  position: relative;
+  left: 50%;
+  width: 2576px;
+  height: 7910px;
+  margin-left: -1288px;
+  scroll-margin-top: 80px;
+}
+.publishers-content img { display: block; max-width: none; }
+.publishers-content__mask {
+  position: absolute;
+  top: 1416.38px;
+  left: 328px;
+  width: 1920px;
+  height: 2199.5px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 83%, transparent 93%);
+  mask-image: linear-gradient(to bottom, #000 0, #000 83%, transparent 93%);
+  pointer-events: none;
+}
+.publishers-content > section,
+.publishers-content > footer { position: absolute; }
+
+.publishers-content__hero { top: 0; left: 568px; width: 1440px; height: 1060px; }
+.publishers-content__hero-image { position: absolute; left: 0; top: 100px; width: 1440px; height: 848px; }
+.publishers-content__hero-cta { position: absolute; left: 576px; top: 1008px; display: inline-flex; width: 289px; height: 54px; align-items: center; justify-content: center; border: 1px solid #ff0032; border-radius: 56px; background: #f7fafd; color: #ff0032; font: 500 16px/20px 'MTS Wide', Arial, sans-serif; text-decoration: none; }
+.publishers-content__hero-cta:hover { background: #f7fafd; }
+.publishers-content__hero-cta:focus-visible { outline: 2px solid #ff0032; outline-offset: 3px; }
+
+.publishers-content__partner { left: 328px; top: 3358px; width: 1920px; height: 970px; }
+.publishers-content__partner img { width: 1920px; height: 970px; }
+.publishers-content__integration { left: 568px; top: 4343px; width: 1440px; height: 876px; }
+.publishers-content__integration img { width: 1440px; height: 876px; }
+.publishers-content__cases { left: 328px; top: 5418px; width: 1920px; }
+.publishers-content__platforms { left: 568px; top: 6282px; width: 1440px; height: 876px; }
+.publishers-content__platforms img { width: 1440px; height: 876px; }
+.publishers-content__footer { left: 328px; top: 7358px; width: 1920px; height: 552px; }
+
+@media (max-width: 900px) {
+  .publishers-content { transform: scale(.5); transform-origin: top center; margin-bottom: -3955px; }
+}

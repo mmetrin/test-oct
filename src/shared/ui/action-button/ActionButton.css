@@ -1,0 +1,62 @@
+.action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: 'MTS Wide', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 20px;
+  text-align: center;
+  transition: background-color 160ms ease, opacity 160ms ease, transform 100ms ease;
+}
+
+.action-button__label {
+  padding: 2px 8px;
+}
+
+.action-button--large {
+  padding: 14px 16px;
+  border-radius: 56px;
+  background: #369afe;
+}
+
+.action-button--large:hover:not(:disabled) {
+  background: #0b57a3;
+}
+
+.action-button--large:active:not(:disabled) {
+  background: #6db0f3;
+}
+
+.action-button--medium {
+  min-height: 36px;
+  padding: 10px;
+  border-radius: 26px;
+  background: rgb(255 255 255 / 8%);
+  backdrop-filter: blur(20px);
+  color: #7f8c9f;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.action-button--medium:hover:not(:disabled) {
+  background: rgb(255 255 255 / 24%);
+}
+
+.action-button--medium:active:not(:disabled) {
+  background: rgb(255 255 255 / 18%);
+}
+
+.action-button:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.action-button:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 4px;
+}

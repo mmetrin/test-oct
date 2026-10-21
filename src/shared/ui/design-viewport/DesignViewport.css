@@ -1,0 +1,21 @@
+body.design-viewport-active {
+  background: #f7fafd;
+}
+
+body.design-viewport-active > .site-header {
+  left: 50%;
+  width: 1920px;
+  zoom: var(--design-scale, 1);
+  transform: translateX(-50%);
+}
+
+.design-viewport {
+  flex: 0 0 1920px;
+  width: 1920px;
+  min-width: 1920px;
+  max-width: 1920px;
+}
+
+.design-viewport > * {
+  width: 1920px;
+}

@@ -1,0 +1,174 @@
+.white-solutions-section {
+  width: min(1440px, calc(100% - 48px));
+  margin: 160px auto 0;
+}
+
+.white-solutions-section h2,
+.white-solutions-section h3,
+.white-solutions-section p { margin: 0; }
+
+.white-solutions-section h2 {
+  color: rgb(255 255 255 / 93%);
+  font-family: 'MTS Wide', Arial, sans-serif;
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.white-solutions-section h2 span,
+.white-solutions-section__benefit p span { color: #7f8c9f; }
+
+.white-solutions-section__content {
+  display: grid;
+  grid-template-columns: 470px minmax(0, 1fr);
+  height: 444.506px;
+  margin-top: 70px;
+}
+
+.white-solutions-section__benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  padding: 40px 40px 0 0;
+}
+
+.white-solutions-section__benefit h3,
+.white-solutions-section__premium-copy h3 {
+  color: rgb(255 255 255 / 93%);
+  font-family: 'MTS Wide', Arial, sans-serif;
+  font-weight: 500;
+}
+
+.white-solutions-section__benefit h3 {
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.white-solutions-section__benefit p,
+.white-solutions-section__premium-copy p {
+  color: rgb(255 255 255 / 93%);
+  font-family: 'MTS Text', Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.white-solutions-section__benefit p { margin-top: 16px; }
+.white-solutions-section__benefits-divider { display: block; width: 100%; height: 2px; }
+
+.white-solutions-section__premium-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  min-width: 0;
+  overflow: hidden;
+  padding: 40px 60px 70px;
+  background: #000814;
+}
+
+.white-solutions-section__premium-background {
+  position: absolute;
+  z-index: 0;
+  top: -173px;
+  left: -105px;
+  width: 971px;
+  height: 546px;
+  opacity: 0.1;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.white-solutions-section__premium-card::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(90deg, rgb(0 8 20 / 50%) 1.34%, transparent 46.52%, rgb(0 8 20 / 50%) 95.31%);
+  content: '';
+  pointer-events: none;
+}
+
+.white-solutions-section__premium-divider {
+  position: absolute;
+  z-index: 2;
+  top: 445px;
+  left: 0;
+  display: block;
+  width: 445px;
+  height: 2px;
+  transform: rotate(-90deg);
+  transform-origin: top left;
+}
+
+.white-solutions-section__premium-copy,
+.white-solutions-section__logos { position: relative; z-index: 3; }
+
+.white-solutions-section__premium-copy h3 { font-size: 24px; line-height: 28px; }
+.white-solutions-section__premium-copy p { margin-top: 16px; }
+
+.white-solutions-section__logos {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: auto;
+}
+
+.white-solutions-section__logo-row { display: flex; gap: 84px; align-items: center; }
+.white-solutions-section__logo { display: block; flex: 0 0 auto; }
+
+.white-solutions-section__logo--media {
+  display: flex;
+  gap: 18.086px;
+  align-items: center;
+  width: 218.4px;
+  color: rgb(255 255 255 / 93%);
+  font-family: 'MTS Wide', Arial, sans-serif;
+  font-size: 30.14px;
+  font-weight: 500;
+  line-height: 30.144px;
+}
+
+.white-solutions-section__logo--media img { width: 66.316px; height: 66.316px; }
+.white-solutions-section__logo--tonkosti { width: 213.36px; height: auto; }
+.white-solutions-section__logo--kion { width: 163.721px; height: auto; }
+.white-solutions-section__logo--music { width: 144.771px; height: auto; }
+
+.white-solutions-section__logo--clatch {
+  position: relative;
+  width: 213.36px;
+  height: 67.2px;
+}
+
+.white-solutions-section__logo--clatch img { position: absolute; display: block; }
+.white-solutions-section__logo--clatch img:first-child { top: 13.69px; left: -0.23px; width: 36.34px; height: 36.47px; }
+.white-solutions-section__logo--clatch img:last-child { top: 18.76px; left: 48.67px; width: 164.69px; height: 26.53px; }
+
+.white-solutions-section__logo--ostrovok { width: 211.591px; height: auto; }
+.white-solutions-section__logos-divider { display: block; width: 100%; height: 2px; }
+
+@media (max-width: 1200px) {
+  .white-solutions-section__content { grid-template-columns: minmax(320px, 0.75fr) minmax(0, 1fr); }
+  .white-solutions-section__premium-card { padding-right: 40px; padding-left: 40px; }
+  .white-solutions-section__logo-row { gap: 32px; }
+  .white-solutions-section__logo--media { width: 180px; font-size: 25px; }
+  .white-solutions-section__logo--media img { width: 54px; height: 54px; }
+  .white-solutions-section__logo--tonkosti { width: 160px; }
+  .white-solutions-section__logo--kion { width: 125px; }
+  .white-solutions-section__logo--music { width: 125px; }
+  .white-solutions-section__logo--clatch { width: 170px; transform: scale(0.8); transform-origin: left center; }
+  .white-solutions-section__logo--ostrovok { width: 170px; }
+}
+
+@media (max-width: 760px) {
+  .white-solutions-section { width: calc(100% - 40px); margin-top: 80px; }
+  .white-solutions-section h2 { font-size: clamp(32px, 7vw, 44px); }
+  .white-solutions-section__content { display: flex; flex-direction: column; height: auto; margin-top: 40px; }
+  .white-solutions-section__benefits { gap: 36px; padding: 28px 0; }
+  .white-solutions-section__premium-card { min-height: 500px; gap: 36px; padding: 32px 28px; }
+  .white-solutions-section__premium-divider { display: none; }
+  .white-solutions-section__premium-copy h3 { font-size: 24px; line-height: 28px; }
+  .white-solutions-section__logo-row { flex-wrap: wrap; gap: 28px; }
+  .white-solutions-section__logo--media { width: 180px; }
+  .white-solutions-section__logos-divider { width: 100%; }
+}

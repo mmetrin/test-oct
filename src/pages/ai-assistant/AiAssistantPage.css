@@ -1,0 +1,26 @@
+.ai-assistant-page {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #000814;
+  color: #ffffff;
+}
+
+.ai-assistant-page__content {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: visible;
+  padding: 264px 24px 464px;
+}
+
+.ai-assistant-page__content img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 618px;
+  max-width: 100%;
+  height: auto;
+}

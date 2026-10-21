@@ -1,0 +1,72 @@
+.leadership-metric-texts {
+  /* Match the metric cards' padding plus their 1px border. */
+  --metric-label-inset: calc(var(--enterprise-metric-padding) + 1px);
+  --metric-label-line-height: 22px;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 180ms ease-out;
+  pointer-events: none;
+  color: #4e6879;
+  font-family: 'MTS Text', Arial, sans-serif;
+}
+
+.leadership-metric-texts--visible {
+  opacity: 1;
+  transition-duration: 1.4s;
+  transition-timing-function: ease;
+}
+
+.leadership-metric-texts__label {
+  position: absolute;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: var(--metric-label-line-height);
+  white-space: nowrap;
+}
+
+.leadership-metric-texts__label--dynamics {
+  top: calc(449px + var(--metric-label-inset));
+  left: calc(840px + var(--metric-label-inset));
+}
+
+.leadership-metric-texts__ctr {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  top: calc(150px + var(--metric-label-inset));
+  left: calc(1246px + var(--metric-label-inset));
+  position: absolute;
+  color: #6b8190;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 34px;
+  white-space: nowrap;
+}
+
+.leadership-metric-texts__ctr-label {
+  color: #4e6879;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: var(--metric-label-line-height);
+}
+
+.leadership-metric-texts__value {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 1180px) and (min-width: 761px) {
+  .leadership-metric-texts__ctr { font-size: 24px; line-height: 28px; }
+}
+
+@media (max-width: 760px) {
+  .leadership-metric-texts { --metric-label-line-height: 18px; }
+  .leadership-metric-texts__label { font-size: 14px; }
+  .leadership-metric-texts__ctr-label { font-size: 14px; }
+  .leadership-metric-texts__ctr { font-size: 22px; line-height: 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leadership-metric-texts { transition: none; }
+}

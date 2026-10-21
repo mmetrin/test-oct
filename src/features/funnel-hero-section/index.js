@@ -1,0 +1,1 @@
+export { FunnelHeroSection } from './FunnelHeroSection'

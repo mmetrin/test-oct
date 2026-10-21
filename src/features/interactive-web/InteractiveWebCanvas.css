@@ -1,0 +1,6 @@
+.interactive-web-canvas,
+.interactive-web-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

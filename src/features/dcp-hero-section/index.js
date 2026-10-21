@@ -1,0 +1,1 @@
+export { DcpHeroSection } from './DcpHeroSection'

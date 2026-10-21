@@ -1,0 +1,8 @@
+.light-ribbon-canvas {
+  background: #000814;
+  display: block;
+  height: 100vh;
+  inset: 0;
+  position: absolute;
+  width: 100%;
+}

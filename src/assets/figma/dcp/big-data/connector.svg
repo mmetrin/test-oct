@@ -1,0 +1,22 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="230" height="230" viewBox="0 0 230 230" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Frame 2147240144">
+<path id="light-line" d="M114.5 -9.53674e-07L114.5 230" stroke="url(#paint0_linear_0_50)" stroke-width="2"/>
+<path id="light-line_2" d="M-9.53674e-07 115.5L230 115.5" stroke="url(#paint1_linear_0_50)" stroke-width="2"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_50" x1="112.5" y1="-2.12335e-05" x2="18.4427" y2="181.168" gradientUnits="userSpaceOnUse">
+<stop stop-color="#CFE5FC" stop-opacity="0"/>
+<stop offset="0.283654" stop-color="#CFE5FC" stop-opacity="0.203695"/>
+<stop offset="0.5" stop-color="white"/>
+<stop offset="0.75" stop-color="#CFE5FC" stop-opacity="0.16951"/>
+<stop offset="1" stop-color="#CFE5FC" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint1_linear_0_50" x1="-2.12335e-05" y1="117.5" x2="181.168" y2="211.557" gradientUnits="userSpaceOnUse">
+<stop stop-color="#CFE5FC" stop-opacity="0"/>
+<stop offset="0.283654" stop-color="#CFE5FC" stop-opacity="0.203695"/>
+<stop offset="0.5" stop-color="white"/>
+<stop offset="0.75" stop-color="#CFE5FC" stop-opacity="0.16951"/>
+<stop offset="1" stop-color="#CFE5FC" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

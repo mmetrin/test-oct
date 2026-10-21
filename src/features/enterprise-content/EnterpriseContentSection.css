@@ -1,0 +1,37 @@
+/* Figma 10113:103001: native desktop dimensions, raster exports at 2×. */
+.enterprise-content {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 200px;
+  margin-top: 48px;
+}
+
+.enterprise-content img { display: block; }
+
+.enterprise-content__solutions {
+  width: min(1440px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.enterprise-content__solutions { position: relative; z-index: 1; }
+.enterprise-content__solutions img { width: 100%; height: auto; }
+
+.enterprise-content__lead { position: relative; height: 753px; }
+.enterprise-content__lead img {
+  position: absolute;
+  left: calc(50% - 960px);
+  /* Export includes the original gradient overflow above the form. */
+  top: -1142px;
+  width: 1920px;
+  height: 2028px;
+  max-width: none;
+  pointer-events: none;
+}
+
+@media (max-width: 760px) {
+  .enterprise-content { margin-top: 200px; }
+  .enterprise-content__lead { height: 480px; }
+  .enterprise-content__lead img { width: 1200px; height: auto; left: calc(50% - 600px); top: -714px; }
+}

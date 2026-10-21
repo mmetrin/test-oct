@@ -1,0 +1,185 @@
+.flower-shop-bubbles {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.flower-shop-bubbles__message {
+  --flower-bubble-scale: 1;
+  --flower-bubble-base-top: 466px;
+  display: grid;
+  position: absolute;
+  top: calc(var(--flower-bubble-base-top) + 40px);
+  right: clamp(185px, calc(1075px - 50vw), 333px);
+  width: 335.25px;
+  height: 104.4px;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 24px 24px 24px 0;
+  background: rgb(247 250 253 / 72%);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  filter: drop-shadow(0 12px 36px rgb(22 39 62 / 12%));
+  opacity: 0;
+  translate: 0 0;
+  transform: scale(var(--flower-bubble-scale));
+  transform-origin: top right;
+  transition: opacity 360ms ease-in-out;
+}
+
+.flower-shop-bubbles__message--visible {
+  opacity: 1;
+  transition-duration: 400ms;
+  animation: flower-message-appear 620ms 80ms ease-in-out;
+}
+
+.flower-shop-bubbles__message--resolved {
+  top: calc(var(--flower-bubble-base-top) - 30px);
+  translate: 10px 0;
+  border-radius: 24px 24px 0 24px;
+}
+
+.flower-shop-bubbles__message--resolved.flower-shop-bubbles__message--visible {
+  transition: opacity 240ms ease-out 400ms;
+  animation: flower-message-bounce 620ms 400ms ease-in-out;
+}
+
+@keyframes flower-message-appear {
+  0%, 100% { transform: translateY(0) scale(var(--flower-bubble-scale)); }
+  16% { transform: translateY(1px) scale(calc(var(--flower-bubble-scale) * .98)); }
+  44% { transform: translateY(-3px) scale(calc(var(--flower-bubble-scale) * 1.035)); }
+  68% { transform: translateY(1px) scale(calc(var(--flower-bubble-scale) * .994)); }
+  84% { transform: translateY(-1px) scale(calc(var(--flower-bubble-scale) * 1.006)); }
+}
+
+@keyframes flower-message-bounce {
+  0%, 100% { transform: translateY(0) scale(var(--flower-bubble-scale)); }
+  16% { transform: translateY(2px) scale(calc(var(--flower-bubble-scale) * .96)); }
+  44% { transform: translateY(-6px) scale(calc(var(--flower-bubble-scale) * 1.06)); }
+  68% { transform: translateY(1px) scale(calc(var(--flower-bubble-scale) * .985)); }
+  84% { transform: translateY(-2px) scale(calc(var(--flower-bubble-scale) * 1.012)); }
+}
+
+.flower-shop-bubbles__message-content {
+  grid-area: 1 / 1;
+  position: relative;
+  display: flex;
+  gap: 9.7px;
+  padding: 17px 12px 0;
+  opacity: 1;
+}
+
+.flower-shop-bubbles__message-icon {
+  position: relative;
+  flex: none;
+  width: 32.966px;
+  height: 32.966px;
+  overflow: hidden;
+  border-radius: 27px;
+  background: #fff;
+}
+
+.flower-shop-bubbles__message-icon img {
+  position: absolute;
+  top: -56.67px;
+  left: -53.94px;
+  display: block;
+  width: 366.15px;
+  height: 197.89px;
+  max-width: none;
+}
+
+.flower-shop-bubbles__message-copy {
+  flex: 1;
+  min-width: 0;
+  color: #101927;
+}
+
+.flower-shop-bubbles__message-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  line-height: 1;
+}
+
+.flower-shop-bubbles__message-heading strong {
+  font-size: 18.55px;
+  font-weight: 700;
+}
+
+.flower-shop-bubbles__message-heading span {
+  color: #93adc8;
+  font-size: 16.75px;
+}
+
+.flower-shop-bubbles__message-body {
+  min-height: 44px;
+  margin-top: 7px;
+}
+
+.flower-shop-bubbles__message-copy p {
+  margin: 0;
+  font-size: 16.75px;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.flower-shop-bubbles__skeleton-shape {
+  display: block;
+  border-radius: 6px;
+  background: linear-gradient(100deg, #b8cbdc 25%, #f8fbff 50%, #b8cbdc 75%);
+  background-size: 200% 100%;
+  animation: flower-skeleton-shimmer 2.4s ease-in-out infinite;
+  animation-play-state: paused;
+}
+
+.flower-shop-bubbles__message--visible .flower-shop-bubbles__skeleton-shape {
+  animation-play-state: running;
+}
+
+.flower-shop-bubbles__skeleton .flower-shop-bubbles__message-icon {
+  border-radius: 50%;
+}
+
+.flower-shop-bubbles__skeleton-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding-top: 5px;
+}
+
+.flower-shop-bubbles__skeleton-lines span { height: 12px; }
+.flower-shop-bubbles__skeleton-lines span:last-child {
+  width: 84%;
+  animation-delay: 140ms;
+}
+
+@keyframes flower-skeleton-shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+@media (max-width: 760px) {
+  .flower-shop-bubbles__message {
+    --flower-bubble-base-top: 476px;
+    right: 170px;
+    border-radius: 18px 18px 18px 0;
+  }
+
+  .flower-shop-bubbles__message--resolved { border-radius: 18px 18px 0 18px; }
+}
+
+@media (max-width: 430px) {
+  .flower-shop-bubbles__message {
+    --flower-bubble-scale: .83;
+    right: clamp(0px, calc(100vw - 300px), 95px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flower-shop-bubbles__skeleton-shape,
+  .flower-shop-bubbles__message--visible { animation: none; }
+  .flower-shop-bubbles__message { transition: none; }
+}

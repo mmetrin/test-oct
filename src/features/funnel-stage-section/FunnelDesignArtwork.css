@@ -1,0 +1,23 @@
+.funnel-design-artwork {
+  position: absolute;
+  left: 82px;
+  top: -61px;
+  width: 510px;
+  height: 624px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.funnel-design-artwork img {
+  position: absolute;
+  display: block;
+  max-width: none;
+}
+
+.funnel-design-artwork__top {
+  left: -95.478px;
+  top: -37.304px;
+  /* The SVG fill starts at y=70; fade it in after that horizontal edge. */
+  mask-image: linear-gradient(to bottom, transparent 72px, #000 190px);
+}
+.funnel-design-artwork__bottom { left: -51.584px; top: 430.164px; }

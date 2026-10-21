@@ -1,0 +1,46 @@
+/* The Figma frame is 1920px wide; all exported sections are rendered at 2×. */
+.small-business-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 200px;
+  width: 100%;
+  scroll-margin-top: 80px;
+}
+
+.small-business-content > :not(.small-business-content__mask) { position: relative; z-index: 1; }
+.small-business-content__mask {
+  position: absolute;
+  top: 2230.38px;
+  left: 50%;
+  width: 1920px;
+  height: 1686.5px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.small-business-content img { display: block; max-width: none; }
+
+.small-business-content__hero {
+  position: relative;
+  width: 100%;
+  height: 954px;
+}
+
+.small-business-content__hero img {
+  position: absolute;
+  top: 45px;
+  left: calc(50% - 945px);
+  width: 1890px;
+  height: 934px;
+}
+
+.small-business-content__image { width: min(1440px, calc(100% - 48px)); margin-inline: auto; }
+.small-business-content__image img { width: 100%; height: auto; }
+.small-business-content__ai { width: min(1080px, calc(100% - 48px)); }
+
+@media (max-width: 900px) {
+  .small-business-content { gap: 120px; }
+  .small-business-content__hero { height: min(52vw, 760px); }
+  .small-business-content__hero img { top: 5vw; left: 0; width: 100%; height: auto; }
+}

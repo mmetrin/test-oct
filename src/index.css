@@ -1,0 +1,108 @@
+@font-face {
+  font-family: 'MTS Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./assets/fonts/MTSText-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'MTS Text';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./assets/fonts/MTSText-Medium.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'MTS Text';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./assets/fonts/MTSText-Bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'MTS Wide';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../MTSWide — копия/MTSWide-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'MTS Wide';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./assets/fonts/MTSWide-Medium.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'MTS Wide';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./assets/fonts/MTSWide-Bold.otf') format('opentype');
+}
+
+:root {
+  font-family: 'MTS Text', Arial, sans-serif;
+  color: #ffffff;
+  background: #00060f;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  background: #00060f;
+}
+
+/* Match the canvas to light pages so their entrance never exposes a dark flash. */
+:root[data-page-theme='light'],
+:root:has(.funnel-journey-page, .enterprise-hero-page, .cert-page, .contacts-page, .interactive-web-page, .cursor-grid-page, .bloggers-standalone),
+:root[data-page-theme='light'] body,
+body:has(.funnel-journey-page, .enterprise-hero-page, .cert-page, .contacts-page, .interactive-web-page, .cursor-grid-page, .bloggers-standalone) {
+  background: #f7fafd;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+/* Every entry point mounts into #root, including the standalone pages. */
+@media (prefers-reduced-motion: no-preference) {
+  #root > * {
+    animation: page-appear 760ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes page-appear {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+button,
+a {
+  font: inherit;
+}

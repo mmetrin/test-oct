@@ -1,0 +1,858 @@
+html:has(.funnel-journey-page),
+body:has(.funnel-journey-page) {
+  overflow-x: clip;
+}
+
+.funnel-journey-page {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: clip;
+  overflow-y: visible;
+  background: #00060f;
+  color: #ffffff;
+}
+
+.funnel-journey-page__tabs,
+.funnel-journey-page__funnel-flow {
+  display: flow-root;
+}
+
+.funnel-journey-page__scroll-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 560ms ease,
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, filter, transform;
+}
+
+.funnel-journey-page__scroll-reveal.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+  will-change: auto;
+}
+
+.funnel-stage-section__container--reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 560ms ease,
+    transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, filter, transform;
+}
+
+.funnel-stage-section__container--reveal.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+  will-change: auto;
+}
+
+.funnel-journey-page__feedback {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+  padding: 160px 24px 464px;
+}
+
+.funnel-journey-page__feedback img {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 618px;
+  max-width: 100%;
+  height: auto;
+}
+
+.funnel-stage-section {
+  position: relative;
+  z-index: 1;
+  margin-top: 70px;
+  height: 1460px;
+  min-height: 1460px;
+  overflow: visible;
+}
+
+.funnel-stage-section__scene {
+  position: sticky;
+  top: max(0px, calc((100vh - 730px) / 2));
+  height: 730px;
+  overflow: visible;
+}
+
+.funnel-stage-section__scene::after {
+  display: none;
+}
+
+.funnel-stage-section__next-preview {
+  position: absolute;
+  top: 715px;
+  left: 50%;
+  z-index: 0;
+  width: min(900px, calc(100% - 48px));
+  color: #7f8c9f;
+  font-family: 'MTS Wide', Arial, sans-serif;
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: center;
+  opacity: 0;
+  filter: blur(8px);
+  pointer-events: none;
+  transform: translate(-50%, 32px);
+  transition:
+    opacity 800ms ease,
+    filter 800ms ease,
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.funnel-stage-section__next-preview.is-visible {
+  opacity: 0.42;
+  filter: blur(2px);
+  transform: translate(-50%, 0);
+}
+
+.funnel-stage-section__next-preview span,
+.funnel-stage-section__next-preview strong {
+  display: block;
+}
+
+.funnel-stage-section__next-preview strong {
+  color: #000814;
+  font: inherit;
+}
+
+.funnel-stage-section__container {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  display: flex;
+  align-items: start;
+  width: min(1440px, calc(100% - 48px));
+  height: 730px;
+  min-height: 730px;
+  margin: 0 auto;
+}
+
+.funnel-stage-section__content {
+  position: relative;
+  z-index: 2;
+  order: 1;
+  flex: 0 0 900px;
+  width: 900px;
+  padding-top: 0;
+  transform: none;
+}
+
+.funnel-stage-section h1,
+.funnel-stage-section h2,
+.funnel-stage-section p {
+  margin: 0;
+}
+
+.funnel-stage-section h1 {
+  max-width: 900px;
+  color: #e5f4ff;
+  font-family: 'MTS Wide', Arial, sans-serif;
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.funnel-stage-section__title-secondary {
+  color: #7f8c9f;
+}
+
+.funnel-stage-section__description {
+  height: 68px;
+  width: 774px;
+  margin-top: 70px;
+}
+
+.funnel-stage-section__description h2 {
+  color: #ffffff;
+  font-family: 'MTS Wide', Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.funnel-stage-section__description p {
+  max-width: 774px;
+  margin-top: 16px;
+  color: #7f8c9f;
+  font-family: 'MTS Text', Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.funnel-stage-section__cases {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  width: 778px;
+  margin-top: 40px;
+}
+
+.funnel-stage-section__channels {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  width: max-content;
+  max-width: 100%;
+  min-height: 46px;
+  margin-top: 16px;
+  overflow: hidden;
+}
+
+.funnel-stage-section__chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 10px 16px;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 30px;
+  color: #7f8c9f;
+  font-family: 'MTS Text', Arial, sans-serif;
+  font-size: 17px;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.funnel-stage-section__channels-more {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 0 8px;
+  color: #7f8c9f;
+  font-family: 'MTS Text', Arial, sans-serif;
+  font-size: 17px;
+  line-height: 24px;
+  white-space: nowrap;
+}
+
+.funnel-stage-section__button {
+  position: absolute;
+  top: 483px;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  margin: 0;
+  padding: 14px 16px;
+  border: 0;
+  border-radius: 56px;
+  background: #369afe;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.funnel-stage-section__button:hover {
+  background: #1688f7;
+}
+
+.funnel-stage-section__button:active {
+  transform: translateY(1px);
+}
+
+.funnel-stage-section__button:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 4px;
+}
+
+.funnel-stage-section__button span {
+  padding: 2px 8px;
+  font-family: 'MTS Wide', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 20px;
+  text-align: center;
+}
+
+.funnel-stage-section__visual {
+  position: relative;
+  z-index: 1;
+  order: 2;
+  flex: 0 0 576px;
+  width: 576px;
+  height: 730px;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translateY(-80px);
+}
+
+.funnel-stage-section__funnel-frame {
+  width: 576px;
+  height: 670px;
+  margin-top: 62px;
+  overflow: hidden;
+}
+
+.funnel-stage-section__funnel {
+  display: block;
+  width: 570px;
+  height: 670px;
+  max-width: none;
+  transform: translate(0, 0);
+}
+
+.funnel-stage-section__stages {
+  position: absolute;
+  left: 198px;
+  top: 0;
+  width: 200px;
+  height: 730px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.funnel-stage-section__stages li {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  color: #7f8c9f;
+  font-family: 'MTS Wide', Arial, sans-serif;
+  font-size: 20.786px;
+  font-weight: 500;
+  letter-spacing: -0.208px;
+  line-height: 31.179px;
+  text-align: center;
+  transition: color 360ms ease;
+}
+
+.funnel-stage-section__stages li:nth-child(1) { top: 116px; }
+.funnel-stage-section__stages li:nth-child(2) { top: 236px; }
+.funnel-stage-section__stages li:nth-child(3) { top: 355px; }
+.funnel-stage-section__stages li:nth-child(4) { top: 553px; }
+
+.funnel-stage-section__stages li.is-active {
+  color: #e5f4ff;
+}
+
+.funnel-stage-section__stage-label {
+  display: inline-block;
+}
+
+.funnel-stage-section__stage-underline {
+  display: block;
+  width: calc(100% + 40px);
+  height: 12px;
+  margin: 8px -20px 0;
+  position: relative;
+}
+
+.funnel-stage-section__stage-underline::before,
+.funnel-stage-section__stage-underline::after {
+  position: absolute;
+  top: 5px;
+  width: 50%;
+  height: 1px;
+  content: '';
+  background: linear-gradient(90deg, rgb(229 244 255 / 16%), rgb(229 244 255 / 92%));
+  box-shadow: 0 0 7px rgb(177 223 255 / 52%);
+  opacity: 0;
+  animation: funnel-stage-underline-half-in 1200ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform, opacity;
+}
+
+.funnel-stage-section__stage-underline::before {
+  right: 50%;
+  transform-origin: right center;
+}
+
+.funnel-stage-section__stage-underline::after {
+  left: 50%;
+  transform-origin: left center;
+  background: linear-gradient(90deg, rgb(229 244 255 / 92%), rgb(229 244 255 / 16%));
+}
+
+@keyframes funnel-stage-underline-half-in {
+  from {
+    opacity: 0;
+    transform: scaleX(0.02);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.funnel-stage-section__dynamic-content {
+  position: relative;
+}
+
+.funnel-stage-section__dynamic-content > .funnel-stage-section__description,
+.funnel-stage-section__dynamic-content > .funnel-stage-section__cases,
+.funnel-stage-section__dynamic-content > .funnel-stage-section__channels {
+  will-change: opacity, transform;
+}
+
+.funnel-stage-section__dynamic-content:not(.is-leaving) > .funnel-stage-section__description {
+  animation: funnel-stage-content-in 460ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.funnel-stage-section__dynamic-content:not(.is-leaving) > .funnel-stage-section__cases {
+  animation: funnel-stage-content-in 520ms 100ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.funnel-stage-section__dynamic-content:not(.is-leaving) > .funnel-stage-section__channels {
+  animation: funnel-stage-content-in 520ms 200ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.funnel-stage-section__dynamic-content.is-leaving > .funnel-stage-section__description {
+  animation: funnel-stage-content-out 300ms cubic-bezier(0.55, 0, 1, 0.45) both;
+}
+
+.funnel-stage-section__dynamic-content.is-leaving > .funnel-stage-section__cases {
+  animation: funnel-stage-content-out 300ms 80ms cubic-bezier(0.55, 0, 1, 0.45) both;
+}
+
+.funnel-stage-section__dynamic-content.is-leaving > .funnel-stage-section__channels {
+  animation: funnel-stage-content-out 300ms 160ms cubic-bezier(0.55, 0, 1, 0.45) both;
+}
+
+@keyframes funnel-stage-content-in {
+  from {
+    opacity: 0;
+    transform: translateY(44px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes funnel-stage-content-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-44px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .funnel-journey-page__scroll-reveal,
+  .funnel-journey-page__scroll-reveal.is-visible,
+  .funnel-stage-section__container--reveal,
+  .funnel-stage-section__container--reveal.is-visible {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+
+  .funnel-stage-section__dynamic-content > .funnel-stage-section__description,
+  .funnel-stage-section__dynamic-content > .funnel-stage-section__cases,
+  .funnel-stage-section__dynamic-content > .funnel-stage-section__channels {
+    animation: none;
+  }
+
+  .funnel-stage-section__stage-underline::before,
+  .funnel-stage-section__stage-underline::after {
+    animation: none;
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 1040px) {
+  .funnel-stage-section__container {
+    width: max-content;
+  }
+
+  .funnel-stage-section__content {
+    flex-basis: 900px;
+    width: 900px;
+  }
+
+}
+
+@media (max-width: 680px) {
+  .funnel-stage-section {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .funnel-stage-section__scene {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .funnel-stage-section__scene::after {
+    display: none;
+  }
+
+  .funnel-stage-section__container {
+    width: calc(100% - 40px);
+    min-height: 0;
+    padding: 56px 0;
+  }
+
+  .funnel-stage-section__content {
+    padding: 0;
+  }
+
+  .funnel-stage-section h1 {
+    font-size: 32px;
+  }
+
+  .funnel-stage-section__description {
+    width: 100%;
+    margin-top: 36px;
+  }
+
+  .funnel-stage-section__description h2 {
+    font-size: 20px;
+    line-height: 25px;
+  }
+
+  .funnel-stage-section__description p {
+    font-size: 15px;
+    line-height: 21px;
+  }
+
+  .funnel-stage-section__cases {
+    overflow-x: auto;
+    width: calc(100% + 20px);
+    padding-right: 20px;
+    scrollbar-width: none;
+  }
+
+  .funnel-stage-section__cases::-webkit-scrollbar {
+    display: none;
+  }
+
+  .funnel-stage-section__channels {
+    width: 100%;
+    object-position: left;
+  }
+
+  .funnel-stage-section__button {
+    position: static;
+    width: 100%;
+    margin-top: 40px;
+  }
+
+  .funnel-stage-section__button span {
+    font-size: 10px;
+  }
+
+}
+
+/* The first two screens follow the light main-enterprises frame in Figma. */
+.funnel-journey-page {
+  background: #f7fafd;
+  color: #000814;
+}
+
+.funnel-journey-page .action-button--large,
+.funnel-stage-section__button {
+  background: #ff0032;
+  color: #fff;
+}
+
+.funnel-journey-page .action-button--large:hover:not(:disabled),
+.funnel-stage-section__button:hover {
+  background: #e5002d;
+}
+
+.funnel-journey-page .action-button--medium {
+  background: rgb(239 240 245 / 50%);
+  color: #7f8c9f;
+}
+
+.funnel-journey-page__tabs > .audience-segment-section__tabs {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 60px;
+}
+
+@media (min-width: 681px) {
+  .funnel-stage-section__container {
+    padding-top: clamp(0px, calc(461px - 50vh), 96px);
+  }
+}
+
+.funnel-journey-page__tabs > .audience-segment-section__tabs .segmented-control {
+  justify-content: space-between;
+  width: min(882px, calc(100% - 48px));
+  padding: 6px;
+  background: #eaf1fb;
+  backdrop-filter: none;
+}
+
+.funnel-journey-page__tabs > .audience-segment-section__tabs .segmented-control__item {
+  color: #000814;
+}
+
+.funnel-journey-page__tabs > .audience-segment-section__tabs .segmented-control__item.is-active {
+  background: #fff;
+}
+
+.funnel-journey-page__tabs > .audience-segment-section__tabs .segmented-control__item:hover:not(:disabled):not(.is-active) {
+  background: #dce7f1;
+}
+
+.funnel-stage-section__container {
+  width: min(1440px, calc(100% - 48px));
+}
+
+.funnel-stage-section__content {
+  flex-basis: 880px;
+  width: 880px;
+}
+
+.funnel-stage-section h1 {
+  color: #000814;
+}
+
+.funnel-stage-section__description h2 {
+  color: #000814;
+}
+
+.funnel-stage-section__description p,
+.funnel-stage-section__chip,
+.funnel-stage-section__channels-more {
+  color: #7f8c9f;
+}
+
+.funnel-stage-section__cases {
+  gap: 24px;
+}
+
+.funnel-stage-section__chip {
+  border-color: #e0e9f2;
+}
+
+.funnel-stage-section__button {
+  top: 463px;
+}
+
+.funnel-stage-section__visual {
+  flex-basis: 560px;
+  width: 560px;
+  height: 670px;
+  overflow: visible;
+  transform: translateY(-50px);
+}
+
+.funnel-stage-section__funnel-frame {
+  width: 560px;
+  height: 670px;
+  margin-top: 0;
+}
+
+.funnel-stage-section__funnel {
+  width: 560px;
+  height: 670px;
+  filter: blur(1px);
+}
+
+.funnel-stage-section__stages {
+  left: 200px;
+  top: 69px;
+  height: 436px;
+}
+
+.funnel-stage-section__stages li {
+  color: #bec8d4;
+}
+
+.funnel-stage-section__stages li:nth-child(1) { top: 0; }
+.funnel-stage-section__stages li:nth-child(2) { top: 123px; }
+.funnel-stage-section__stages li:nth-child(3) { top: 246px; }
+.funnel-stage-section__stages li:nth-child(4) { top: 406px; }
+
+.funnel-stage-section__stages li.is-active {
+  color: #000814;
+}
+
+.funnel-stage-section__background {
+  position: absolute;
+  top: -98px;
+  left: calc(50% - 893px);
+  display: block;
+  width: 1853px;
+  height: 791px;
+  max-width: none;
+  pointer-events: none;
+}
+
+.funnel-stage-section__funnel-export {
+  position: absolute;
+  top: -104px;
+  left: calc(50% + 84px);
+  display: block;
+  width: 777px;
+  height: 758px;
+  max-width: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 170px);
+  mask-image: linear-gradient(to bottom, transparent, #000 170px);
+  pointer-events: none;
+}
+
+.funnel-stage-section__stage-underline {
+  width: 200px;
+  margin: 5px 0 0;
+  background: url('../../assets/figma/main-enterprises/funnel-active-line.svg') center top / 200px auto no-repeat;
+  transform-origin: center top;
+}
+
+.funnel-stage-section__stage-underline::before,
+.funnel-stage-section__stage-underline::after {
+  display: none;
+}
+
+@media (min-width: 841px) {
+  .funnel-stage-section__funnel-frame {
+    transform: translate(60px, 80px);
+  }
+
+  .funnel-stage-section__next-preview {
+    top: calc(715px + clamp(0px, calc(461px - 50vh), 96px));
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .funnel-stage-section__stage-underline {
+    animation: funnel-stage-active-line-reveal 1000ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes funnel-stage-active-line-reveal {
+  from {
+    opacity: 0;
+    transform: scaleX(0.02);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.funnel-journey-page__feedback {
+  background: #00060f;
+  color: #fff;
+}
+
+@media (max-width: 840px) {
+  .funnel-stage-section__background,
+  .funnel-stage-section__funnel-export {
+    display: none;
+  }
+
+  .funnel-stage-section__next-preview {
+    display: none;
+  }
+
+  .funnel-journey-page__tabs > .audience-segment-section__tabs {
+    margin-top: 60px;
+    padding: 0 20px;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .funnel-journey-page__tabs > .audience-segment-section__tabs .segmented-control {
+    flex: 0 0 auto;
+    width: max-content;
+  }
+
+  .funnel-stage-section {
+    margin-top: 70px;
+  }
+
+  .funnel-stage-section__container {
+    display: block;
+    width: calc(100% - 40px);
+  }
+
+  .funnel-stage-section__content {
+    width: 100%;
+  }
+
+  .funnel-stage-section__visual {
+    display: none;
+  }
+
+  .funnel-stage-section h1 {
+    font-size: clamp(32px, 5vw, 44px);
+  }
+
+  .funnel-stage-section__description {
+    width: 100%;
+    height: auto;
+  }
+
+  .funnel-stage-section__cases {
+    width: min(778px, 100%);
+    overflow-x: auto;
+  }
+
+  .funnel-stage-section__channels {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .funnel-stage-section__button {
+    position: static;
+    margin-top: 36px;
+  }
+
+  .funnel-stage-section__button span {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 599px) {
+  .funnel-stage-section {
+    min-height: 0;
+    height: auto;
+    padding-bottom: 100px;
+  }
+
+  .funnel-stage-section__scene {
+    position: relative;
+    top: auto;
+    height: auto;
+  }
+
+  .funnel-stage-section__container {
+    height: auto;
+    min-height: 0;
+    padding: 0;
+  }
+
+  .funnel-stage-section__content {
+    flex-basis: auto;
+  }
+
+  .funnel-stage-section__description {
+    margin-top: 40px;
+  }
+
+  .funnel-stage-section__description p {
+    margin-top: 16px;
+  }
+
+  .funnel-stage-section__cases {
+    margin-top: 32px;
+  }
+}

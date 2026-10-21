@@ -1,0 +1,185 @@
+.cert-page {
+  --cert-ink: #111a29;
+  --cert-muted: #677fa2;
+  width: 100%;
+  min-width: 320px;
+  overflow: hidden;
+  background: #f7fafd;
+  color: var(--cert-ink);
+  font-family: 'MTS Text', Arial, sans-serif;
+}
+
+.cert-page a { color: inherit; text-decoration: none; }
+.cert-page button { cursor: pointer; }
+.cert-visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+.cert-hero { position: relative; height: 756px; isolation: isolate; }
+.cert-hero__glow { position: absolute; width: 1787px; height: 720px; object-fit: cover; top: 0; left: 50%; transform: translateX(-50%); z-index: -1; max-width: none; }
+.cert-hero__inner { position: relative; max-width: 1440px; height: 100%; margin: 0 auto; }
+.cert-header { position: relative; z-index: 5; display: flex; align-items: center; justify-content: space-between; height: 80px; }
+.cert-header__logo { display: block; flex: 0 0 124px; }
+.cert-header__logo img { display: block; width: 124px; height: auto; }
+.cert-header__nav { display: flex; align-items: center; gap: 48px; margin-left: 100px; color: #425d79; font-size: 17px; line-height: 24px; }
+.cert-header__nav a { white-space: nowrap; transition: color .2s; }
+.cert-header__nav a:hover { color: #ff0032; }
+.cert-header__nav span { margin-left: 5px; font-size: 20px; line-height: 0; }
+.cert-header__action { padding: 10px 15px; border-radius: 40px; background: #eaf0f6; color: #677fa2 !important; font-family: 'MTS Wide', sans-serif; font-size: 14px; font-weight: 500; white-space: nowrap; }
+.cert-header__menu-toggle { display: none; }
+
+.cert-hero__copy { position: absolute; top: 198px; left: 0; width: 790px; z-index: 2; }
+.cert-hero__tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 56px; }
+.cert-hero__tags span { display: inline-flex; align-items: center; min-height: 46px; padding: 0 16px; border: 1px solid #ccd9ea; border-radius: 30px; color: var(--cert-muted); font-size: 17px; }
+.cert-hero h1 { margin: 0 0 28px; font-family: 'MTS Wide', sans-serif; font-size: 50px; font-weight: 500; line-height: 1.1; letter-spacing: -.025em; }
+.cert-hero__copy > p { margin: 0 0 48px; font-family: 'MTS Wide', sans-serif; font-size: 17px; line-height: 24px; }
+.cert-outline-button { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 23px; border: 1px solid #ff0032; border-radius: 40px; color: #ff0032 !important; font-family: 'MTS Wide', sans-serif; font-size: 16px; font-weight: 500; transition: background .2s, color .2s; }
+.cert-outline-button:hover { background: #ff0032; color: white !important; }
+.cert-hero__visual { position: absolute; top: 151px; left: 742px; width: 718px; height: 523px; z-index: 1; }
+.cert-hero__figure-mask, .cert-hero__video-mask { position: absolute; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: 100% 100%; mask-size: 100% 100%; }
+.cert-hero__figure-mask { inset: 0; -webkit-mask-image: url('./assets/hero-outer-mask.svg'); mask-image: url('./assets/hero-outer-mask.svg'); }
+.cert-hero__figure { display: block; position: absolute; left: -7.09%; top: -10.25%; width: 109.4%; height: 120.47%; object-fit: fill; max-width: none; }
+.cert-hero__video-mask { left: .66%; top: 1.14%; width: 97.22%; height: 97.7%; -webkit-mask-image: url('./assets/hero-inner-mask.svg'); mask-image: url('./assets/hero-inner-mask.svg'); }
+.cert-hero__video { position: absolute; left: -7.78%; top: -11.53%; width: 113.16%; height: 124%; object-fit: fill; max-width: none; }
+.cert-hero__quote { position: absolute; z-index: 3; top: 308px; left: 683px; display: flex; flex-direction: column; gap: 20px; width: 280px; min-height: 182px; padding: 24px; border-radius: 30px; background: #fff; box-shadow: -3px 4px 44px rgba(9, 75, 139, .13); color: #1d2023; }
+.cert-hero__quote strong { font-family: 'MTS Wide', sans-serif; font-size: 18px; font-weight: 500; line-height: 1.2; }
+.cert-hero__quote > span { display: flex; align-items: center; gap: 11px; font-size: 17px; }
+.cert-hero__avatar { display: block; width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+
+.cert-partners { width: min(1440px, calc(100% - 48px)); height: 60px; margin: 0 auto; }
+.cert-partners img { display: block; width: 100%; height: auto; }
+.cert-image-section { width: min(1440px, calc(100% - 48px)); margin-right: auto; margin-left: auto; }
+.cert-image-section img { display: block; width: 100%; height: auto; }
+.cert-advantages-stage { position: relative; isolation: isolate; margin-top: 200px; }
+.cert-advantages-stage__mask { position: absolute; z-index: 0; top: min(293px, 15.26vw); left: 50%; width: min(1920px, 100vw); height: auto; max-width: none; transform: translateX(-50%); pointer-events: none; }
+.cert-image-section--advantages { position: relative; z-index: 1; }
+.cert-audience { position: relative; z-index: 1; width: min(1920px, 100%); height: 960px; margin: 200px auto 0; isolation: isolate; }
+.cert-audience__content { position: relative; z-index: 2; width: min(1400px, calc(100% - 48px)); margin: 0 auto; text-align: center; }
+.cert-audience h2 { margin: 0; font-family: 'MTS Wide', sans-serif; font-size: 44px; font-weight: 500; line-height: 48px; }
+.cert-audience__cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 60px; }
+.cert-audience__card { display: flex; flex-direction: column; align-items: center; min-width: 0; }
+.cert-audience__card--entrepreneurs, .cert-audience__card--beginners { padding-top: 40px; }
+.cert-audience__text { width: 100%; }
+.cert-audience__text h3 { margin: 0; font-family: 'MTS Wide', sans-serif; font-size: 24px; font-weight: 500; line-height: 28px; }
+.cert-audience__text p { margin: 12px 0 0; font-size: 17px; line-height: 24px; }
+.cert-audience__main-photo { width: 309px; height: 350px; margin-top: 36px; overflow: hidden; border-radius: 40px; }
+.cert-audience__main-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cert-audience__card--entrepreneurs .cert-audience__main-photo img { width: 102.66%; height: 120.78%; margin-top: -6.07%; transform: scaleX(-1); }
+.cert-audience__card--marketers .cert-audience__main-photo { width: 450px; max-width: 100%; height: 450px; }
+.cert-audience__card--marketers .cert-audience__main-photo img { width: 131.48%; height: 146.3%; margin-top: -12.3%; margin-left: -15.71%; }
+.cert-audience__action { position: relative; z-index: 4; margin-top: 60px; }
+.cert-audience__floats { position: absolute; z-index: 3; inset: 0; pointer-events: none; }
+.cert-audience__float { position: absolute; overflow: hidden; border-radius: 40px; box-shadow: 0 28px 28px -15px rgba(20, 31, 45, .32); }
+.cert-audience__float img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cert-audience__float--analyst { left: 3.7%; top: 40.6%; width: 10.42%; aspect-ratio: 1; }
+.cert-audience__float--learner { left: 12.2%; top: 57.3%; width: 6.82%; aspect-ratio: 1; }
+.cert-audience__float--consultant { left: 24.1%; top: 72.3%; width: 6.77%; aspect-ratio: 1; }
+.cert-audience__float--tablet-student { left: 85.6%; top: 42.2%; width: 6.93%; aspect-ratio: 1; }
+.cert-audience__float--tablet-learner { left: 79.8%; top: 52.7%; width: 11.46%; aspect-ratio: 1; }
+.cert-audience__float--presenter { left: 72.8%; top: 73.8%; width: 5.73%; aspect-ratio: 1; }
+.cert-audience__float--presenter img { width: 145.91%; height: 194.55%; margin-top: -34.89%; }
+.cert-curriculum-stage { position: relative; isolation: isolate; margin-top: 86px; }
+.cert-image-section--curriculum { position: relative; }
+.cert-image-section--outcomes, .cert-image-section--companies { margin-top: 200px; }
+
+.cert-reviews-stage { position: relative; isolation: isolate; margin-top: 200px; }
+.cert-reviews-stage__mask { position: absolute; z-index: -1; top: -200px; left: 50%; width: min(1920px, 100%); height: 1370px; max-width: none; object-fit: fill; transform: translateX(-50%); -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 100%); pointer-events: none; }
+.cert-reviews { position: relative; z-index: 1; width: min(1440px, calc(100% - 48px)); margin: 0 auto; }
+.cert-reviews h2 { margin: 0 0 60px; color: #677fa2; font-family: 'MTS Wide', sans-serif; font-size: 44px; font-weight: 500; line-height: 1.2; text-align: center; }
+.cert-reviews h2 strong { color: var(--cert-ink); font-weight: 500; }
+.cert-reviews__track { width: calc(100vw - max(24px, calc(50vw - 720px))); overflow-x: auto; scrollbar-width: thin; padding-bottom: 4px; }
+.cert-reviews__artwork { display: block; width: 2282px; height: auto; max-width: none; }
+
+.cert-enrollment { --photo-top: -134px; --photo-height: 858px; --bottom-fade: 160px; position: relative; isolation: isolate; height: 582px; margin-top: 196px; scroll-margin-top: 88px; }
+.cert-enrollment__background { position: absolute; z-index: 0; left: 50%; top: var(--photo-top); width: min(1920px, 100%); height: var(--photo-height); object-fit: cover; object-position: center top; transform: translateX(-50%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, .3) 16%, #000 37%, #000 100%); mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, .3) 16%, #000 37%, #000 100%); }
+.cert-enrollment__mask { position: absolute; z-index: 2; top: -230px; left: 50%; width: min(2357px, 123vw); height: 1060px; max-width: none; object-fit: fill; opacity: .38; transform: translateX(-50%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 17%, #000 47%, transparent 90%); mask-image: linear-gradient(to bottom, transparent 0%, #000 17%, #000 47%, transparent 90%); pointer-events: none; }
+.cert-enrollment::before { position: absolute; z-index: 1; top: var(--photo-top); left: 50%; width: min(1920px, 100%); height: 350px; background: radial-gradient(ellipse 58% 85% at 23% 58%, rgba(255, 154, 170, .36), transparent 78%), linear-gradient(180deg, rgba(247, 250, 253, 0) 0%, rgba(247, 250, 253, .3) 28%, transparent 100%); transform: translateX(-50%); content: ''; pointer-events: none; }
+.cert-enrollment::after { position: absolute; z-index: 3; top: calc(var(--photo-top) + var(--photo-height) - var(--bottom-fade)); left: 50%; width: min(1920px, 100%); height: calc(var(--bottom-fade) + 163px); background: linear-gradient(to bottom, transparent, #f7fafd 50%, #f7fafd), url('./assets/enrollment-bottom-gradient@2x.png') center / 100% 100% no-repeat; transform: translateX(-50%); content: ''; pointer-events: none; }
+.cert-enrollment__card { position: absolute; z-index: 4; top: -98px; left: calc(50% - 814px); width: 908px; }
+.cert-enrollment__card img { display: block; width: 100%; height: auto; }
+.cert-enrollment__card a { position: absolute; top: 67.7%; left: 18%; width: 59%; height: 7%; border-radius: 50px; }
+.cert-enrollment__card a:focus-visible { outline: 3px solid #ff0032; outline-offset: 3px; }
+
+.cert-questions { position: relative; width: min(1440px, calc(100% - 48px)); margin: 200px auto 0; }
+.cert-questions > img { display: block; width: 100%; height: auto; }
+
+.cert-footer { margin-top: 200px; }
+
+@media (max-width: 1500px) {
+  .cert-hero__inner { width: calc(100% - 96px); }
+  .cert-hero__visual { left: 52%; width: min(718px, 52vw); height: auto; aspect-ratio: 718 / 523; }
+  .cert-hero__copy { width: min(790px, 58%); }
+  .cert-hero__quote { left: 48%; }
+  .cert-hero h1 { font-size: clamp(36px, 3.2vw, 50px); }
+  .cert-hero__copy > p { max-width: 560px; }
+  .cert-desktop-break { display: none; }
+}
+
+@media (max-width: 980px) {
+  .cert-hero { height: 900px; }
+  .cert-hero__inner { width: calc(100% - 48px); }
+  .cert-header { height: 72px; }
+  .cert-header__nav { display: none; position: absolute; top: 72px; right: 0; left: 0; flex-direction: column; align-items: stretch; gap: 0; margin: 0; padding: 12px 24px; border-radius: 24px; background: #fff; box-shadow: 0 12px 32px #10345822; }
+  .cert-header__nav--open { display: flex; }
+  .cert-header__nav a { padding: 12px 0; }
+  .cert-header__menu-toggle { display: flex; order: 3; flex-direction: column; gap: 5px; padding: 10px; border: 0; background: transparent; }
+  .cert-header__menu-toggle > span:not(.cert-visually-hidden) { width: 24px; height: 2px; background: #111a29; }
+  .cert-header__action { margin-left: auto; }
+  .cert-hero__copy { top: 125px; width: min(700px, 100%); }
+  .cert-hero__tags { margin-bottom: 32px; }
+  .cert-hero__copy > p { margin-bottom: 24px; }
+  .cert-hero__visual { top: 520px; left: 50%; width: min(600px, 90vw); transform: translateX(-50%); }
+  .cert-hero__quote { top: 570px; left: 3%; width: 240px; }
+  .cert-hero__glow { top: 160px; }
+  .cert-advantages-stage, .cert-audience, .cert-image-section--outcomes, .cert-image-section--companies, .cert-questions, .cert-footer { margin-top: 100px; }
+  .cert-audience { height: auto; padding-bottom: 20px; }
+  .cert-audience__floats { display: none; }
+  .cert-audience__cards { gap: 16px; }
+  .cert-audience__text h3 { font-size: 20px; line-height: 25px; }
+  .cert-audience__text p { font-size: 15px; line-height: 21px; }
+  .cert-audience__main-photo, .cert-audience__card--marketers .cert-audience__main-photo { width: 100%; height: auto; aspect-ratio: 1; }
+  .cert-curriculum-stage { margin-top: 45px; }
+  .cert-reviews-stage { margin-top: 100px; }
+  .cert-reviews-stage__mask { top: -100px; height: 1200px; }
+  .cert-enrollment { margin-top: 120px; }
+  .cert-enrollment__card { left: 2%; width: min(908px, 54vw); }
+}
+
+@media (max-width: 600px) {
+  .cert-hero { height: 780px; }
+  .cert-hero__inner { width: calc(100% - 32px); }
+  .cert-header__logo, .cert-header__logo img { width: 96px; }
+  .cert-header__action { display: none; }
+  .cert-hero__copy { top: 110px; }
+  .cert-hero__tags { gap: 5px; margin-bottom: 24px; }
+  .cert-hero__tags span { min-height: 32px; padding: 0 10px; font-size: 12px; }
+  .cert-hero h1 { margin-bottom: 18px; font-size: clamp(29px, 8vw, 42px); }
+  .cert-hero__copy > p { font-size: 15px; line-height: 21px; }
+  .cert-outline-button { min-height: 44px; font-size: 14px; }
+  .cert-hero__visual { top: 470px; width: min(430px, 98vw); }
+  .cert-hero__quote { top: 530px; left: 0; width: 190px; min-height: 0; padding: 16px; gap: 10px; border-radius: 20px; }
+  .cert-hero__quote strong { font-size: 12px; }
+  .cert-hero__quote > span { font-size: 13px; }
+  .cert-hero__avatar { width: 30px; height: 30px; }
+  .cert-partners { width: calc(100% - 32px); height: auto; overflow: hidden; }
+  .cert-partners img { width: 720px; max-width: none; }
+  .cert-image-section { width: calc(100% - 32px); }
+  .cert-advantages-stage, .cert-audience, .cert-image-section--outcomes, .cert-image-section--companies, .cert-questions, .cert-footer { margin-top: 70px; }
+  .cert-audience__content { width: calc(100% - 32px); }
+  .cert-audience h2 { font-size: 30px; line-height: 36px; }
+  .cert-audience__cards { display: flex; flex-direction: column; gap: 40px; margin-top: 36px; }
+  .cert-audience__card--entrepreneurs, .cert-audience__card--beginners { padding-top: 0; }
+  .cert-audience__main-photo, .cert-audience__card--marketers .cert-audience__main-photo { width: min(100%, 390px); height: auto; aspect-ratio: 1; margin-top: 20px; border-radius: 28px; }
+  .cert-audience__action { margin-top: 40px; }
+  .cert-reviews-stage { margin-top: 70px; }
+  .cert-reviews-stage__mask { top: -70px; height: 1000px; }
+  .cert-reviews { width: calc(100% - 32px); }
+  .cert-reviews h2 { margin-bottom: 28px; font-size: 27px; }
+  .cert-reviews__track { width: calc(100vw - 16px); }
+  .cert-reviews__artwork { width: min(1700px, 440vw); }
+  .cert-enrollment { --photo-top: -70px; --photo-height: 600px; --bottom-fade: 110px; height: 500px; margin-top: 100px; }
+  .cert-enrollment__background { object-position: 62% center; }
+  .cert-enrollment__mask { top: -150px; height: 750px; }
+  .cert-enrollment::before { height: 200px; }
+  .cert-enrollment::after { height: calc(var(--bottom-fade) + 70px); }
+  .cert-enrollment__card { top: -15px; left: 50%; width: calc(100vw + 60px); transform: translateX(-50%); }
+  .cert-questions { width: calc(100% - 32px); }
+}

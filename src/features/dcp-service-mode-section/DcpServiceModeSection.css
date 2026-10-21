@@ -1,0 +1,337 @@
+.dcp-service-mode {
+  display: flex;
+  width: min(1440px, calc(100% - 48px));
+  flex-direction: column;
+  gap: 70px;
+  align-items: center;
+  margin: 120px auto 160px;
+}
+
+.dcp-service-mode__title {
+  width: 100%;
+  margin: 0;
+  color: #7f8c9f;
+  font-family: 'MTS Wide', Arial, sans-serif;
+  font-size: 44px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.dcp-service-mode__title span {
+  color: rgb(255 255 255 / 93%);
+}
+
+.dcp-service-mode__card {
+  position: relative;
+  width: 100%;
+  height: 620px;
+  overflow: hidden;
+  border-radius: 40px;
+  background: #000814;
+  isolation: isolate;
+}
+
+.dcp-service-mode__video-layer,
+.dcp-service-mode__video,
+.dcp-service-mode__static-image,
+.dcp-service-mode__shade {
+  position: absolute;
+  inset: 0;
+}
+
+.dcp-service-mode__video-layer {
+  z-index: 0;
+  overflow: hidden;
+}
+
+.dcp-service-mode__video {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity 520ms ease, transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: scale(1.015);
+}
+
+.dcp-service-mode__static-image {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  object-fit: cover;
+  transition: opacity 520ms ease;
+}
+
+.dcp-service-mode__video.is-active,
+.dcp-service-mode__static-image.is-active {
+  opacity: 1;
+}
+
+.dcp-service-mode__video.is-active {
+  transform: scale(1);
+}
+
+.dcp-service-mode__video--self,
+.dcp-service-mode__static-image--self {
+  object-position: 58% center;
+}
+
+.dcp-service-mode__shade {
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgb(0 8 20 / 88%) 0%, rgb(0 8 20 / 73%) 28%, rgb(0 8 20 / 10%) 58%),
+    linear-gradient(180deg, rgb(0 8 20 / 10%) 0%, rgb(0 8 20 / 28%) 100%);
+  pointer-events: none;
+}
+
+.dcp-service-mode__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: min(520px, calc(100% - 80px));
+  flex-direction: column;
+  gap: 70px;
+  align-items: flex-start;
+  padding: 70px 0 0 70px;
+}
+
+.dcp-service-mode__segments {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  gap: 4px;
+  justify-content: flex-start;
+  padding: 4px;
+  border-radius: 36px;
+  background: rgb(255 255 255 / 8%);
+  backdrop-filter: blur(24px);
+}
+
+.dcp-service-mode__segment {
+  display: inline-flex;
+  height: 44px;
+  min-width: 52px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 18px 10px;
+  border: 0;
+  border-radius: 42px;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: 'MTS Text', Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 24px;
+  transition: background-color 180ms ease, transform 120ms ease;
+  white-space: nowrap;
+}
+
+.dcp-service-mode__segment.is-active {
+  background: rgb(203 233 255 / 10%);
+}
+
+.dcp-service-mode__segment:hover {
+  background: rgb(203 233 255 / 16%);
+}
+
+.dcp-service-mode__segment:active {
+  transform: scale(0.98);
+}
+
+.dcp-service-mode__segment:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.dcp-service-mode__copy,
+.dcp-service-mode__text {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.dcp-service-mode__copy {
+  gap: 40px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dcp-service-mode__copy {
+    animation: dcp-mode-copy-appear 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes dcp-mode-copy-appear {
+  from { opacity: .55; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dcp-service-mode__text {
+  gap: 16px;
+}
+
+.dcp-service-mode__text h3,
+.dcp-service-mode__text p {
+  margin: 0;
+}
+
+.dcp-service-mode__text h3 {
+  width: 100%;
+  color: rgb(255 255 255 / 93%);
+  font-family: 'MTS Wide', Arial, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+
+.dcp-service-mode__text p {
+  width: 100%;
+  color: #7f8c9f;
+  font-family: 'MTS Text', Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+
+.dcp-service-mode__text strong {
+  color: rgb(255 255 255 / 93%);
+  font-weight: 500;
+}
+
+.dcp-service-mode__button {
+  padding: 14px;
+  border-radius: 56px;
+  font-family: 'MTS Wide', Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 16px;
+  text-transform: none;
+}
+
+.dcp-service-mode__expert-chat {
+  position: absolute;
+  z-index: 2;
+  right: 37px;
+  bottom: -93px;
+  display: block;
+  width: 355px;
+  height: 346px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 420ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(14px);
+}
+
+.dcp-service-mode__expert-chat.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 1200px) {
+  .dcp-service-mode__content {
+    width: min(500px, calc(100% - 64px));
+    padding-left: 48px;
+  }
+
+  .dcp-service-mode__expert-chat {
+    right: 24px;
+  }
+}
+
+@media (max-width: 840px) {
+  .dcp-service-mode {
+    width: calc(100% - 40px);
+    gap: 40px;
+    margin-top: 90px;
+  }
+
+  .dcp-service-mode__title {
+    font-size: clamp(32px, 7vw, 44px);
+    text-align: left;
+  }
+
+  .dcp-service-mode__card {
+    height: 660px;
+    border-radius: 28px;
+  }
+
+  .dcp-service-mode__video {
+    object-position: 62% center;
+  }
+
+  .dcp-service-mode__shade {
+    background:
+      linear-gradient(180deg, rgb(0 8 20 / 90%) 0%, rgb(0 8 20 / 68%) 42%, rgb(0 8 20 / 18%) 100%),
+      linear-gradient(90deg, rgb(0 8 20 / 82%) 0%, rgb(0 8 20 / 0%) 100%);
+  }
+
+  .dcp-service-mode__content {
+    width: calc(100% - 48px);
+    gap: 48px;
+    padding: 32px 24px 0;
+  }
+
+  .dcp-service-mode__segment {
+    font-size: 15px;
+  }
+
+  .dcp-service-mode__expert-chat {
+    right: 14px;
+    bottom: -118px;
+    width: min(330px, 78vw);
+    height: auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .dcp-service-mode__card {
+    height: 610px;
+    border-radius: 24px;
+  }
+
+  .dcp-service-mode__content {
+    width: calc(100% - 32px);
+    gap: 36px;
+    padding: 24px 16px 0;
+  }
+
+  .dcp-service-mode__segments {
+    width: fit-content;
+  }
+
+  .dcp-service-mode__segment {
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 13px;
+  }
+
+  .dcp-service-mode__text h3 {
+    font-size: 22px;
+  }
+
+  .dcp-service-mode__text p {
+    font-size: 15px;
+    line-height: 21px;
+  }
+
+  .dcp-service-mode__button {
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dcp-service-mode__video,
+  .dcp-service-mode__static-image,
+  .dcp-service-mode__segment,
+  .dcp-service-mode__expert-chat {
+    transition: none;
+  }
+}

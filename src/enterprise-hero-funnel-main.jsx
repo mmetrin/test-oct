@@ -1,0 +1,15 @@
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import { EnterpriseHeroFunnelPage } from './pages/enterprise-hero-funnel/EnterpriseHeroFunnelPage'
+
+if ('scrollRestoration' in window.history) {
+  window.history.scrollRestoration = 'manual'
+}
+window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <EnterpriseHeroFunnelPage />
+  </StrictMode>,
+)

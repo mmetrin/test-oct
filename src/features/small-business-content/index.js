@@ -1,0 +1,1 @@
+export { SmallBusinessContent } from './SmallBusinessContent'
