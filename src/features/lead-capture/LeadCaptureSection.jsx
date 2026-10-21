@@ -108,7 +108,6 @@ export function LeadCaptureSection() {
           <AudienceChip href="https://marketolog.mts.ru/">для малого и среднего бизнеса</AudienceChip>
         </p>
       </div>
-      <p className="lead-capture-section__footer-note">Тут надо будет футер продумать</p>
     </section>
   )
 }

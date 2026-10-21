@@ -7,20 +7,15 @@
   color: var(--mts-txt-primary-on-light);
 }
 
-.enterprise-hero-page__big-data {
-  height: 500px;
-  padding: 48px 24px 0;
-  background: linear-gradient(180deg, #f7f9fc 0%, #e9f1fb 45%, #d8e3f3 100%);
-}
-
-.enterprise-hero-page__big-data h2 {
-  margin: 0;
-  font: 500 clamp(30px, 4vw, 44px)/1.2 'MTS Wide', Arial, sans-serif;
-  text-align: center;
-}
-
 .enterprise-hero-page > .enterprise-content {
   margin-top: 0;
+}
+
+@media (min-width: 600px) {
+  /* The sticky preview hands over to the real heading when the funnel ends. */
+  .enterprise-hero-page .enterprise-funnel:has(.funnel-stage-section__big-data-preview.is-visible) + .enterprise-data .enterprise-data__heading h2 {
+    visibility: hidden;
+  }
 }
 
 .enterprise-hero-page .enterprise-content__lead img {

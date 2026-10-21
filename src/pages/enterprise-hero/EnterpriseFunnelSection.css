@@ -173,7 +173,8 @@ body:has(.enterprise-hero-page) { overflow-x: clip; }
 
 .enterprise-funnel .funnel-stage-section__content { flex: 0 0 880px; width: 880px; }
 .enterprise-funnel .funnel-stage-section h1 { font-size: 44px; line-height: 52.8px; }
-.enterprise-funnel .funnel-stage-section__description { margin-top: 60.2px; height: 68px; }
+.enterprise-funnel .funnel-stage-section__description { width: 100%; margin-top: 60.2px; height: 68px; }
+.enterprise-funnel .funnel-stage-section__description p { max-width: none; }
 .enterprise-funnel .funnel-stage-section__cases { margin-top: 40px; gap: 24px; }
 .enterprise-funnel .funnel-stage-section__channels { margin-top: 16px; }
 .enterprise-funnel .funnel-stage-section__next-preview { display: none; }
@@ -185,19 +186,23 @@ body:has(.enterprise-hero-page) { overflow-x: clip; }
   z-index: 3;
   box-sizing: border-box;
   width: 100%;
-  height: 500px;
-  padding: 48px 24px 0;
-  color: var(--mts-txt-primary-on-light);
-  font: 500 clamp(30px, 4vw, 44px)/1.2 'MTS Wide', Arial, sans-serif;
+  padding: 51px 24px 0;
+  color: #172b40;
+  font: 500 48px/1.18 'MTS Wide', Arial, sans-serif;
+  letter-spacing: -1.6px;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   text-align: center;
   transform: translateY(12px);
   transition: opacity 420ms ease, transform 420ms cubic-bezier(.22, 1, .36, 1);
 }
 
+.enterprise-funnel .funnel-stage-section__big-data-preview span { display: block; }
+
 .enterprise-funnel .funnel-stage-section__big-data-preview.is-visible {
   opacity: 1;
+  visibility: visible;
   transform: translateY(0);
 }
 
@@ -233,18 +238,19 @@ body:has(.enterprise-hero-page) { overflow-x: clip; }
 .enterprise-funnel .funnel-stage-section__stages { left: 247px; top: 29px; height: 436px; }
 .enterprise-funnel .funnel-stage-section__stages li { color: var(--mts-txt-light-blue); font-size: 21px; line-height: 30px; letter-spacing: 0; }
 .enterprise-funnel .funnel-stage-section__stages li.is-active { color: var(--mts-bg-states-action); }
+.enterprise-funnel .funnel-stage-section__stage-label { position: relative; }
 .enterprise-funnel .funnel-stage-section__stage-underline {
   position: absolute;
   top: 38.7px;
-  left: 1.13px;
-  width: 199px;
+  left: -10px;
+  width: calc(100% + 20px);
   height: 1.3px;
   margin: 0;
   background: none;
   opacity: 0;
   animation: none;
   overflow: visible;
-  transition: none;
+  transition: opacity 200ms ease;
 }
 .enterprise-funnel .funnel-stage-section__stages li.is-active .funnel-stage-section__stage-underline {
   opacity: 1;
@@ -253,9 +259,9 @@ body:has(.enterprise-hero-page) { overflow-x: clip; }
   display: block;
   top: 0;
   left: 0;
-  width: 199px;
+  width: 100%;
   height: 1.3px;
-  background: url('../../assets/figma/enterprise-funnel/active-line.svg') left center / 199px 1.3px no-repeat;
+  background: url('../../assets/figma/enterprise-funnel/active-line.svg') left center / 100% 1.3px no-repeat;
   box-shadow: none;
   opacity: .25;
   animation: none;
@@ -265,10 +271,11 @@ body:has(.enterprise-hero-page) { overflow-x: clip; }
   position: absolute;
   top: 0;
   left: 0;
-  width: calc(199px * var(--funnel-line-progress, 0.04));
+  width: calc(100% * var(--funnel-line-progress, 0.04));
   height: 1.3px;
-  background: url('../../assets/figma/enterprise-funnel/active-line.svg') left center / 199px 1.3px no-repeat;
+  background: url('../../assets/figma/enterprise-funnel/active-line.svg') left center / 100% 1.3px no-repeat;
   filter: drop-shadow(0 0 3px var(--mts-bg-states-action));
+  transition: width 180ms ease-out;
 }
 .enterprise-funnel .funnel-stage-section__stage-underline-fill::after {
   position: absolute;
@@ -279,6 +286,11 @@ body:has(.enterprise-hero-page) { overflow-x: clip; }
   border-radius: 50%;
   background: var(--mts-bg-states-action);
   content: '';
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enterprise-funnel .funnel-stage-section__stage-underline,
+  .enterprise-funnel .funnel-stage-section__stage-underline-fill { transition: none; }
 }
 
 .enterprise-funnel .funnel-stage-section__design-background {

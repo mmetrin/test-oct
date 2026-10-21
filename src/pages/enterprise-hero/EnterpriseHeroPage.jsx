@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import { EnterpriseFunnelSection } from './EnterpriseFunnelSection'
+import { EnterpriseBigData } from '../../features/enterprise-big-data/EnterpriseBigData'
 import { EnterpriseContentSection } from '../../features/enterprise-content/EnterpriseContentSection'
 import { EnterpriseHero } from '../../features/enterprise-hero/EnterpriseHero'
 import { EnterprisePartnerLogos } from '../../features/enterprise-hero/EnterprisePartnerLogos'
@@ -10,7 +11,7 @@ import { getDesignScale } from '../../shared/ui/design-viewport'
 import './EnterpriseFigmaVariables.css'
 import './EnterpriseHeroPage.css'
 
-export function EnterpriseHeroPage() {
+export function EnterpriseHeroPage({ bigDataNetwork = true }) {
   const [videoChangeCount, setVideoChangeCount] = useState(0)
   const [areLogosVisible, setAreLogosVisible] = useState(false)
   const [activeSegment, setActiveSegment] = useState(
@@ -94,9 +95,7 @@ export function EnterpriseHeroPage() {
       <EnterpriseFunnelSection activeSegment={activeSegment} onSegmentChange={changeSegment} />
       {activeSegment === 'enterprise' && (
         <>
-          <section className="enterprise-hero-page__big-data" aria-labelledby="enterprise-big-data-title">
-            <h2 id="enterprise-big-data-title">тут биг дата</h2>
-          </section>
+          <EnterpriseBigData variant={bigDataNetwork ? 'network' : 'shards'} />
           <EnterpriseContentSection />
         </>
       )}

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { SiteCases, SiteFooter, SitePlatforms } from '../../shared/ui/site-sections'
-import introPanels from '../../assets/figma/bloggers/intro-panels.png'
+import introPanels from '../../assets/figma/bloggers/intro-panels-no-background.png'
 import growthPanels from '../../assets/figma/bloggers/growth-panels.png'
 import workFormat from '../../assets/figma/bloggers/work-format.png'
 import appQr from '../../assets/figma/bloggers/app-qr.png'
@@ -8,8 +8,9 @@ import backgroundGlow from '../../assets/figma/bloggers/background-glow.png'
 import phoneFrame from '../../assets/figma/bloggers/phone-frame.png'
 import leftPoster from '../../assets/figma/bloggers/hero-video-left-poster.png'
 import rightPoster from '../../assets/figma/bloggers/hero-video-right-poster.png'
+import heroBrandLogos from '../../assets/figma/bloggers/logos.svg'
 import leftVideo from '../../assets/figma/bloggers/tiktok-final-1.mp4'
-import rightVideo from '../../assets/figma/bloggers/tiktok-final-2.mp4'
+import rightVideo from '../../assets/figma/bloggers/tiktok-final-2-updated.mp4'
 import './BloggersContent.css'
 
 const caseImages = import.meta.glob('../../assets/figma/bloggers/case-*.png', {
@@ -83,10 +84,7 @@ function BloggersHero() {
   return (
     <section className="bloggers-hero" aria-labelledby="bloggers-title">
       <div className="bloggers-hero__glow" aria-hidden="true" />
-      <div className="bloggers-hero__brand-names" aria-hidden="true">
-        <span>Befree</span><span>МИРАТОРГ</span><span>GRASS</span><span>Плати по миру</span>
-        <span>SYNERGETIC</span><span>КАССИР</span><span>Bombbar</span><span>Я.Маркет</span>
-      </div>
+      <img className="bloggers-hero__brand-logos" src={heroBrandLogos} alt="" aria-hidden="true" />
       <img className="bloggers-hero__poster bloggers-hero__poster--left" src={leftPoster} alt="" />
       <img className="bloggers-hero__poster bloggers-hero__poster--right" src={rightPoster} alt="" />
       <PhoneVideo className="bloggers-hero__phone--left" src={rightVideo} poster={leftPoster} label="Видео блогера в левой карточке" videoRef={leftVideoRef} isSynced={isSynced} />
@@ -133,14 +131,14 @@ function BloggerCases() {
 export function BloggersContent() {
   return (
     <div className="bloggers-page" id="bloggers-content">
-      <div className="bloggers-page__mask-group" aria-hidden="true">
-        <div className="bloggers-page__mask-canvas">
-          <img src={backgroundGlow} alt="" draggable={false} />
-        </div>
-      </div>
       <BloggersHero />
       <ImageSection className="bloggers-page__intro" src={introPanels} alt="От идеи до выплаты: известные бренды, оплата за видео и официальные выплаты" width="1440" height="646" />
       <section className="bloggers-page__image-section bloggers-page__growth" aria-label="Возможности для вашего роста">
+        <div className="bloggers-page__mask-group" aria-hidden="true">
+          <div className="bloggers-page__mask-canvas">
+            <img src={backgroundGlow} alt="" draggable={false} />
+          </div>
+        </div>
         <img src={growthPanels} alt="Возможности для вашего роста: идеи, поддержка, инструменты и выплаты блогерам" width="1440" height="793" loading="lazy" />
       </section>
       <ImageSection className="bloggers-page__format" src={workFormat} alt="Формат работы: CPA, UGC-креаторы и фабрика контента" width="1440" height="642" />

@@ -1170,8 +1170,7 @@
 .lead-capture-section__copy p,
 .lead-capture-section__note-card p,
 .lead-capture-section__form p,
-.lead-capture-section__audience p,
-.lead-capture-section__footer-note {
+.lead-capture-section__audience p {
   margin: 0;
 }
 
@@ -1381,17 +1380,6 @@
   height: 55px;
   pointer-events: none;
   user-select: none;
-}
-
-.lead-capture-section__footer-note {
-  width: 828px;
-  margin-top: 297px;
-  color: rgba(255, 255, 255, 0.2);
-  font-family: 'MTS Wide', Arial, sans-serif;
-  font-size: 42px;
-  font-weight: 500;
-  line-height: 1.05;
-  letter-spacing: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {

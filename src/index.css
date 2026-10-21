@@ -78,9 +78,9 @@ body {
 
 /* Match the canvas to light pages so their entrance never exposes a dark flash. */
 :root[data-page-theme='light'],
-:root:has(.funnel-journey-page, .enterprise-hero-page, .cert-page, .contacts-page, .interactive-web-page, .cursor-grid-page, .bloggers-standalone),
+:root:has(.funnel-journey-page, .enterprise-hero-page, .cert-page, .contacts-page, .interactive-web-page, .cursor-grid-page, .bloggers-standalone, .article-brandbook-page),
 :root[data-page-theme='light'] body,
-body:has(.funnel-journey-page, .enterprise-hero-page, .cert-page, .contacts-page, .interactive-web-page, .cursor-grid-page, .bloggers-standalone) {
+body:has(.funnel-journey-page, .enterprise-hero-page, .cert-page, .contacts-page, .interactive-web-page, .cursor-grid-page, .bloggers-standalone, .article-brandbook-page) {
   background: #f7fafd;
 }
 

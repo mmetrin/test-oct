@@ -7,6 +7,7 @@ import { PremiumVideoTransition } from '../../features/premium-video-transition'
 import { usePageReady } from '../../shared/lib/usePageReady'
 import { useScrollReveal } from '../../shared/lib/useScrollReveal'
 import { SiteHeader } from '../../shared/ui/site-header'
+import { SiteFooter } from '../../shared/ui/site-sections'
 import './PremiumVideoPage.css'
 
 const LEAD_FORM_SCROLL_OFFSET = 200
@@ -106,6 +107,7 @@ export function PremiumVideoPage() {
       <AdvantagesSection />
       <PremiumVideoTransition />
       <LeadCaptureSection />
+      <SiteFooter />
     </main>
     </>
   )

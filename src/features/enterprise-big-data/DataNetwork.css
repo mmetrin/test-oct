@@ -1,0 +1,83 @@
+.data-network {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.data-network__tracks {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.data-network__track-bed,
+.data-network__track-core,
+.data-network__track-highlight {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.data-network__track-lines {
+  filter: blur(0.7px);
+}
+
+.data-network__track-bed { stroke: #e0e8f1; stroke-width: 15; }
+.data-network__track-core { stroke: #c5d5e7; stroke-width: 6; }
+.data-network__track-highlight { stroke: #fff; stroke-width: 2; opacity: .8; }
+.data-network__junction { fill: #fff; stroke: #d3deec; stroke-width: 2; }
+
+.data-network__logo,
+.data-network__hub {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border: 1px solid #e3e6eb;
+  box-shadow: 0 14px 30px #29476c12, 0 2px 5px #29476c0a;
+}
+
+.data-network__logo {
+  width: 178px;
+  height: 94px;
+  padding: 12px 17px;
+  border-radius: 22px;
+}
+
+.data-network__logo img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+.data-network__logo--top-left { left: calc(15.625% + 24px); top: 21.6%; }
+.data-network__logo--middle-left { left: 14.583%; top: 51.6%; }
+.data-network__logo--bottom-left { left: calc(15.625% + 24px); top: 83%; }
+.data-network__logo--top-right { left: calc(84.375% - 24px); top: 21.6%; }
+.data-network__logo--middle-right { left: 85.417%; top: 51.6%; }
+.data-network__logo--bottom-right { left: calc(84.375% - 24px); top: 83%; }
+
+.data-network__hub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  top: calc(51.6% + 60px);
+  width: 300px;
+  height: 260px;
+  padding: 32px;
+  border-radius: 40px;
+  box-shadow: 0 20px 46px #243d6220, 0 3px 10px #243d6210;
+}
+
+.data-network__hub img {
+  display: block;
+  flex: none;
+  width: auto;
+  height: 196px;
+  transform: translateX(21px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .data-network__pulse { display: none; }
+}

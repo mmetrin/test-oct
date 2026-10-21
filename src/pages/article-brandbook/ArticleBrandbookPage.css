@@ -1,0 +1,127 @@
+.article-brandbook-page {
+  position: relative;
+  container-type: inline-size;
+  width: min(100%, 1920px);
+  margin-inline: auto;
+  background: #f7fafd;
+}
+
+.article-brandbook-page__accessible-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.article-brandbook-page__toc-track {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#root > .article-brandbook-page__toc-track {
+  animation: none;
+}
+
+.article-brandbook-page__toc-track--hidden .article-brandbook-page__toc {
+  pointer-events: none;
+}
+
+.article-brandbook-page__toc {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+}
+
+.article-brandbook-page__toc-link {
+  display: block;
+  border-left: calc(2 * var(--toc-unit)) solid rgba(147, 173, 200, 0.3);
+  padding: calc(8 * var(--toc-unit)) 0 calc(8 * var(--toc-unit)) calc(16 * var(--toc-unit));
+  color: #7f8c9f;
+  font-family: 'MTS Text', Arial, sans-serif;
+  font-size: calc(14 * var(--toc-unit));
+  font-weight: 400;
+  line-height: calc(20 * var(--toc-unit));
+  text-decoration: none;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.article-brandbook-page__toc-link:hover,
+.article-brandbook-page__toc-link[aria-current='location'] {
+  border-left-color: #000814;
+  color: #000814;
+}
+
+.article-brandbook-page__toc-link:focus-visible {
+  outline: 2px solid #369afe;
+  outline-offset: 3px;
+}
+
+.article-brandbook-page__hero {
+  position: relative;
+  height: 52.1875cqw;
+}
+
+.article-brandbook-page__hero-background,
+.article-brandbook-page__header,
+.article-brandbook-page__hero-content {
+  position: absolute;
+  display: block;
+  height: auto;
+}
+
+.article-brandbook-page__hero-background {
+  top: 4.583333cqw;
+  left: 0;
+  width: 100%;
+}
+
+.article-brandbook-page__header {
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.article-brandbook-page__hero-content {
+  top: 7.708333cqw;
+  left: 32.8125%;
+  width: 40.104167%;
+}
+
+.article-brandbook-page__article {
+  position: relative;
+  padding-top: 2.083333cqw;
+}
+
+.article-brandbook-page__article-image {
+  display: block;
+  width: 40.104167%;
+  height: auto;
+  margin-left: 32.8125%;
+}
+
+.article-brandbook-page__section-anchor {
+  position: absolute;
+  left: 32.8125%;
+  width: 1px;
+  height: 1px;
+  scroll-margin-top: 140px;
+}
+
+.article-brandbook-page__bottom {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.article-brandbook-page) {
+    scroll-behavior: smooth;
+  }
+}

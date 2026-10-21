@@ -8,6 +8,7 @@ import formImage from '../../../form.png'
 import { usePageScrollRestoration } from '../../shared/lib/usePageScrollRestoration'
 import { useScrollReveal } from '../../shared/lib/useScrollReveal'
 import { SiteHeader } from '../../shared/ui/site-header'
+import { SiteFooter } from '../../shared/ui/site-sections'
 import './FunnelJourneyPage.css'
 
 export function FunnelJourneyPage() {
@@ -47,6 +48,7 @@ export function FunnelJourneyPage() {
         <LightGlowCanvas />
         <img src={formImage} alt="Форма обратной связи" />
       </section>
+      <SiteFooter />
     </main>
   )
 }

@@ -193,7 +193,7 @@ export function FunnelStageSection({ onTransitionChange, updatedVisual = false, 
 
         {designLayout ? (
           <div className={`funnel-stage-section__big-data-preview${isNextPreviewVisible ? ' is-visible' : ''}`} aria-hidden="true">
-            <span>тут биг дата</span>
+            <span>Анализируем больше данных —<br />точнее находим ваших клиентов</span>
           </div>
         ) : (
           <div className={`funnel-stage-section__next-preview${isNextPreviewVisible ? ' is-visible' : ''}`} aria-hidden="true">

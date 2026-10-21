@@ -93,9 +93,24 @@
   clip-path: inset(48px 151px 50px 151px round 32px);
 }
 
-.publishers-formats__video { object-fit: cover; }
+.publishers-formats__source-video {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.publishers-formats__video { overflow: hidden; }
+.publishers-formats__video-content {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-28px) rotate(-16deg) scale(1.72);
+  transform-origin: center;
+}
 .publishers-formats__video--in-stream { left: 16px; top: 17px; width: 684px; height: 384px; border-radius: 18px; }
 .publishers-formats__video--out-stream { left: 84px; top: 88px; width: 320px; height: 161px; border: 1px solid #ff0032; border-radius: 16px; }
+.publishers-formats__video--out-stream .publishers-formats__video-content { transform: translateY(-12px) rotate(-16deg) scale(1.72); }
 .publishers-formats__video--fullscreen { left: 30px; top: 57px; width: 664px; height: 344px; border-radius: 22px; }
 
 .publishers-formats__ad-time,
