@@ -59,6 +59,7 @@ export function ContactsPage() {
         <div className="contacts-page__intro"><h1>Контакты</h1></div>
         <section className="contacts-page__map-section" data-map-ready={mapReady} aria-label="Расположение офиса МТС Ads">
           <iframe key={mapSize} className="contacts-page__map" src={mapUrls[mapSize]} title={`Яндекс Карта: ${address}`} loading="eager" onLoad={handleMapLoad} allowFullScreen />
+          <div className="contacts-page__map-skeleton" aria-hidden="true" />
           <a className="contacts-page__place-label" href={placeUrl} target="_blank" rel="noreferrer" aria-label="Порт Плаза — открыть в Яндекс Картах">
             <span className="contacts-page__place-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 8V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2M4 8h16v11H4V8Zm0 4c2.3 1.3 5 2 8 2s5.7-.7 8-2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
             <span><strong>Порт Плаза</strong><small>Бизнес-центр</small></span>

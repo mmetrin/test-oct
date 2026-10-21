@@ -11,7 +11,7 @@
   --flower-bubble-base-top: 466px;
   display: grid;
   position: absolute;
-  top: calc(var(--flower-bubble-base-top) + 40px);
+  top: calc(var(--flower-bubble-base-top) + 80px);
   right: clamp(185px, calc(1075px - 50vw), 333px);
   width: 335.25px;
   height: 104.4px;
@@ -22,7 +22,7 @@
   backdrop-filter: blur(2px);
   filter: drop-shadow(0 12px 36px rgb(22 39 62 / 12%));
   opacity: 0;
-  translate: 0 0;
+  translate: -100px 0;
   transform: scale(var(--flower-bubble-scale));
   transform-origin: top right;
   transition: opacity 360ms ease-in-out;
@@ -36,7 +36,7 @@
 
 .flower-shop-bubbles__message--resolved {
   top: calc(var(--flower-bubble-base-top) - 30px);
-  translate: 10px 0;
+  translate: 85px 0;
   border-radius: 24px 24px 0 24px;
 }
 
@@ -175,7 +175,10 @@
   .flower-shop-bubbles__message {
     --flower-bubble-scale: .83;
     right: clamp(0px, calc(100vw - 300px), 95px);
+    translate: -16px 0;
   }
+
+  .flower-shop-bubbles__message--resolved { translate: 40px 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
