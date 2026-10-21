@@ -1,17 +1,30 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import { AudienceSegmentTabs } from '../../features/audience-segment-section'
 import { BloggersContent } from '../../features/bloggers-content'
 import { FunnelStageSection } from '../../features/funnel-stage-section'
 import { SmallBusinessContent } from '../../features/small-business-content'
 import { PublishersContent } from '../../features/publishers-content'
+import { getDesignScale } from '../../shared/ui/design-viewport'
 import '../funnel-journey/FunnelJourneyPage.css'
 import './EnterpriseFunnelSection.css'
 
 export function EnterpriseFunnelSection({ activeSegment, onSegmentChange }) {
+  const sectionRef = useRef(null)
   const [displayedSegment, setDisplayedSegment] = useState(activeSegment)
   const [outgoingSegment, setOutgoingSegment] = useState(null)
   const [hasSwitched, setHasSwitched] = useState(false)
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current
+    const syncStickyTop = () => {
+      section.style.setProperty('--funnel-scene-top', `${170 / getDesignScale()}px`)
+    }
+
+    window.addEventListener('resize', syncStickyTop)
+    syncStickyTop()
+    return () => window.removeEventListener('resize', syncStickyTop)
+  }, [])
 
   useLayoutEffect(() => {
     if (activeSegment === displayedSegment) return undefined
@@ -42,7 +55,7 @@ export function EnterpriseFunnelSection({ activeSegment, onSegmentChange }) {
   }
 
   return (
-    <div className={`enterprise-funnel${activeSegment === 'small-business' ? ' enterprise-funnel--small-business' : ''}`}>
+    <div ref={sectionRef} className={`enterprise-funnel${activeSegment === 'small-business' ? ' enterprise-funnel--small-business' : ''}`}>
       <div className="enterprise-funnel__tabs">
         <AudienceSegmentTabs activeSegment={activeSegment} onChange={onSegmentChange} />
       </div>
