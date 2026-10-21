@@ -49,6 +49,7 @@ export function FunnelStageSection({ onTransitionChange, updatedVisual = false, 
   const [displayedStep, setDisplayedStep] = useState(0)
   const [isContentLeaving, setIsContentLeaving] = useState(false)
   const [isNextPreviewVisible, setIsNextPreviewVisible] = useState(false)
+  const [isStickyScrolling, setIsStickyScrolling] = useState(false)
   const content = contentSteps[displayedStep]
 
   useEffect(() => {
@@ -81,8 +82,9 @@ export function FunnelStageSection({ onTransitionChange, updatedVisual = false, 
         return
       }
 
-      const scrollDistance = section.offsetHeight - scene.offsetHeight
-      const sceneTop = Number.parseFloat(window.getComputedStyle(scene).top) || 0
+      const sceneScale = scene.getBoundingClientRect().height / scene.offsetHeight || 1
+      const scrollDistance = (section.offsetHeight - scene.offsetHeight) * sceneScale
+      const sceneTop = (Number.parseFloat(window.getComputedStyle(scene).top) || 0) * sceneScale
       const sectionTop = section.getBoundingClientRect().top
       const hasStickyScrollStarted = sectionTop <= sceneTop
       const progress = Math.min(
@@ -101,6 +103,7 @@ export function FunnelStageSection({ onTransitionChange, updatedVisual = false, 
 
       setActiveStep(Math.min(contentSteps.length - 1, Math.floor(progress * contentSteps.length)))
       setIsNextPreviewVisible(nextTransition === 'preview')
+      setIsStickyScrolling(designLayout && progress > 0 && progress < 0.995)
 
       if (transitionRef.current !== nextTransition) {
         transitionRef.current = nextTransition
@@ -127,7 +130,7 @@ export function FunnelStageSection({ onTransitionChange, updatedVisual = false, 
   return (
     <section className="funnel-stage-section" ref={sectionRef} aria-labelledby="funnel-stage-title">
       <div
-        className="funnel-stage-section__scene"
+        className={`funnel-stage-section__scene${isStickyScrolling ? ' is-sticky-scrolling' : ''}`}
         ref={(element) => {
           sceneRef.current = element
           revealRef.current = element

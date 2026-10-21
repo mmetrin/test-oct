@@ -5,7 +5,7 @@ body:has(.enterprise-hero-page) { overflow-x: clip; }
   position: relative;
   --funnel-tabs-top: 80px;
   --funnel-tabs-height: 64px;
-  --funnel-heading-gap: 200px;
+  --funnel-heading-gap: 100px;
   --funnel-scene-top: calc(var(--funnel-tabs-top) + var(--funnel-heading-gap));
   --funnel-scene-height: 660px;
   --funnel-scroll-distance: 3200px;
@@ -25,7 +25,7 @@ body:has(.enterprise-hero-page) { overflow-x: clip; }
   opacity: 1;
 }
 
-/* Align the first heading in each panel 200px below the tabs. */
+/* Align the first heading in each panel 100px below the tabs. */
 @media (min-width: 901px) {
   .enterprise-funnel .small-business-content { top: -71px; margin-bottom: -71px; }
   .enterprise-funnel .publishers-content { top: -6px; margin-bottom: -6px; }
@@ -162,6 +162,11 @@ body:has(.enterprise-hero-page) { overflow-x: clip; }
 .enterprise-funnel .funnel-stage-section__scene {
   top: var(--funnel-scene-top);
   height: var(--funnel-scene-height);
+  transition: transform 320ms ease;
+}
+
+.enterprise-funnel .funnel-stage-section__scene.is-sticky-scrolling {
+  transform: translateY(70px);
 }
 
 /* Figma 10113:102600: 1920 canvas, centered 1440 content, no viewport zoom. */
@@ -207,10 +212,11 @@ body:has(.enterprise-hero-page) { overflow-x: clip; }
 }
 
 @media (min-width: 600px) and (max-height: 800px) {
-  .enterprise-funnel { --funnel-scene-top: 212px; }
+  .enterprise-funnel { --funnel-scene-top: 112px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .enterprise-funnel .funnel-stage-section__scene { transition: none; }
   .enterprise-funnel .funnel-stage-section__big-data-preview { transition: none; }
 }
 
