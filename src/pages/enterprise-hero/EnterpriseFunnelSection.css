@@ -5,8 +5,8 @@ body:has(.enterprise-hero-page) { overflow-x: clip; }
   position: relative;
   --funnel-tabs-top: 80px;
   --funnel-tabs-height: 64px;
-  --funnel-heading-gap: 100px;
-  --funnel-scene-top: calc(var(--funnel-tabs-top) + 100px);
+  --funnel-heading-gap: 200px;
+  --funnel-scene-top: calc(var(--funnel-tabs-top) + var(--funnel-heading-gap));
   --funnel-scene-height: 660px;
   --funnel-scroll-distance: 3200px;
   display: flow-root;
@@ -25,7 +25,7 @@ body:has(.enterprise-hero-page) { overflow-x: clip; }
   opacity: 1;
 }
 
-/* Align the first heading in each panel 100px below the tabs. */
+/* Align the first heading in each panel 200px below the tabs. */
 @media (min-width: 901px) {
   .enterprise-funnel .small-business-content { top: -71px; margin-bottom: -71px; }
   .enterprise-funnel .publishers-content { top: -6px; margin-bottom: -6px; }
@@ -207,7 +207,7 @@ body:has(.enterprise-hero-page) { overflow-x: clip; }
 }
 
 @media (min-width: 600px) and (max-height: 800px) {
-  .enterprise-funnel { --funnel-scene-top: 112px; }
+  .enterprise-funnel { --funnel-scene-top: 212px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
