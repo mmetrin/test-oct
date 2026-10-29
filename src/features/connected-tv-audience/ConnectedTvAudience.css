@@ -1,0 +1,52 @@
+.ctv-audience { width: 1440px; margin: 200px auto 0; color: rgb(0 8 20 / 93%); font: 400 17px/24px 'MTS Text', Arial, sans-serif; }
+.ctv-audience__heading { text-align: center; }
+.ctv-audience__heading h2 { font: 500 44px/53px 'MTS Wide', Arial, sans-serif; }
+.ctv-audience .ctv-audience__heading p { margin-top: 20px; }
+.ctv-audience__segments { display: flex; width: 447px; height: 64px; margin: 60px auto 40px; padding: 4px; border-radius: 40px; background: #eaf0f6; font: 500 16px/16px 'MTS Wide', Arial, sans-serif; }
+.ctv-audience__segments button { display: flex; align-items: center; justify-content: center; flex: 0 0 157px; padding: 0; border: 1px solid transparent; border-radius: 40px; background: transparent; color: inherit; font: inherit; cursor: pointer; transition: background 220ms ease, border-color 220ms ease; }
+.ctv-audience__segments button:first-child { flex-basis: 282px; }
+.ctv-audience__segments button:hover { background: rgb(255 255 255 / 60%); }
+.ctv-audience__segments button:focus-visible { outline: 2px solid #ff0032; outline-offset: 3px; }
+.ctv-audience__segments .is-selected { border: 1px solid #ff0032; background: #f7fafd; }
+.ctv-audience__dashboard { display: flex; flex-direction: column; gap: 8px; width: 1447px; }
+.ctv-audience__row { display: grid; grid-template-columns: 520px 455.5px 455.5px; gap: 8px; }
+.ctv-chart { position: relative; height: 420px; border-radius: 40px; background: #fff; --chart-color: #677fa2; }
+.ctv-chart { font-variant-numeric: tabular-nums; }
+.ctv-chart h3 { font: 500 24px/28px 'MTS Wide', Arial, sans-serif; }
+.ctv-chart__badge { display: flex; position: absolute; align-items: center; justify-content: center; width: 44px; height: 44px; border-inline: 1px solid var(--chart-color); border-radius: 32px; background: linear-gradient(90deg, #e7f2fd, #fff); color: var(--chart-color); backdrop-filter: blur(5px); font: 400 17px/24px 'MTS Text', Arial, sans-serif; }
+.ctv-chart--age { overflow: hidden; padding: 40px 0 40px 40px; }
+.ctv-age-list { display: flex; flex-direction: column; gap: 20px; padding: 0; margin: 24px 0 0; list-style: none; }
+.ctv-age-list li { display: flex; align-items: center; gap: 8px; height: 24px; }
+.ctv-age-list__label { flex: 0 0 117.315px; white-space: nowrap; }
+.ctv-age-list__track { position: relative; flex: 0 0 372px; height: 16px; border-radius: 4px; background: #f7fafd; box-shadow: inset 0 0 4px rgb(15 82 174 / 10%); }
+.ctv-age-list__bar { display: block; width: var(--bar-width); height: 16px; border-radius: 4px; background: #677fa2; box-shadow: 0 5px 20px rgb(0 0 0 / 10%); transform: scaleX(0); transform-origin: left; }
+.ctv-age-list .ctv-chart__badge { top: -14px; left: calc(var(--bar-width) - 22px); opacity: 0; transform: translateY(4px); }
+.ctv-donut { position: absolute; top: 80px; left: 97.75px; }
+.ctv-donut__reveal { stroke-dasharray: 100; stroke-dashoffset: 100; }
+.ctv-donut__title { position: absolute; top: 196px; left: 0; width: 100%; text-align: center; }
+.ctv-donut__legend { margin: 0; }
+.ctv-donut__label { position: absolute; display: flex; flex-direction: column; gap: 2px; opacity: 0; transform: translateY(4px); }
+.ctv-donut__label dd { order: -1; margin: 0; color: var(--chart-color); }
+.ctv-donut__label--top-left { top: 40px; left: 40px; gap: 4px; }
+.ctv-donut__label--top-left dd { order: 1; }
+.ctv-donut__label--bottom-left { bottom: 40px; left: 40px; }
+.ctv-donut__label--bottom-right { bottom: 40px; right: 41.75px; align-items: flex-end; }
+.ctv-donut__icon { background: rgb(255 255 255 / 60%); opacity: 0; transform: translateY(4px); }
+.ctv-donut__icon img { display: block; flex: 0 0 auto; }
+.ctv-chart--location { height: 234px; padding: 40px; }
+.ctv-location-list { display: flex; gap: 8px; height: 102px; margin: 24px 0 0; padding: 14px 0 0; list-style: none; }
+.ctv-location-list li { position: relative; flex: 0 0 auto; }
+.ctv-location-list__bar { display: block; height: 16px; border-radius: 4px; background: var(--chart-color); box-shadow: 0 5px 20px rgb(0 0 0 / 10%); transform: scaleX(0); transform-origin: left; }
+.ctv-location-list .ctv-chart__badge { top: -14px; left: calc(50% - 22px); opacity: 0; transform: translateY(4px); }
+.ctv-location-list__label { position: absolute; top: 40px; left: 0; width: 100%; text-align: center; white-space: nowrap; opacity: 0; }
+.ctv-chart.is-visible :is(.ctv-age-list__bar, .ctv-location-list__bar) { animation: ctv-bar-grow 1600ms cubic-bezier(.45, 0, .2, 1) var(--delay) both; }
+.ctv-chart.is-visible .ctv-donut__reveal { animation: ctv-ring-draw 1800ms cubic-bezier(.45, 0, .2, 1) var(--delay) both; }
+.ctv-chart.is-visible :is(.ctv-chart__badge, .ctv-donut__label, .ctv-location-list__label) { animation: ctv-label-reveal 1100ms cubic-bezier(.4, 0, .2, 1) calc(var(--delay) + 120ms) both; }
+@keyframes ctv-bar-grow { to { transform: scaleX(1); } }
+@keyframes ctv-ring-draw { to { stroke-dashoffset: 0; } }
+@keyframes ctv-label-reveal { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .ctv-audience__segments button { transition: none; }
+  .ctv-chart :is(.ctv-age-list__bar, .ctv-location-list__bar, .ctv-chart__badge, .ctv-donut__label, .ctv-location-list__label) { animation: none !important; opacity: 1; transform: none; }
+  .ctv-chart .ctv-donut__reveal { animation: none !important; stroke-dashoffset: 0; }
+}

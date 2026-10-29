@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
+import funnelImage from '../../assets/enterprise-hero/sales-funnel-single.png'
 import { AudienceSegmentTabs } from '../../features/audience-segment-section'
 import { BloggersContent } from '../../features/bloggers-content'
 import { FunnelStageSection } from '../../features/funnel-stage-section'
@@ -51,11 +52,11 @@ export function EnterpriseFunnelSection({ activeSegment, onSegmentChange }) {
     if (segment === 'small-business') return <SmallBusinessContent />
     if (segment === 'publishers') return <PublishersContent />
     if (segment === 'bloggers') return <BloggersContent />
-    return <FunnelStageSection updatedVisual designLayout />
+    return <FunnelStageSection updatedVisual designLayout funnelImage={funnelImage} />
   }
 
   return (
-    <div ref={sectionRef} className={`enterprise-funnel${activeSegment === 'small-business' ? ' enterprise-funnel--small-business' : ''}`}>
+    <div ref={sectionRef} className={`enterprise-funnel${activeSegment === 'enterprise' ? ' enterprise-funnel--enterprise' : ''}${activeSegment === 'small-business' ? ' enterprise-funnel--small-business' : ''}`}>
       <div className="enterprise-funnel__tabs">
         <AudienceSegmentTabs activeSegment={activeSegment} onChange={onSegmentChange} />
       </div>

@@ -1,1 +1,0 @@
-export { BigDataSection } from './BigDataSection'

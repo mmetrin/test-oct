@@ -48,7 +48,23 @@ function EnterpriseHeroFacts() {
   )
 }
 
-export function EnterpriseHero({ leadershipOnly = false, showTrustCopy = false, showHeader = true, onVideoChange }) {
+export function EnterpriseHero({
+  leadershipOnly = false,
+  showTrustCopy = false,
+  showHeader = true,
+  singleVideo = false,
+  loopVideo = true,
+  videoSrc = leadershipVideo,
+  background,
+  showVideoMetrics = true,
+  className = '',
+  title,
+  description,
+  ctaLabel = 'Запустить рекламу с МТС ADS',
+  ctaHref,
+  facts,
+  onVideoChange,
+}) {
   const familyVideoRef = useRef(null)
   const flowerShopVideoRef = useRef(null)
   const leadershipVideoRef = useRef(null)
@@ -186,33 +202,36 @@ export function EnterpriseHero({ leadershipOnly = false, showTrustCopy = false, 
     if (event.propertyName !== 'opacity') return
     if (activeVideoRef.current !== videoName) return
     if (event.currentTarget.closest('[data-parallax-covered]')) return
+    if (singleVideo && !loopVideo && event.currentTarget.ended) return
     if (videoName === 'mother-child') setShowMotherChildMetrics(true)
     if (event.currentTarget.paused) void event.currentTarget.play().catch(() => undefined)
   }
 
   return (
-    <section className="enterprise-hero" id="top" aria-labelledby="enterprise-hero-title">
+    <section className={`enterprise-hero ${className}`.trim()} id="top" aria-labelledby="enterprise-hero-title">
       <div className={`enterprise-hero__stage${leadershipOnly ? ' enterprise-hero__stage--leadership-only' : ''}`} aria-hidden="true">
+        {background ?? <>
         <video
           ref={leadershipVideoRef}
-          className={`enterprise-hero__video enterprise-hero__video--leadership${activeVideo === 'leadership' && hasLeadershipFrame ? ' enterprise-hero__video--active' : ''}`}
-          src={leadershipVideo}
+          className={`enterprise-hero__video enterprise-hero__video--leadership${activeVideo === 'leadership' && (!showVideoMetrics || hasLeadershipFrame) ? ' enterprise-hero__video--active' : ''}`}
+          src={videoSrc}
           autoPlay
+          loop={singleVideo && loopVideo}
           muted
           playsInline
           preload="auto"
           onTransitionEnd={(event) => handleVideoFadeComplete(event, 'leadership')}
-          onTimeUpdate={(event) => advanceVideoNearEnd(event, 'leadership', flowerShopVideoRef, 'flower-shop')}
-          onEnded={() => playNextVideo('leadership', flowerShopVideoRef, 'flower-shop')}
+          onTimeUpdate={singleVideo ? undefined : (event) => advanceVideoNearEnd(event, 'leadership', flowerShopVideoRef, 'flower-shop')}
+          onEnded={singleVideo ? undefined : () => playNextVideo('leadership', flowerShopVideoRef, 'flower-shop')}
         />
-        <MaskedHeroVideo
+        {showVideoMetrics && <MaskedHeroVideo
           sourceVideoRef={leadershipVideoRef}
           active={activeVideo === 'leadership'}
           visible={showLeadershipGraphs}
           graphTone="light"
           onFrameReady={setHasLeadershipFrame}
-        />
-        <video
+        />}
+        {!singleVideo && <video
           ref={flowerShopVideoRef}
           className={`enterprise-hero__video enterprise-hero__video--flower-shop${activeVideo === 'flower-shop' ? ' enterprise-hero__video--active' : ''}`}
           src={flowerShopVideo}
@@ -223,8 +242,8 @@ export function EnterpriseHero({ leadershipOnly = false, showTrustCopy = false, 
           onTimeUpdate={handleFlowerShopTimeUpdate}
           onTransitionEnd={(event) => handleVideoFadeComplete(event, 'flower-shop')}
           onEnded={handleFlowerShopEnded}
-        />
-        <video
+        />}
+        {!singleVideo && <video
           ref={motherChildVideoRef}
           className={`enterprise-hero__video enterprise-hero__video--leadership enterprise-hero__video--mother-child${activeVideo === 'mother-child' ? ' enterprise-hero__video--active' : ''}`}
           src={motherChildVideo}
@@ -234,8 +253,8 @@ export function EnterpriseHero({ leadershipOnly = false, showTrustCopy = false, 
           onTransitionEnd={(event) => handleVideoFadeComplete(event, 'mother-child')}
           onTimeUpdate={(event) => advanceVideoNearEnd(event, 'mother-child', leadershipOnly ? leadershipVideoRef : familyVideoRef, leadershipOnly ? 'leadership' : 'family')}
           onEnded={() => playNextVideo('mother-child', leadershipOnly ? leadershipVideoRef : familyVideoRef, leadershipOnly ? 'leadership' : 'family')}
-        />
-        {!leadershipOnly && <video
+        />}
+        {!singleVideo && !leadershipOnly && <video
           ref={familyVideoRef}
           className={`enterprise-hero__video${activeVideo === 'family' ? ' enterprise-hero__video--active' : ''}`}
           src={familyVideo}
@@ -246,18 +265,19 @@ export function EnterpriseHero({ leadershipOnly = false, showTrustCopy = false, 
           onTransitionEnd={(event) => handleVideoFadeComplete(event, 'family')}
           onEnded={() => playNextVideo('family', leadershipVideoRef, 'leadership')}
         />}
+        </>}
         <div className="enterprise-hero__left-overlay" />
         <div className="enterprise-hero__bottom-overlay" />
-        <LeadershipMetricTexts videoRef={leadershipVideoRef} visible={activeVideo === 'leadership' && showLeadershipGraphs && hasLeadershipFrame} />
-        <MotherChildMetrics
+        {showVideoMetrics && <LeadershipMetricTexts videoRef={leadershipVideoRef} visible={activeVideo === 'leadership' && showLeadershipGraphs && hasLeadershipFrame} />}
+        {!singleVideo && <MotherChildMetrics
           videoRef={motherChildVideoRef}
           visible={activeVideo === 'mother-child' && showMotherChildMetrics}
-        />
+        />}
       </div>
 
       <div className="enterprise-hero__inner">
         {showHeader && <header className="enterprise-hero__header">
-          <a className="enterprise-hero__logo" href={`${import.meta.env.BASE_URL}enterprise-hero/`} aria-label="МТС ADS — главная">
+          <a className="enterprise-hero__logo" href={import.meta.env.BASE_URL} aria-label="МТС ADS — главная">
             <img src={mtsLogo} alt="МТС ADS" />
           </a>
           <nav className={`enterprise-hero__nav${isMenuOpen ? ' enterprise-hero__nav--open' : ''}`} id="enterprise-hero-nav" aria-label="Основная навигация">
@@ -279,32 +299,34 @@ export function EnterpriseHero({ leadershipOnly = false, showTrustCopy = false, 
           ><span /><span /></button>
         </header>}
 
-        <div className={`enterprise-hero__copy${showTrustCopy ? ' enterprise-hero__copy--with-lead' : ''}`}>
+        <div className={`enterprise-hero__copy${showTrustCopy || description ? ' enterprise-hero__copy--with-lead' : ''}`}>
           <h1 id="enterprise-hero-title">
-            <span className="enterprise-hero__title-accent">Единое решение</span>{' '}
-            <strong>для&nbsp;продвижения бизнеса</strong>{' '}
-            <span className="enterprise-hero__title-dark">любого масштаба</span>
+            {title ?? <>
+              <span className="enterprise-hero__title-accent">Единое решение</span>{' '}
+              <strong>для&nbsp;продвижения бизнеса</strong>{' '}
+              <span className="enterprise-hero__title-dark">любого масштаба</span>
+            </>}
           </h1>
-          {showTrustCopy && <p className="enterprise-hero__lead">
-            Запускайте рекламу, привлекайте клиентов, растите продажи
+          {(showTrustCopy || description) && <p className="enterprise-hero__lead">
+            {description ?? 'Запускайте рекламу, привлекайте клиентов, растите продажи'}
           </p>}
-          <ActionButton className="enterprise-hero__cta">Запустить рекламу с МТС ADS</ActionButton>
+          {ctaHref ? <a className="action-button action-button--large enterprise-hero__cta" href={ctaHref}><span className="action-button__label">{ctaLabel}</span></a> : <ActionButton className="enterprise-hero__cta">{ctaLabel}</ActionButton>}
         </div>
 
-        {!leadershipOnly && <div className={`enterprise-hero__bubble enterprise-hero__bubble--blogger${activeVideo === 'family' && isBloggerBubbleVisible ? ' enterprise-hero__bubble--visible' : ''}`} aria-hidden={activeVideo !== 'family' || !isBloggerBubbleVisible}>
+        {!singleVideo && !leadershipOnly && <div className={`enterprise-hero__bubble enterprise-hero__bubble--blogger${activeVideo === 'family' && isBloggerBubbleVisible ? ' enterprise-hero__bubble--visible' : ''}`} aria-hidden={activeVideo !== 'family' || !isBloggerBubbleVisible}>
           Монетизируйте свою аудиторию с Getblogger
         </div>}
-        {!leadershipOnly && <div className={`enterprise-hero__bubble enterprise-hero__bubble--toy${activeVideo === 'family' && isToyBubbleVisible ? ' enterprise-hero__bubble--visible' : ''}`} aria-hidden={activeVideo !== 'family' || !isToyBubbleVisible}>
+        {!singleVideo && !leadershipOnly && <div className={`enterprise-hero__bubble enterprise-hero__bubble--toy${activeVideo === 'family' && isToyBubbleVisible ? ' enterprise-hero__bubble--visible' : ''}`} aria-hidden={activeVideo !== 'family' || !isToyBubbleVisible}>
           <span>Реклама товаров<br />и услуг</span>
           <img src={toyImage} alt="" />
         </div>}
 
-        <FlowerShopBubbles
+        {!singleVideo && <FlowerShopBubbles
           visible={activeVideo === 'flower-shop' && showFlowerNotification}
           messageReady={showFlowerMessage}
-        />
+        />}
 
-        <EnterpriseHeroFacts />
+        {facts ?? <EnterpriseHeroFacts />}
       </div>
     </section>
   )

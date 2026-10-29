@@ -12,7 +12,7 @@ const navigationItems = [
   { label: 'Контакты', href: `${import.meta.env.BASE_URL}contacts/` },
 ]
 
-export function SiteHeader({ actionHref, contactMode = false }) {
+export function SiteHeader({ actionHref, contactMode = false, homeNavigation = false }) {
   const [isScrolled, setIsScrolled] = useState(() => window.scrollY > 0)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -29,13 +29,13 @@ export function SiteHeader({ actionHref, contactMode = false }) {
     <header className={`site-header${isScrolled ? ' site-header--fixed-on' : ''}`}>
       <div className="site-header__frame" aria-hidden="true" />
       <div className="site-header__content">
-        <a className="site-header__logo" href={`${import.meta.env.BASE_URL}enterprise-hero/`} aria-label="МТС ADS — главная">
+        <a className="site-header__logo" href={import.meta.env.BASE_URL} aria-label="МТС ADS — главная">
           <img src={logo} alt="МТС ADS" />
         </a>
 
         <nav className={`site-header__navigation${isMenuOpen ? ' site-header__navigation--open' : ''}`} id="site-header-navigation" aria-label="Основная навигация">
           {navigationItems.map((item) => (
-            <a className="site-header__navigation-link" href={contactMode && item.href === '#top' ? import.meta.env.BASE_URL : item.href} key={item.label} onClick={() => setIsMenuOpen(false)} aria-current={contactMode && item.label === 'Контакты' ? 'page' : undefined}>
+            <a className="site-header__navigation-link" href={(contactMode || homeNavigation) && item.href === '#top' ? import.meta.env.BASE_URL : item.href} key={item.label} onClick={() => setIsMenuOpen(false)} aria-current={contactMode && item.label === 'Контакты' ? 'page' : undefined}>
               {item.label}
               {item.hasChevron && <span className="site-header__chevron" aria-hidden="true" />}
             </a>

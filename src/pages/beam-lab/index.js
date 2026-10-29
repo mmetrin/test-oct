@@ -1,1 +1,0 @@
-export { BeamLabPage } from './BeamLabPage'

@@ -1,0 +1,42 @@
+.strategy-audience__portrait .strategy-audience__photo {
+  left: 0; top: 0; width: 100%; height: 100%; object-fit: cover;
+}
+.strategy-audience__clip { position: absolute; inset: 0; z-index: 1; overflow: hidden; border-radius: inherit; background: #eef3f8; }
+.strategy-audience__frame { position: absolute; inset: 0; overflow: hidden; visibility: hidden; }
+.strategy-audience__frame.is-current { visibility: visible; z-index: 2; }
+.strategy-audience__frame.is-previous { z-index: 1; }
+.strategy-audience[data-cycling='true'] .strategy-audience__frame.is-current {
+  animation: strategy-audience-focus-in var(--strategy-swap-duration) var(--strategy-swap-ease) both;
+}
+.strategy-audience[data-cycling='true'] .strategy-audience__frame.is-previous {
+  animation: strategy-audience-focus-out var(--strategy-swap-duration) var(--strategy-swap-ease) both;
+}
+.strategy-audience__frame::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: #e8eef5; opacity: 0;
+}
+.strategy-audience[data-cycling='true'] .strategy-audience__frame.is-current::after {
+  animation: strategy-audience-veil-in var(--strategy-swap-duration) var(--strategy-swap-ease) both;
+}
+.strategy-audience[data-cycling='true'] .strategy-audience__frame.is-previous::after {
+  animation: strategy-audience-veil-out var(--strategy-swap-duration) var(--strategy-swap-ease) both;
+}
+/* Switch only while blurred; one opaque portrait remains visible at every step. */
+@keyframes strategy-audience-focus-out {
+  0% { visibility: visible; filter: blur(0); }
+  40%, 49.99% { visibility: visible; filter: blur(22px); }
+  50%, 100% { visibility: hidden; filter: blur(22px); }
+}
+@keyframes strategy-audience-focus-in {
+  0%, 49.99% { visibility: hidden; filter: blur(22px); }
+  50%, 60% { visibility: visible; filter: blur(22px); }
+  100% { visibility: visible; filter: blur(0); }
+}
+@keyframes strategy-audience-veil-out {
+  0% { opacity: 0; }
+  40%, 100% { opacity: .5; }
+}
+@keyframes strategy-audience-veil-in {
+  0%, 60% { opacity: .5; }
+  100% { opacity: 0; }
+}

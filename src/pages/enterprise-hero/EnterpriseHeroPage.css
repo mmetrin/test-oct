@@ -12,7 +12,6 @@
 }
 
 @media (min-width: 600px) {
-  /* The sticky preview hands over to the real heading when the funnel ends. */
   .enterprise-hero-page .enterprise-funnel:has(.funnel-stage-section__big-data-preview.is-visible) + .enterprise-data .enterprise-data__heading h2 {
     visibility: hidden;
   }

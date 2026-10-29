@@ -137,7 +137,7 @@
 }
 .contacts-card {
   position: relative;
-  border-radius: 40px;
+  border-radius: 80px;
   background: var(--contacts-bg);
   box-shadow: 0 10px 40px rgb(0 0 0 / 14%);
   pointer-events: auto;

@@ -1,1 +1,0 @@
-export { TintLabPage } from './TintLabPage'

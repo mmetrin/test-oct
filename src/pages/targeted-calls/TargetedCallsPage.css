@@ -1,0 +1,72 @@
+.calls-page { --calls-secondary: #677fa2; isolation: isolate; }
+.calls-container { width: 1440px; margin-inline: auto; }
+.calls-page :where(.calls-access, .calls-scenarios, .calls-pricing) h2 { margin: 0; font: 500 44px/1.2 'MTS Wide', sans-serif; }
+.calls-page :where(.calls-access, .calls-scenarios, .calls-pricing) h3 { margin: 0; font: 500 24px/1.4 'MTS Wide', sans-serif; }
+.calls-page :where(.calls-access, .calls-scenarios, .calls-pricing) p { margin: 0; }
+.calls-accent, .calls-scenarios h2 span { color: var(--mts-bg-states-action); }
+.calls-hero__background { position: absolute; inset: 0; }
+.calls-hero__office { position: absolute; top: -7px; right: 0; width: 1920px; height: 871px; object-fit: cover; max-width: none; }
+.calls-hero__operator { position: absolute; top: 108px; left: 1058px; width: 607px; height: 592px; object-fit: cover; mask: url('../../assets/figma/targeted-calls/hero-imgRectangle240662690.svg') -25.006px -17.141px / 639.03px 637.509px no-repeat; }
+.calls-hero__operator--overlay { mask-image: url('../../assets/figma/targeted-calls/hero-imgRectangle240662692.svg'); mask-position: -25.006px 12.859px; mask-size: 626.993px 613.461px; }
+.calls-hero .enterprise-hero__copy, .calls-hero .enterprise-hero__copy h1, .calls-hero .enterprise-hero__lead { width: 790px; }
+.calls-hero .enterprise-hero__copy h1, .calls-hero .enterprise-hero__number { color: var(--mts-txt-primary-on-light); }
+.calls-hero .enterprise-hero__facts { width: auto; gap: 56px; }
+.calls-hero .enterprise-hero__fact { flex: 0 0 auto; }
+.calls-hero .enterprise-hero__number span { margin-left: 0; }
+.calls-hero .enterprise-hero__cta { text-decoration: none; }
+/* 80px below hero facts + 69px margin + 51px data padding = 200px. */
+.calls-page > .enterprise-data { margin-top: 69px; }
+/* 38px below the white hub + 110px stage margin + 32px section padding
+   + 20px here = 200px from the hub to the next heading. */
+.calls-access { position: relative; isolation: isolate; margin-top: 20px; padding-bottom: 40px; }
+.calls-access__scene { position: absolute; z-index: -1; left: 0; top: -77px; width: 1920px; height: 830px; mask: url('../../assets/figma/targeted-calls/access-imgFrame2147240346.svg') 0 6px / 1920px 795px no-repeat; }
+.calls-access__scene::before, .calls-access__scene::after { content: ''; position: absolute; left: 0; width: 1920px; height: 362px; z-index: 1; background: url('../../assets/figma/targeted-calls/access-img.png') center / cover; opacity: .5; }
+.calls-access__scene::before { top: 0; transform: scaleY(-1); }
+.calls-access__scene::after { bottom: 0; }
+.calls-access__office { position: absolute; right: 0; top: 1px; width: 2160px; height: 821px; max-width: none; object-fit: cover; }
+.calls-access__laptop { position: absolute; left: 176.12px; top: 218.92px; width: 980.802px; height: 464.307px; object-fit: cover; mask: url('../../assets/figma/targeted-calls/access-imgImage2090007935.svg') 103.278px 35.266px / 527.606px 337.818px no-repeat; }
+.calls-access__detail { position: absolute; left: 550px; top: 590.5px; }
+.calls-access__content { display: grid; grid-template-columns: 640px 750px; gap: 60px 50px; }
+.calls-access__cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.calls-access__card { display: flex; flex-direction: column; justify-content: space-between; min-height: 250px; padding: 32px; border-radius: 40px; background: #fff; }
+.calls-access p, .calls-scenarios p { font: 400 17px/24px 'MTS Text', sans-serif; }
+.calls-access__card p { margin-top: 12px; }
+.calls-icon { display: flex; width: 56px; height: 56px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 50%; background: #eaf0f6; }
+.calls-icon img { display: block; }
+.calls-access__targeting { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px 32px 32px; border-radius: 40px; background: var(--mts-bg-base); box-shadow: 0 5px 20px #0000001a; }
+.calls-access__targeting p { margin-top: 12px; }
+.calls-button { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 14px 24px; border: 1px solid var(--mts-bg-states-action); border-radius: 40px; background: var(--mts-bg-base); color: var(--mts-bg-states-action); text-decoration: none; font: 500 16px/1 'MTS Wide', sans-serif; }
+.calls-button:hover { background: #fff0f3; }
+.calls-button:focus-visible { outline: 3px solid #677fa2; outline-offset: 4px; }
+.calls-scenarios { margin-top: 170px; text-align: center; }
+.calls-scenarios__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; padding: 0 20px; margin-top: 60px; }
+.calls-scenarios__grid article { display: flex; flex-direction: column; align-items: center; }
+.calls-scenarios h3 { margin-top: 24px; }
+.calls-scenarios p { margin-top: 16px; }
+.calls-pricing { margin-top: 200px; position: relative; z-index: 1; }
+.calls-pricing h2 { text-align: center; }
+.calls-pricing__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 60px; }
+.calls-pricing__card { min-width: 0; padding: 32px; background: #fff; border-radius: 40px; overflow: hidden; }
+.calls-diagram { position: relative; display: flex; justify-content: space-between; height: 100px; border-radius: 16px; overflow: hidden; }
+.calls-diagram__device { position: relative; width: 160px; height: 100px; flex-shrink: 0; }
+.calls-diagram__device > img { position: absolute; width: 227px; height: 106px; max-width: none; left: -31px; top: -4px; object-fit: cover; }
+.calls-diagram__screen { position: absolute; display: block; background: #e5f2fe; left: 5px; top: 4.5px; width: 154px; height: 90.5px; border-radius: 12px; overflow: hidden; }
+.calls-diagram__operator { position: absolute; left: 25px; top: 6px; }
+.calls-diagram__person { position: absolute; left: 38px; top: 12px; }
+.calls-diagram__connection { position: absolute; top: 0; left: 161px; width: 324px; height: 100px; display: flex; align-items: center; justify-content: center; }
+.calls-diagram__connection > img { position: absolute; left: 6px; top: 50px; }
+.calls-diagram__connection .calls-diagram__cross { left: auto; right: -5px; top: 44px; }
+.calls-diagram__connection span { position: relative; background: white; border: 1.5px solid #ff0819; border-radius: 12px; padding: 9px 12px 10px; font: 500 17px/24px 'MTS Wide', sans-serif; text-align: center; }
+.calls-diagram.is-answered .calls-diagram__connection span { border-color: #00ca48; }
+.calls-diagram__status { position: absolute; right: 8px; top: 7px; width: 31px; height: 31px; border-radius: 50%; overflow: hidden; }
+.calls-diagram__status img { position: absolute; width: 387.88%; height: 126.25%; max-width: none; top: -12.37%; left: -10.99%; }
+.calls-diagram.is-answered .calls-diagram__status img { left: -275.76%; }
+.calls-pricing__rate { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-top: 36px; min-height: 123px; font: 500 24px/1.4 'MTS Wide', sans-serif; color: #799fc5; }
+.calls-pricing__number { font: 500 150px/.9 'MTS Wide', sans-serif; white-space: nowrap; background: url('../../assets/figma/targeted-calls/price-img12.png') 92.52% 37.17% / 633.68% 198.21%; background-clip: text; color: transparent; }
+.calls-pricing__number span { font-size: 93px; }
+.calls-page__lead { position: relative; padding-block: 120px 140px; margin-top: 80px; scroll-margin-top: 0; }
+/* Let the form's soft background extend behind the preceding content. */
+.calls-page__lead .enterprise-content__lead img { z-index: -1; }
+.calls-page > .strategy-section { margin-top: 100px; background: transparent; }
+/* The lead wrapper already adds 140px below the white form card. */
+.calls-page__ending { display: flex; flex-direction: column; gap: 200px; margin-top: 60px; }

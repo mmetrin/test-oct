@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import header from '../../assets/figma/article-brandbook/header.png'
+import { SiteHeader } from '../../shared/ui/site-header'
+import { getDesignScale } from '../../shared/ui/design-viewport/designScale'
 import heroBackground from '../../assets/figma/article-brandbook/hero-background.png'
 import heroContent from '../../assets/figma/article-brandbook/hero-content.png'
 import content01 from '../../assets/figma/article-brandbook/content-01.png'
@@ -45,6 +46,7 @@ export function ArticleBrandbookPage() {
       const toc = tocRef.current
       if (!page || !body || !bottom || !toc) return
 
+      document.documentElement.style.setProperty('--article-header-scale', String(getDesignScale()))
       const pageRect = page.getBoundingClientRect()
       const scale = pageRect.width / 1920
       toc.style.setProperty('--toc-unit', `${scale}px`)
@@ -90,11 +92,13 @@ export function ArticleBrandbookPage() {
       window.removeEventListener('scroll', scheduleUpdate)
       window.removeEventListener('resize', scheduleUpdate)
       window.cancelAnimationFrame(frame)
+      document.documentElement.style.removeProperty('--article-header-scale')
     }
   }, [])
 
   return (
     <>
+      <SiteHeader homeNavigation actionHref={`${import.meta.env.BASE_URL}contacts/`} />
       <div className={`article-brandbook-page__toc-track${isTocHidden ? ' article-brandbook-page__toc-track--hidden' : ''}`} ref={tocRef} aria-hidden={isTocHidden} inert={isTocHidden}>
         <nav className="article-brandbook-page__toc" aria-label="Содержание статьи">
           {sections.map(({ id, label }) => (
@@ -110,7 +114,6 @@ export function ArticleBrandbookPage() {
 
         <section className="article-brandbook-page__hero" aria-label="Обложка статьи">
           <img className="article-brandbook-page__hero-background" src={heroBackground} width="1920" height="914" alt="" />
-          <img className="article-brandbook-page__header" src={header} width="1920" height="88" alt="" />
           <img className="article-brandbook-page__hero-content" src={heroContent} width="770" height="794" alt="Обложка статьи «Брендбук: зачем нужен и как создать»" />
         </section>
 

@@ -36,7 +36,7 @@ const contentSteps = [
   },
 ]
 
-export function FunnelStageSection({ onTransitionChange, updatedVisual = false, scrollDriven = true, showBackground = true, designLayout = false }) {
+export function FunnelStageSection({ onTransitionChange, updatedVisual = false, scrollDriven = true, showBackground = true, designLayout = false, funnelImage }) {
   const sectionRef = useRef(null)
   const sceneRef = useRef(null)
   const stagesRef = useRef(null)
@@ -81,7 +81,8 @@ export function FunnelStageSection({ onTransitionChange, updatedVisual = false, 
         return
       }
 
-      const sceneScale = scene.getBoundingClientRect().height / scene.offsetHeight || 1
+      const sceneBounds = scene.getBoundingClientRect()
+      const sceneScale = sceneBounds.height / scene.offsetHeight || 1
       const scrollDistance = (section.offsetHeight - scene.offsetHeight) * sceneScale
       const sceneTop = (Number.parseFloat(window.getComputedStyle(scene).top) || 0) * sceneScale
       const sectionTop = section.getBoundingClientRect().top
@@ -101,7 +102,7 @@ export function FunnelStageSection({ onTransitionChange, updatedVisual = false, 
       }
 
       setActiveStep(Math.min(contentSteps.length - 1, Math.floor(progress * contentSteps.length)))
-      setIsNextPreviewVisible(nextTransition === 'preview')
+      if (!designLayout) setIsNextPreviewVisible(nextTransition === 'preview')
 
       if (transitionRef.current !== nextTransition) {
         transitionRef.current = nextTransition
@@ -139,10 +140,16 @@ export function FunnelStageSection({ onTransitionChange, updatedVisual = false, 
         {designLayout && <div className="funnel-stage-section__design-background" aria-hidden="true"><img src={designBackground} alt="" /></div>}
         <div className={`funnel-stage-section__container funnel-stage-section__container--reveal${isSceneVisible ? ' is-visible' : ''}`}>
           <div className="funnel-stage-section__visual" aria-label="Этапы воронки">
-            {designLayout && <FunnelDesignArtwork />}
-            {!updatedVisual && <div className="funnel-stage-section__funnel-frame">
-              <img className="funnel-stage-section__funnel" src={lightFunnelImage} alt="" />
-            </div>}
+            {funnelImage ? (
+              <img className="funnel-stage-section__single-image" src={funnelImage} alt="" />
+            ) : (
+              <>
+                {designLayout && <FunnelDesignArtwork />}
+                {!updatedVisual && <div className="funnel-stage-section__funnel-frame">
+                  <img className="funnel-stage-section__funnel" src={lightFunnelImage} alt="" />
+                </div>}
+              </>
+            )}
             <ol className="funnel-stage-section__stages" ref={stagesRef}>
               {stages.map((stage, index) => (
                 <li className={index === activeStep ? 'is-active' : ''} key={stage}>
@@ -192,12 +199,12 @@ export function FunnelStageSection({ onTransitionChange, updatedVisual = false, 
         </div>
 
         {designLayout ? (
-          <div className={`funnel-stage-section__big-data-preview${isNextPreviewVisible ? ' is-visible' : ''}`} aria-hidden="true">
-            <span>Анализируем больше данных —<br />точнее находим ваших клиентов</span>
+          <div className="funnel-stage-section__big-data-preview is-visible" aria-hidden="true">
+            <span>Анализируем данные МТС и партнёров — точнее находим <em>ваших клиентов</em></span>
           </div>
         ) : (
           <div className={`funnel-stage-section__next-preview${isNextPreviewVisible ? ' is-visible' : ''}`} aria-hidden="true">
-            <span>Анализируем больше данных —</span>
+            <span>Анализируем данные МТС и партнёров —</span>
             <strong>точнее находим ваших клиентов</strong>
           </div>
         )}

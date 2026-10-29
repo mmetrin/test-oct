@@ -1,0 +1,254 @@
+[
+  {
+    "section": "hero",
+    "node": "10380:108102",
+    "variable": "imgImage2090007895",
+    "file": "assets/figma/publishers/device-outstream-tablet.png",
+    "sha256": "49c1fc137af84482f5e9fef93e6bcc5722aebc870aacb6e02529705cd65bf905"
+  },
+  {
+    "section": "hero",
+    "node": "10380:108102",
+    "variable": "imgImage2090007938",
+    "file": "assets/figma/media/hero-image2090007938.png",
+    "sha256": "a0ed0bc506c3fcaa34693c3ee25f3ea0fc0ce5fff3b45911426cc2ab2d1d3a07"
+  },
+  {
+    "section": "hero",
+    "node": "10380:108102",
+    "variable": "imgRectangle240655283",
+    "file": "assets/figma/media/hero-rectangle240655283.png",
+    "sha256": "b5688accae84ff01f11067a2f01686e466499f12930dd701d530f89a95cdb058"
+  },
+  {
+    "section": "hero",
+    "node": "10380:108102",
+    "variable": "imgGroup2087326297",
+    "file": "assets/figma/media/hero-group2087326297.svg",
+    "sha256": "979fbc3b7d26f8843b5fdb849bafd82e4e7424e41b0144069d5b8b303d04fc3e"
+  },
+  {
+    "section": "hero",
+    "node": "10380:108102",
+    "variable": "imgBox",
+    "file": "assets/figma/multichannel-strategy/arrow.svg",
+    "sha256": "4ce7b8ce23071f8fe3944da165a1a1cd62e538bcd6c81b5829bd059435c28317"
+  },
+  {
+    "section": "news",
+    "node": "10380:110173",
+    "variable": "imgBox",
+    "file": "assets/figma/multichannel-strategy/arrow.svg",
+    "sha256": "4ce7b8ce23071f8fe3944da165a1a1cd62e538bcd6c81b5829bd059435c28317"
+  },
+  {
+    "section": "news",
+    "node": "10380:110173",
+    "variable": "imgImageForExport",
+    "file": "assets/figma/media/news-image-for-export.png",
+    "sha256": "76cc6c4d7b440847d0ca303d867e424ee8b9e823b94ee6f8b448cbcb98110cb5"
+  },
+  {
+    "section": "news",
+    "node": "10380:110173",
+    "variable": "imgImage2090007941",
+    "file": "assets/figma/media/news-image2090007941.png",
+    "sha256": "7b0be5d7adc4abd5cd02b1f94cd4eed2c0dbfdd0acf4ace4ce9591a402c7048c"
+  },
+  {
+    "section": "news",
+    "node": "10380:110173",
+    "variable": "imgBox1",
+    "file": "assets/figma/media/news-box1.svg",
+    "sha256": "30d0ee8d5684c403a4d48f0806004c79fe93df5897b75121d8ffad4825f20b9f"
+  },
+  {
+    "section": "cases",
+    "node": "10380:108863",
+    "variable": "imgChangeImage",
+    "file": "assets/figma/media/cases-change-image.png",
+    "sha256": "66db244892bdda1cdb13ffd0005bd8d189855b165bd82cc0471a6b18d1cf70ff"
+  },
+  {
+    "section": "cases",
+    "node": "10380:108863",
+    "variable": "imgChangeImage1",
+    "file": "assets/figma/media/cases-change-image1.png",
+    "sha256": "ef81aa9b257cdd83cf09edd8f88c13423e937d0d5bc907df307675fead9a3a55"
+  },
+  {
+    "section": "cases",
+    "node": "10380:108863",
+    "variable": "imgChangeImage2",
+    "file": "assets/figma/media/cases-change-image2.png",
+    "sha256": "c45f7806b2e863413bc1cd52997a4bc3f4f92c85f1bb86f05ea6476244262b1c"
+  },
+  {
+    "section": "cases",
+    "node": "10380:108863",
+    "variable": "imgChangeImage3",
+    "file": "assets/figma/media/cases-change-image3.png",
+    "sha256": "c7d5b7c6f68a9e4097ae43a2c580e46c47b8c4ac659b0cf984ab25a49d993e4d"
+  },
+  {
+    "section": "cases",
+    "node": "10380:108863",
+    "variable": "imgChangeImage4",
+    "file": "assets/figma/media/cases-change-image4.png",
+    "sha256": "37cc55f5fb3f670d16fbe82beb2ed4937a8ed42c1241b7c1da61441d996b52cd"
+  },
+  {
+    "section": "cases",
+    "node": "10380:108863",
+    "variable": "imgChangeImage5",
+    "file": "assets/figma/media/cases-change-image5.png",
+    "sha256": "e43a626606f700c464f97868e7accb962e060b00a9515efd8431bf2c405afbfb"
+  },
+  {
+    "section": "cases",
+    "node": "10380:108863",
+    "variable": "imgChangeImage6",
+    "file": "assets/figma/media/cases-change-image6.png",
+    "sha256": "0708d771247206adb0933467ac798631eafa7102e5578d5fc60c12b59853f81f"
+  },
+  {
+    "section": "cases",
+    "node": "10380:108863",
+    "variable": "imgChangeImage7",
+    "file": "assets/figma/media/cases-change-image7.png",
+    "sha256": "63fdf8f56b10fbc70719936c3b975748497703f8bd4571b4f15792fe7f0d2a15"
+  },
+  {
+    "section": "cases",
+    "node": "10380:108863",
+    "variable": "imgImage2090007957",
+    "file": "assets/figma/funnel-cases/baikal-logo.png",
+    "sha256": "852c64d5b6e8e98d53f576ecd6e775f2393e161b1f0e2d4fcbf8809c9378e88f"
+  },
+  {
+    "section": "cases",
+    "node": "10380:108863",
+    "variable": "imgFrame",
+    "file": "assets/figma/media/cases-frame.svg",
+    "sha256": "038ff12777c7c4fcbd8c958a9e1d54debb87d58c8bfa2015fe6043d972702556"
+  },
+  {
+    "section": "cases",
+    "node": "10380:108863",
+    "variable": "imgVector",
+    "file": "assets/figma/media/cases-vector.svg",
+    "sha256": "beb53c31359cbc1b7d5bfe0f3d964e2f879f15b1040597995722ddc31e90c678"
+  },
+  {
+    "section": "cases",
+    "node": "10380:108863",
+    "variable": "imgVector1",
+    "file": "assets/figma/media/cases-vector1.svg",
+    "sha256": "e9f1c01925d32ae355699402db0fcdb474891fd1494ac6c9eb6de4f5372311a3"
+  },
+  {
+    "section": "cases",
+    "node": "10380:108863",
+    "variable": "imgVector2",
+    "file": "assets/figma/media/cases-vector2.svg",
+    "sha256": "96a5930d166ce1fc4e744519fa4b7f5cf6274ac252e64322ed27adc898dcf6ec"
+  },
+  {
+    "section": "cases",
+    "node": "10380:108863",
+    "variable": "imgVector3",
+    "file": "assets/figma/media/cases-vector3.svg",
+    "sha256": "8e4aca487256b873ed738c242c1e3af0bc5c1e402fd96d1201b841ef28d49c2a"
+  },
+  {
+    "section": "cases",
+    "node": "10380:108863",
+    "variable": "imgVector4",
+    "file": "assets/figma/media/cases-vector4.svg",
+    "sha256": "4076b8836bd2040358bf8b839eaff376c682b4b69c8dd4f36c4ffd6e0e95241a"
+  },
+  {
+    "section": "cases",
+    "node": "10380:108863",
+    "variable": "imgGroup",
+    "file": "assets/figma/media/cases-group.svg",
+    "sha256": "b07f216aa7c87ff60db33a10e447d8348c926111559c6d6da36e5bcf89e67e21"
+  },
+  {
+    "section": "practice",
+    "node": "10380:108982",
+    "variable": "imgImageForExport",
+    "file": "assets/figma/media/practice-image-for-export.png",
+    "sha256": "e3f12a56b9cd1462fb5b9b6fc0ef04068e077608d897e4017d8a89f0de6a3862"
+  },
+  {
+    "section": "practice",
+    "node": "10380:108982",
+    "variable": "imgImageForExport1",
+    "file": "assets/figma/media/practice-image-for-export1.png",
+    "sha256": "669071e457dfa97790f7d9c41c67912972ea5192335b53054377db97776d88cd"
+  },
+  {
+    "section": "practice",
+    "node": "10380:108982",
+    "variable": "imgImage2090007902",
+    "file": "assets/figma/media/practice-image2090007902.png",
+    "sha256": "c1dc1f8ee60d0e919d9bd9de927045527395da4ed22f2a924b0dce3ddd46ab01"
+  },
+  {
+    "section": "practice",
+    "node": "10380:108982",
+    "variable": "imgImage2090007903",
+    "file": "assets/figma/media/practice-image2090007903.png",
+    "sha256": "3984d30ca622a762ecc037ca4fda75a7eed891e25cd616a0ca0186a8a9b3d1d6"
+  },
+  {
+    "section": "practice",
+    "node": "10380:108982",
+    "variable": "imgImage2090007905",
+    "file": "assets/figma/media/practice-image2090007905.png",
+    "sha256": "4774ee43808de8d93320223a4027e5c815fc906d794dbac298c6ce62e6948c0a"
+  },
+  {
+    "section": "trends",
+    "node": "10380:109003",
+    "variable": "imgImageForExport",
+    "file": "assets/figma/media/trends-image-for-export.png",
+    "sha256": "e3f12a56b9cd1462fb5b9b6fc0ef04068e077608d897e4017d8a89f0de6a3862"
+  },
+  {
+    "section": "trends",
+    "node": "10380:109003",
+    "variable": "imgImage2090007902",
+    "file": "assets/figma/media/trends-image2090007902.png",
+    "sha256": "517ddc7ac70c48e683020ed75f6a84a28c046a26db4f84aa22d0dd39b11d8a3c"
+  },
+  {
+    "section": "trends",
+    "node": "10380:109003",
+    "variable": "imgImage2090007903",
+    "file": "assets/figma/media/trends-image2090007903.png",
+    "sha256": "a3125b7363c41e5cfbbea56fa84d5c794d140a72bf927f2f2eea13ff9f35d863"
+  },
+  {
+    "section": "trends",
+    "node": "10380:109003",
+    "variable": "imgImage2090007904",
+    "file": "assets/figma/media/trends-image2090007904.png",
+    "sha256": "c33d785010ad737cd5ebf53e2df64848092017df222948cf1ed322b03505db3e"
+  },
+  {
+    "section": "trends",
+    "node": "10380:109003",
+    "variable": "imgBox",
+    "file": "assets/figma/multichannel-strategy/arrow.svg",
+    "sha256": "4ce7b8ce23071f8fe3944da165a1a1cd62e538bcd6c81b5829bd059435c28317"
+  },
+  {
+    "section": "more",
+    "node": "10384:113010",
+    "variable": "imgBox",
+    "file": "assets/figma/media/more-box.svg",
+    "sha256": "b5aa8afa820b51a6f6bae4255db0d9034bbae4f943feecf8ed41965b6086d202"
+  }
+]

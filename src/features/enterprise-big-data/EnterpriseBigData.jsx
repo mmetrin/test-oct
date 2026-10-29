@@ -9,7 +9,7 @@ const SEGMENTS = [
   { id: 'geo', label: 'Геометки', value: 'Рядом с вашим бизнесом', description: 'Выбираем тех, кто бывает рядом', icon: '⌖' },
   { id: 'interests', label: 'Интересы', value: 'Покупки · путешествия · стиль', description: 'Объединяем людей с общими интересами', icon: '✧' },
 ]
-export function EnterpriseBigData({ variant = 'shards' }) {
+export function EnterpriseBigData({ variant = 'shards', title, description }) {
   const [hovered, setHovered] = useState(null)
   const [focused, setFocused] = useState(null)
   const [pinned, setPinned] = useState(null)
@@ -25,9 +25,11 @@ export function EnterpriseBigData({ variant = 'shards' }) {
   return (
     <section className={`enterprise-data ${variant === 'particles' ? 'enterprise-data--particles' : ''} ${variant === 'network' ? 'enterprise-data--network' : ''} ${active !== null ? 'has-selection' : ''}`} id="enterprise-big-data" aria-labelledby="enterprise-big-data-title">
       <header className="enterprise-data__heading">
-        <h2 id="enterprise-big-data-title">Анализируем больше данных —<br />точнее находим ваших клиентов</h2>
-        {variant === 'shards' && <p>Находим общие признаки среди миллионов сигналов — и собираем вашу аудиторию</p>}
+        <h2 id="enterprise-big-data-title">{title ?? <>Анализируем данные МТС и партнёров — точнее находим <span className="enterprise-data__title-accent">ваших клиентов</span></>}</h2>
       </header>
+      <div className="enterprise-data__details">
+        <p>{description ?? <>Подберём аудиторию среди 65+&nbsp;млн абонентов МТС по&nbsp;интересам, онлайн‑поведению, звонкам и геолокации. Данные партнёров о&nbsp;покупках помогут точнее найти клиентов для&nbsp;вашего бренда</>}</p>
+      </div>
       <div ref={stageRef} className={`enterprise-data__stage ${variant === 'particles' ? 'enterprise-data__stage--particles' : ''} ${variant === 'network' ? 'enterprise-data__stage--network' : ''}`} onPointerMove={variant === 'shards' ? selectAtPointer : undefined} onPointerLeave={variant === 'shards' ? () => setHovered(null) : undefined}
         onKeyDown={event => { if (event.key === 'Escape') clearSelection() }}>
         {variant === 'network' ? <><AmbientParticles /><DataNetwork /></> : variant === 'particles' ? <AmbientParticles /> : <>
@@ -48,10 +50,6 @@ export function EnterpriseBigData({ variant = 'shards' }) {
         </div>
         <DataStream active={active} />
         </>}
-      </div>
-      <div className="enterprise-data__details">
-        <p>Подберём точную аудиторию среди 65+ млн абонентов МТС на основе их интересов, интернет-поведения, звонков и гео-данных</p>
-        <p>Обогащаем выборку данными от партнёров — знаем детали о реальных покупках на товары вашей категории или бренд</p>
       </div>
     </section>
   )

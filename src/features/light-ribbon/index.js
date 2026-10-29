@@ -1,1 +1,0 @@
-export { LightRibbonCanvas } from './LightRibbonCanvas'

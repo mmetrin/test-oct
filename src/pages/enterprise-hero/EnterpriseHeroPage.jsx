@@ -11,7 +11,7 @@ import { getDesignScale } from '../../shared/ui/design-viewport'
 import './EnterpriseFigmaVariables.css'
 import './EnterpriseHeroPage.css'
 
-export function EnterpriseHeroPage({ bigDataNetwork = true }) {
+export function EnterpriseHeroPage({ bigDataNetwork = true, hero }) {
   const [videoChangeCount, setVideoChangeCount] = useState(0)
   const [areLogosVisible, setAreLogosVisible] = useState(false)
   const [activeSegment, setActiveSegment] = useState(
@@ -30,6 +30,10 @@ export function EnterpriseHeroPage({ bigDataNetwork = true }) {
 
   useEffect(() => {
     const sectionId = window.location.hash.slice(1)
+    if (sectionId === 'multichannel-strategy') {
+      window.location.replace(`${import.meta.env.BASE_URL}targeted-calls/#multichannel-strategy`)
+      return undefined
+    }
     if (!['small-business-content', 'publishers-content', 'bloggers-content'].includes(sectionId)) return undefined
     const showSection = () => document.getElementById(sectionId)?.scrollIntoView()
     const frame = window.requestAnimationFrame(showSection)
@@ -85,12 +89,12 @@ export function EnterpriseHeroPage({ bigDataNetwork = true }) {
   return (
     <main className="enterprise-hero-page" ref={pageRef}>
       <SiteHeader />
-      <EnterpriseHero
+      {hero ?? <EnterpriseHero
         leadershipOnly
         showTrustCopy
         showHeader={false}
         onVideoChange={() => setVideoChangeCount((count) => count + 1)}
-      />
+      />}
       <EnterprisePartnerLogos videoChangeCount={videoChangeCount} visible={areLogosVisible} />
       <EnterpriseFunnelSection activeSegment={activeSegment} onSegmentChange={changeSegment} />
       {activeSegment === 'enterprise' && (

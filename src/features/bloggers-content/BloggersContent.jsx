@@ -10,7 +10,7 @@ import leftPoster from '../../assets/figma/bloggers/hero-video-left-poster.png'
 import rightPoster from '../../assets/figma/bloggers/hero-video-right-poster.png'
 import heroBrandLogos from '../../assets/figma/bloggers/logos.svg'
 import leftVideo from '../../assets/figma/bloggers/tiktok-final-1.mp4'
-import rightVideo from '../../assets/figma/bloggers/tiktok-final-2-updated.mp4'
+import rightVideo from '../../assets/figma/bloggers/tiktok_final_2_oct24.mp4'
 import './BloggersContent.css'
 
 const caseImages = import.meta.glob('../../assets/figma/bloggers/case-*.png', {

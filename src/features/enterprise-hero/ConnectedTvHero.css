@@ -1,0 +1,35 @@
+.connected-tv-hero .enterprise-hero__video.enterprise-hero__video--leadership {
+  left: 410px;
+  transform: scale(0.98) translateX(100%) scaleX(-1);
+  transform-origin: top left;
+}
+
+.connected-tv-hero .enterprise-hero__left-overlay {
+  width: 1400px;
+}
+
+.connected-tv-hero .enterprise-hero__copy,
+.connected-tv-hero .enterprise-hero__copy h1,
+.connected-tv-hero .enterprise-hero__lead {
+  width: 840px;
+  max-width: 100%;
+}
+
+.connected-tv-hero .enterprise-hero__copy h1,
+.connected-tv-hero .enterprise-hero__fact p {
+  color: var(--mts-txt-primary-on-light);
+}
+
+.connected-tv-hero .enterprise-hero__facts {
+  width: max-content;
+  max-width: 100%;
+}
+
+.connected-tv-hero .enterprise-hero__fact {
+  flex: 0 0 auto;
+}
+
+.connected-tv-hero .connected-tv-hero__number-prefix {
+  margin-left: 0;
+  margin-right: 12px;
+}

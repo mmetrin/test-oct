@@ -1,0 +1,24 @@
+.connected-tv-page { position: relative; isolation: isolate; min-height: 8354px; }
+.connected-tv-page :is(h2, h3, p) { margin: 0; }
+.connected-tv-page > :not(.connected-tv-lead) { position: relative; z-index: 1; }
+.connected-tv-page .enterprise-hero__copy { top: 198px; }
+.connected-tv-page .enterprise-hero__cta { text-decoration: none; }
+.connected-tv-page .enterprise-hero__lead { margin-top: 28px; }
+.connected-tv-page .enterprise-hero__number { margin-bottom: 4px; }
+.connected-tv-placements { width: 1920px; height: 748px; margin-top: 126px; }
+.connected-tv-placements > img { display: block; width: 1920px; height: 795px; }
+.connected-tv-raster-link { position: absolute; display: block; border-radius: 40px; }
+.connected-tv-raster-link:focus-visible { outline: 2px solid #ff0032; outline-offset: 5px; }
+.connected-tv-raster-link:hover { box-shadow: 0 0 0 3px rgb(255 0 50 / 12%); }
+.connected-tv-placements__cta { left: 860px; top: 696px; width: 200px; height: 52px; }
+.connected-tv-targeting { width: 1895px; height: 846px; margin: 460px auto 0; }
+.connected-tv-targeting h2 { position: absolute; top: 0; left: 50%; width: 900px; transform: translateX(-50%); text-align: center; font: 500 44px/53px 'MTS Wide', Arial, sans-serif; }
+.connected-tv-targeting h2 span { color: #ff0032; }
+/* Replace the title baked into the export with editable text. */
+.connected-tv-targeting > img { clip-path: inset(106px 0 0);  position: absolute; left: -10px; top: 0; display: block; width: 1917.5px; height: 960px; }
+.connected-tv-targeting__cta { left: 837px; top: 766px; width: 224px; height: 52px; }
+.connected-tv-lead { position: relative; height: 1821px; margin-top: 200px; scroll-margin-top: 100px; }
+.connected-tv-lead > img { position: absolute; top: -1121.62px; left: 0; z-index: -1; display: block; width: 1920px; height: 2008px; pointer-events: none; }
+
+/* Clip horizontal canvas overflow without creating a nested scroll container. */
+html:has(.connected-tv-page), body:has(.connected-tv-page) { overflow-x: clip; }

@@ -69,7 +69,6 @@
 }
 
 .article-brandbook-page__hero-background,
-.article-brandbook-page__header,
 .article-brandbook-page__hero-content {
   position: absolute;
   display: block;
@@ -78,12 +77,6 @@
 
 .article-brandbook-page__hero-background {
   top: 4.583333cqw;
-  left: 0;
-  width: 100%;
-}
-
-.article-brandbook-page__header {
-  top: 0;
   left: 0;
   width: 100%;
 }
@@ -124,4 +117,15 @@
   html:has(.article-brandbook-page) {
     scroll-behavior: smooth;
   }
+}
+
+body:has(.article-brandbook-page) > .site-header {
+  left: 50%;
+  width: 1920px;
+  zoom: var(--article-header-scale, 1);
+  transform: translateX(-50%);
+}
+
+body:has(.article-brandbook-page) .site-header__action.action-button--medium {
+  background: #eaf0f6;
 }

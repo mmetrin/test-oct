@@ -1,1 +1,0 @@
-export { InteractiveWebCanvas } from './InteractiveWebCanvas'
