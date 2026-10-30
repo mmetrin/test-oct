@@ -18,6 +18,7 @@ export default defineConfig({
         contacts: resolve(import.meta.dirname, 'contacts/index.html'),
         media: resolve(import.meta.dirname, 'media/index.html'),
         articleBrandbook: resolve(import.meta.dirname, 'article-brandbook/index.html'),
+        orbitalHero: resolve(import.meta.dirname, 'orbital-hero/index.html'),
       },
     },
   },

@@ -1,0 +1,24 @@
+.orbital-page {
+  width: 100%;
+  min-height: 100svh;
+  background: var(--mts-bg-base);
+  color: var(--mts-txt-primary-on-light);
+}
+
+/* The shared header is rendered into document.body. */
+body:has(.orbital-page) .site-header .site-header__action.action-button--medium {
+  background: rgb(38 59 85 / 7%);
+  color: #677fa2;
+}
+
+body:has(.orbital-page) .site-header .site-header__action.action-button--medium:hover {
+  background: rgb(38 59 85 / 16%);
+}
+
+body:has(.orbital-page) .site-header .site-header__action.action-button--medium:active {
+  background: rgb(38 59 85 / 20%);
+}
+
+body:has(.orbital-page) .site-header .site-header__action.action-button--medium:focus-visible {
+  outline-color: #263b55;
+}

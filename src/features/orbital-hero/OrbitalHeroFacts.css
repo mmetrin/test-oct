@@ -1,0 +1,44 @@
+.orbital-hero__facts {
+  position: absolute;
+  z-index: 2;
+  bottom: 80px;
+  left: 0;
+  display: flex;
+  gap: 56px;
+  width: 765px;
+  max-width: 100%;
+}
+
+.orbital-hero__fact { flex: 0 0 250px; }
+.orbital-hero__fact:nth-child(2) { flex-basis: 240px; }
+.orbital-hero__fact:nth-child(3) { flex-basis: 120px; }
+.orbital-hero__fact p {
+  margin: 0;
+  color: #7f8c9f;
+  font-size: 17px;
+  line-height: 24px;
+}
+.orbital-hero__fact p span { color: #000814; }
+.orbital-hero__fact .orbital-hero__number {
+  margin-bottom: 4px;
+  color: #000814;
+  font-family: 'MTS Wide', Arial, sans-serif;
+  font-size: 52px;
+  font-weight: 500;
+  line-height: 57px;
+  white-space: nowrap;
+}
+.orbital-hero__number span { margin-left: 4px; font-size: 24px; line-height: 28px; }
+
+@media (max-width: 1050px) {
+  .orbital-hero__facts { position: relative; bottom: auto; margin-top: 48px; }
+}
+@media (max-width: 760px) {
+  .orbital-hero__facts { width: 100%; gap: 16px; }
+  .orbital-hero__fact,
+  .orbital-hero__fact:nth-child(2),
+  .orbital-hero__fact:nth-child(3) { flex: 1 1 0; min-width: 0; }
+  .orbital-hero__fact .orbital-hero__number { font-size: clamp(23px, 6vw, 38px); line-height: 1.1; }
+  .orbital-hero__number span { font-size: 13px; }
+  .orbital-hero__fact p { font-size: 11px; line-height: 15px; }
+}
