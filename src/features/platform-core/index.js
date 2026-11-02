@@ -1,0 +1,1 @@
+export { PlatformCoreHero } from './PlatformCoreHero'

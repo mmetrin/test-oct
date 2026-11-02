@@ -1,0 +1,52 @@
+.platform-core-hero { position: relative; min-height: 100svh; overflow: clip; background: url('../../assets/figma/dsp/hero-background.png') center / 100% 100% no-repeat; }
+.platform-core-hero__main { position: relative; width: min(1444px, calc(100% - 124px)); min-height: max(720px, 100svh); margin: 0 auto; padding: clamp(142px, 11.1vw, 178px) 0 230px; }
+.platform-core-hero__copy { position: relative; z-index: 2; width: 55%; pointer-events: none; }
+.platform-core-hero__copy h1 { margin: 0; font-family: 'MTS Wide', Arial, sans-serif; font-size: clamp(36px, 3.125vw, 50px); font-weight: 500; line-height: 1.1; letter-spacing: 0; }
+.platform-core-hero__description { width: 790px; max-width: 96%; margin: 28px 0 0; color: #000814; font-family: 'MTS Wide', Arial, sans-serif; font-size: clamp(14px, 1.0625vw, 17px); line-height: 1.42; }
+.platform-core-hero__actions { margin-top: 38px; pointer-events: auto; }
+.platform-core-hero__cta.action-button { min-height: 43px; padding: 11px 13px; border: 1px solid var(--mts-bg-states-action); background: var(--mts-bg-base); color: var(--mts-bg-states-action); text-decoration: none; font-size: clamp(13px, 1vw, 16px); }
+.platform-core-hero__cta.action-button:hover { background: white; color: var(--mts-bg-states-action-hover); }
+.core-visual { position: absolute; z-index: 1; top: 104px; right: -70px; width: 60%; height: calc(100% - 150px); min-height: 535px; }
+.core-visual__canvas { position: absolute; inset: 0; }
+.core-visual__canvas canvas { display: block; touch-action: pan-y; }
+.core-visual__pause { position: absolute; right: 70px; bottom: 12px; display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 1px solid rgb(103 131 173 / 20%); border-radius: 50%; background: rgb(255 255 255 / 50%); color: #677f9b; cursor: pointer; }
+.core-visual__pause:hover { background: white; color: #1863d5; }
+.platform-core-hero a:focus-visible, .core-visual button:focus-visible { outline: 3px solid #1863d5; outline-offset: 5px; }
+.core-visual__status { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 15px; padding: 40px; color: #677fa2; font-size: 13px; text-align: center; }
+.core-visual__status button { border: 1px solid #d5e1ec; border-radius: 30px; padding: 10px 18px; background: white; color: #405a73; cursor: pointer; }
+.core-visual__loader { width: 32px; height: 32px; border: 1px solid #d7e4ef; border-top-color: #71aadc; border-radius: 50%; animation: core-loading 1.8s linear infinite; }
+@keyframes core-loading { to { transform: rotate(360deg); } }
+.platform-core-hero .orbital-hero__facts { position: absolute; bottom: 23%; width: 765px; gap: clamp(28px, 3.5vw, 56px); margin-top: 0; }
+.platform-core-hero .orbital-hero__fact { flex-basis: clamp(200px, 15.625vw, 250px); }
+.platform-core-hero .orbital-hero__fact:nth-child(2) { flex-basis: clamp(190px, 15vw, 240px); }
+.platform-core-hero .orbital-hero__fact:nth-child(3) { flex-basis: 120px; }
+.platform-core-hero .orbital-hero__number { font-size: clamp(42px, 3.25vw, 52px); line-height: 1.1; }
+.platform-core-hero .orbital-hero__fact p:not(.orbital-hero__number) { font-size: clamp(13px, 1.0625vw, 17px); line-height: 1.42; }
+.platform-core-hero .orbital-hero__number span { font-size: clamp(19px, 1.5vw, 24px); }
+@media (min-width: 1151px) {
+  .core-visual { right: calc(-70px - clamp(24px, 2.5vw, 44px)); transform: translateY(24px); }
+  .core-visual__canvas { inset: calc(-1 * var(--core-render-padding)); }
+}
+@media (min-width: 1600px) { .platform-core-hero__main { min-height: max(820px, 100svh); } .platform-core-hero .orbital-hero__facts { bottom: 80px; } .core-visual { top: 130px; height: calc(100% - 180px); } }
+@media (min-width: 1151px) and (max-width: 1599px) {
+  .core-visual { right: -60px; transform: translateY(44px); }
+  .platform-core-hero .orbital-hero__facts { bottom: 48px; }
+}
+@media (max-width: 1150px) and (min-width: 801px) { .platform-core-hero__main { width: calc(100% - 64px); } .platform-core-hero__copy { width: 56%; } .platform-core-hero__copy h1 { font-size: 36px; } .core-visual { right: -35px; width: 57%; top: 160px; height: 475px; min-height: 0; } .platform-core-hero .orbital-hero__facts { bottom: 65px; } }
+@media (max-width: 800px) {
+  .platform-core-hero { background-position: 65% bottom; background-size: auto 74%; }
+  .platform-core-hero__main { display: flex; flex-direction: column; width: calc(100% - 40px); min-height: 0; padding: 135px 0 46px; }
+  .platform-core-hero__copy { width: 100%; }
+  .platform-core-hero__copy h1 { font-size: clamp(29px, 6.7vw, 44px); line-height: 1.12; }
+  .platform-core-hero__description { max-width: 100%; margin-top: 24px; font-size: 14px; line-height: 1.5; }
+  .platform-core-hero__actions { margin-top: 27px; }
+  .platform-core-hero__cta.action-button { min-height: 46px; padding: 12px 16px; font-size: 13px; }
+  .core-visual { position: relative; top: auto; right: auto; width: calc(100% + 40px); height: min(115vw, 580px); min-height: 0; margin: 0 -20px; }
+  .core-visual__pause { right: 20px; bottom: 12px; }
+  .platform-core-hero .orbital-hero__facts { position: relative; bottom: auto; width: 100%; gap: 16px; margin-top: 25px; }
+  .platform-core-hero .orbital-hero__fact, .platform-core-hero .orbital-hero__fact:nth-child(2), .platform-core-hero .orbital-hero__fact:nth-child(3) { flex: 1 1 0; min-width: 0; }
+  .platform-core-hero .orbital-hero__fact .orbital-hero__number { font-size: clamp(23px, 6vw, 38px); }
+  .platform-core-hero .orbital-hero__number span { margin-left: 0; font-size: 13px; }
+  .platform-core-hero .orbital-hero__fact p:not(.orbital-hero__number) { font-size: 11px; line-height: 15px; }
+}
+@media (prefers-reduced-motion: reduce) { .core-visual__loader { animation: none; } }

@@ -19,6 +19,7 @@ export default defineConfig({
         media: resolve(import.meta.dirname, 'media/index.html'),
         articleBrandbook: resolve(import.meta.dirname, 'article-brandbook/index.html'),
         orbitalHero: resolve(import.meta.dirname, 'orbital-hero/index.html'),
+        platformCore: resolve(import.meta.dirname, 'platform-core/index.html'),
       },
     },
   },

@@ -1,0 +1,7 @@
+.platform-core-page { width: 100%; min-height: 100svh; background: var(--mts-bg-base); color: var(--mts-txt-primary-on-light); }
+body:has(.platform-core-page) .site-header__content { width: min(1444px, calc(100% - 124px)); }
+body:has(.platform-core-page) .site-header .site-header__action { background: rgb(38 59 85 / 7%); color: #677fa2; }
+body:has(.platform-core-page) .site-header .site-header__action:hover { background: rgb(38 59 85 / 16%); }
+body:has(.platform-core-page) .site-header .site-header__action:focus-visible { outline-color: #263b55; }
+@media (max-width: 1150px) { body:has(.platform-core-page) .site-header__content { width: calc(100% - 64px); } }
+@media (max-width: 800px) { body:has(.platform-core-page) .site-header__content { width: calc(100% - 40px); } }

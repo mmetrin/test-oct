@@ -1,0 +1,1 @@
+export { OrbitalHeroFacts } from './OrbitalHeroFacts'
