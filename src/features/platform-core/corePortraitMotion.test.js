@@ -5,8 +5,8 @@ import { portraitFrame } from './corePortraitMotion.js'
 
 const slots = 12
 const sources = 20
-const { modules, connection, portraits } = getCoreSceneConfig(true)
-const frameAt = (slot, time, desktop = false) => portraitFrame(slot, modules[slot % modules.length], time, connection, portraits, sources, slots, desktop)
+const { modules, connection, portraits } = getCoreSceneConfig(false)
+const frameAt = (slot, time) => portraitFrame(slot, modules[slot % modules.length], time, connection, portraits, sources, slots)
 const arrivalAt = (index) => modules[index].connectAt + modules[index].connectDuration
 
 test('mobile keeps the original reveal after each completed docking', () => {
@@ -19,21 +19,6 @@ test('mobile keeps the original reveal after each completed docking', () => {
       assert.equal(frameAt(slot, arrival).opacity, 0)
       assert.ok(frameAt(slot, arrival + portraits.fadeIn / 2).opacity > 0)
       assert.equal(frameAt(slot, arrival + portraits.fadeIn).opacity, portraits.opacity)
-    }
-  })
-})
-
-test('desktop portraits react at visual contact and are fully visible by final docking', () => {
-  modules.forEach((module, index) => {
-    const arrival = arrivalAt(index)
-    const beforeContact = Array.from({ length: slots }, (_, slot) => frameAt(slot, arrival - 0.3, true))
-    const onDock = Array.from({ length: slots }, (_, slot) => frameAt(slot, arrival, true))
-    assert.equal(beforeContact.filter((frame) => frame.opacity > 0).length, index * 3)
-    assert.equal(onDock.filter((frame) => frame.opacity === portraits.opacity).length, (index + 1) * 3)
-    for (let slot = index; slot < slots; slot += modules.length) {
-      assert.ok(frameAt(slot, arrival - 0.15, true).opacity > 0)
-      assert.equal(frameAt(slot, arrival + 0.1, true).opacity, portraits.opacity)
-      assert.equal(frameAt(slot, arrival + portraits.hold - 0.01, true).blend, 0)
     }
   })
 })

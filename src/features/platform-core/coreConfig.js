@@ -1,6 +1,5 @@
 // World units; angles in radians; durations in seconds. Modules are independent of ad channels.
-function coreDock(quadrant, connectorSide = -1, connectorAxis = 'z') {
-  const portAngle = -0.5 + quadrant * Math.PI / 2
+function radialDock(portAngle, connectorSide = -1, connectorAxis = 'z') {
   const facing = portAngle + (connectorAxis === 'x' ? connectorSide * Math.PI / 2 : connectorSide === 1 ? Math.PI : 0)
   return {
     portAngle,
@@ -10,6 +9,8 @@ function coreDock(quadrant, connectorSide = -1, connectorAxis = 'z') {
     connectorAxis,
   }
 }
+
+const coreDock = (quadrant, connectorSide, connectorAxis) => radialDock(-0.5 + quadrant * Math.PI / 2, connectorSide, connectorAxis)
 
 export const coreConfig = {
   moduleCount: 4,
@@ -28,8 +29,8 @@ export const coreConfig = {
     colors: { telegram: '#229ED9', mts: '#FF0032', vk: '#0077FF' },
   },
   desktopFocus: { baseScale: 1.32, renderPadding: 64, magnification: 1.08, lead: 0.7, settle: 1.3 },
-  portraits: { fadeIn: 0.65, desktopFadeIn: 0.18, desktopRevealLead: 0.24, hold: 3.6, interval: 4.8, crossfade: 1.15, opacity: 0.94, desktopScale: 0.75 },
-  desktopIdentity: { hold: 2.6, mergeDuration: 1.8, revealDelay: 0.65, revealDuration: 1.0, width: 1.0, aspect: 70 / 45 },
+  desktopShell: { color: '#e4e7ed', metalness: 1, roughness: 0.26, clearcoat: 0.32, clearcoatRoughness: 0.2, envMapIntensity: 1.4 },
+  portraits: { fadeIn: 0.65, hold: 3.6, interval: 4.8, crossfade: 1.15, opacity: 0.94 },
   lights: {
     ambient: 0.22, key: 2.6, fill: 0.65, rim: 1.75, environment: 0.8, exposure: 1,
     environmentResolution: 512, shadowResolution: 2048,
@@ -47,15 +48,18 @@ export const coreConfig = {
   desktopLights: {
     ambient: 0.2, key: 2.5, fill: 0.85, rim: 2.7, accent: 1,
     keyColor: '#f2f4ff', fillColor: '#8cbfff', rimColor: '#7acbff', accentColor: '#b5a2ff',
-    environmentColor: '#596e91',
+    environmentColor: '#8995a7',
     cards: [
       { id: 'pearl-key', position: [-3, 7, 5], scale: [5, 4, 1], intensity: 2.8, color: '#f5f4ff' },
       { id: 'azure-strip', position: [5, 3, 0], scale: [1.4, 6, 1], intensity: 4.2, color: '#5b9dff' },
       { id: 'lavender-softbox', position: [-4, 1, -1], scale: [2.8, 4.5, 1], intensity: 2.8, color: '#b99cff' },
+      { id: 'cyan-reflection', position: [5, 1, 4], scale: [2.4, 5.5, 1], intensity: 2.8, color: '#91dcff' },
+      { id: 'lilac-reflection', position: [-4, 1.5, 5], scale: [3.5, 4.5, 1], intensity: 2.1, color: '#c6a7ff' },
       { id: 'front-softbox', position: [0, 5, 8], scale: [4, 2.5, 1], intensity: 1.35, color: '#f1f7ff' },
       { id: 'ice-rim', position: [-1, 4, -5], scale: [3, 0.8, 1], intensity: 4.2, color: '#8ad8ff' },
+      { id: 'upper-cyan', position: [1, 5, -3], scale: [4.5, 3, 1], intensity: 2.5, color: '#a6e4ff' },
       { id: 'blue-bounce', position: [-1, -3, 4], scale: [3, 2, 1], intensity: 1.15, color: '#94b0da' },
-      { id: 'front-flag', position: [0, 0, 7], scale: [5, 1.2, 1], intensity: 0.12, color: '#465e84' },
+      { id: 'front-flag', position: [0, 0, 7], scale: [5, 1.2, 1], intensity: 0.5, color: '#a7adc4' },
       { id: 'side-flag', position: [5, -1, 4], scale: [1.4, 4, 1], intensity: 0.14, color: '#53618d' },
     ],
   },
@@ -79,16 +83,26 @@ export const coreConfig = {
 export function getCoreSceneConfig(desktop) {
   if (!desktop) return coreConfig
   const connection = { ...coreConfig.connection, ...coreConfig.desktopConnection }
-  const swappedBrands = { avito: 'telegram', telegram: 'avito' }
+  const placement = [
+    { brand: 'vk', degrees: 225, radius: 3.35, height: 0.38, angle: 0.3, connectorSide: 1 },
+    { brand: 'avito', degrees: 105, radius: 2.95, height: 0.14, angle: 0.35, connectorAxis: 'x' },
+    { brand: 'telegram', degrees: 345, radius: 3.15, height: 0.12, angle: -0.35 },
+  ]
   return {
     ...coreConfig,
+    sculpture: { ...coreConfig.sculpture, rotation: [0.26, -0.2, -0.22] },
+    moduleCount: 3,
+    coreBrand: 'mts',
     connection,
-    modules: coreConfig.modules.map((module, index) => {
-      const appearance = coreConfig.modules.find((item) => item.brand === swappedBrands[module.brand]) ?? module
+    modules: placement.map(({ brand, degrees, radius, height, angle, connectorSide, connectorAxis }, index) => {
+      const module = coreConfig.modules.find((item) => item.brand === brand)
+      const portAngle = degrees * Math.PI / 180
       return {
         ...module,
-        id: module.id.replace(module.brand, appearance.brand),
-        brand: appearance.brand, shape: appearance.shape, scale: appearance.scale,
+        ...radialDock(portAngle, connectorSide, connectorAxis),
+        id: `${brand}-desktop`,
+        angle,
+        from: [Math.sin(portAngle) * radius + coreConfig.sculpture.corePosition[0], coreConfig.sculpture.corePosition[1] + height, Math.cos(portAngle) * radius + coreConfig.sculpture.corePosition[2]],
         connectDuration: connection.duration + index * connection.arrivalInterval,
       }
     }),

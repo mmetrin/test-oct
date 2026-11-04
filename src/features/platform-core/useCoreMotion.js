@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react'
 export function useCoreMotion() {
   const container = useRef(null)
   const pointer = useRef({ x: 0, y: 0 })
-  const [paused, setPaused] = useState(false)
   const [visible, setVisible] = useState(() => !document.hidden)
   const [reduced, setReduced] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches)
   const [compact, setCompact] = useState(() => matchMedia('(max-width: 800px)').matches)
@@ -34,7 +33,7 @@ export function useCoreMotion() {
   }, [])
 
   const onPointerMove = (event) => {
-    if (reduced || paused || event.pointerType !== 'mouse') return
+    if (reduced || event.pointerType !== 'mouse') return
     const rect = event.currentTarget.getBoundingClientRect()
     const x = (event.clientX - rect.left) / rect.width * 2 - 1
     const y = (event.clientY - rect.top) / rect.height * 2 - 1
@@ -43,5 +42,5 @@ export function useCoreMotion() {
   }
   const onPointerLeave = () => { pointer.current = { x: 0, y: 0 } }
 
-  return { container, pointer, paused, setPaused, reduced, compact, desktop, visible, running: visible && !paused && !reduced, onPointerMove, onPointerLeave }
+  return { container, pointer, reduced, compact, desktop, visible, running: visible && !reduced, onPointerMove, onPointerLeave }
 }

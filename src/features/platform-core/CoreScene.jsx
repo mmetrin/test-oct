@@ -72,7 +72,7 @@ function Sculpture({ config, pointer, running, reduced, compact, desktop }) {
   </group>
 }
 
-function Lifecycle({ onReady, onLost, onRestored }) {
+function Lifecycle({ onLost, onRestored }) {
   const gl = useThree((state) => state.gl)
   useEffect(() => {
     // Refractions can render at a lower resolution without softening the metal silhouette.
@@ -81,17 +81,15 @@ function Lifecycle({ onReady, onLost, onRestored }) {
     const lost = (event) => { event.preventDefault(); onLost() }
     canvas.addEventListener('webglcontextlost', lost)
     canvas.addEventListener('webglcontextrestored', onRestored)
-    const frame = requestAnimationFrame(onReady)
     return () => {
-      cancelAnimationFrame(frame)
       canvas.removeEventListener('webglcontextlost', lost)
       canvas.removeEventListener('webglcontextrestored', onRestored)
     }
-  }, [gl, onReady, onLost, onRestored])
+  }, [gl, onLost, onRestored])
   return null
 }
 
-export function CoreScene({ config, motion, onReady, onLost, onRestored, fallback }) {
+export function CoreScene({ config, motion, onLost, onRestored, fallback }) {
   return <Canvas camera={{ ...config.camera, near: 0.1, far: 40 }}
     dpr={[1, motion.compact ? config.pixelRatio.mobile : config.pixelRatio.desktop]}
     frameloop={motion.running ? 'always' : 'demand'} fallback={fallback}
@@ -100,6 +98,6 @@ export function CoreScene({ config, motion, onReady, onLost, onRestored, fallbac
     aria-hidden="true">
     <Studio config={config} compact={motion.compact} desktop={motion.desktop} />
     <Sculpture key={String(motion.reduced)} config={config} pointer={motion.pointer} running={motion.running} reduced={motion.reduced} compact={motion.compact} desktop={motion.desktop} />
-    <Lifecycle onReady={onReady} onLost={onLost} onRestored={onRestored} />
+    <Lifecycle onLost={onLost} onRestored={onRestored} />
   </Canvas>
 }

@@ -1,0 +1,29 @@
+.audience-technology-graphic {
+  display: block;
+  width: 177.475px;
+  height: 93px;
+  margin-top: 24px;
+  overflow: visible;
+}
+
+.audience-technology-graphic__portrait-rim,
+.stable-id__link,
+.stable-id__signal,
+.stable-id__result-ring,
+.stable-id__confirmation,
+.smart-target__selection,
+.smart-target__confirmation {
+  fill: none;
+  stroke-width: 0.55;
+}
+
+.audience-technology-graphic__portrait-rim,
+.stable-id__link { stroke: #a7a4e8; }
+.stable-id__resolved .audience-technology-graphic__portrait-rim { stroke: none; }
+.stable-id__result-ring,
+.stable-id__confirmation,
+.smart-target__selection,
+.smart-target__confirmation { stroke: #ff0032; }
+.stable-id__signal { stroke: #8d87e0; stroke-width: 1.6; stroke-linecap: round; opacity: 0; }
+.stable-id__confirmation,
+.smart-target__confirmation { opacity: 0; }

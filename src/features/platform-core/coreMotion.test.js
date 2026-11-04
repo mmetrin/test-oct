@@ -73,20 +73,27 @@ test('desktop motion starts immediately while the mobile timing stays unchanged'
   assert.deepEqual(coreConfig.modules.map((module) => module.connectDuration), [4.8, 5.8, 6.8, 7.8])
 })
 
-test('the four ports and docked modules are evenly spaced around the core', () => {
-  const modules = [...coreConfig.modules].sort((a, b) => a.portAngle - b.portAngle)
+for (const desktop of [false, true]) test(`${desktop ? 'three desktop' : 'four mobile'} ports and docked modules are evenly spaced around the core`, () => {
+  const config = getCoreSceneConfig(desktop)
+  assert.equal(config.modules.length, desktop ? 3 : 4)
+  assert.equal(config.moduleCount, config.modules.length)
+  if (desktop) {
+    assert.equal(config.coreBrand, 'mts')
+    assert.deepEqual(config.modules.map((module) => module.brand), ['vk', 'avito', 'telegram'])
+  }
+  const modules = [...config.modules].sort((a, b) => a.portAngle - b.portAngle)
   const radius = Math.hypot(modules[0].dock[0], modules[0].dock[2])
   modules.forEach((module, index) => {
     const next = modules[(index + 1) % modules.length]
     const gap = (next.portAngle - module.portAngle + Math.PI * 2) % (Math.PI * 2)
-    assert.ok(Math.abs(gap - Math.PI / 2) < 1e-10)
+    assert.ok(Math.abs(gap - Math.PI * 2 / modules.length) < 1e-10)
     assert.ok(Math.abs(Math.hypot(module.dock[0], module.dock[2]) - radius) < 1e-10)
     assert.equal(module.dock[1], modules[0].dock[1])
   })
 })
 
 test('branded modules approach the raised core from outside and meet their own ports', () => {
-  for (const module of coreConfig.modules) {
+  for (const module of [...coreConfig.modules, ...getCoreSceneConfig(true).modules]) {
     const [x, , z] = module.dock
     const radius = Math.hypot(x, z)
     assert.ok(Math.abs(x - Math.sin(module.portAngle) * radius) < 0.002)

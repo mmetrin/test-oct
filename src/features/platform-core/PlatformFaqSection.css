@@ -1,0 +1,13 @@
+.platform-faq { width: 1440px; margin: 200px auto 0; }
+.platform-faq > h2 { text-align: center; font-size: 44px; line-height: 1.2; }
+.platform-faq__questions { margin-top: 60px; }
+.platform-faq__item { position: relative; }
+.platform-faq__item:not(:last-child) { margin-bottom: 32px; padding-bottom: 32px; }
+.platform-faq__item h3 { font-size: 24px; line-height: 28px; }
+.platform-faq__question { display: flex; align-items: center; justify-content: space-between; gap: 32px; width: 100%; min-height: 32px; padding: 0; border: 0; background: transparent; color: inherit; text-align: left; font: inherit; }
+button.platform-faq__question { cursor: pointer; }
+.platform-faq__question-text { width: 1228px; }
+.platform-faq__chevron { display: block; flex-shrink: 0; }
+.platform-faq__chevron--closed { transform: rotate(90deg); }
+.platform-faq .platform-faq__answer { margin-top: 12px; }
+.platform-faq__divider { position: absolute; bottom: 0; left: 0; display: block; }

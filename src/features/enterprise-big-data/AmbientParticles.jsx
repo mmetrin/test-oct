@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { PORTRAITS } from './portraitGroups'
+import './AmbientParticles.css'
 
 const COLORS = [
   [254, 234, 223], // #FEEADF
@@ -51,6 +52,7 @@ const SEGMENT_TOOLTIP_WIDTH = 300
 
 const PORTRAIT_SPRITE_SIZE = 96
 const PORTRAIT_LINK_DISTANCE = 260
+const BANNER_PORTRAITS = Array.from({ length: 36 }, (_, index) => PORTRAITS[Math.floor(index * PORTRAITS.length / 36)])
 
 const HORIZONTAL_TRACKS = [
   { y: 108 / 500, from: 324 / 1920, to: 1596 / 1920 },
@@ -170,9 +172,38 @@ function makePortraitLinks(portraits, maxDistance, midX) {
   return links
 }
 
-export function AmbientParticles() {
+function makeBannerPortraitParticle(width, height, portrait, index) {
+  const scale = Math.min(1, width / 1440)
+  return {
+    ...makePortraitParticle(width, height, portrait, index),
+    x: (index + 0.5) / BANNER_PORTRAITS.length * width,
+    y: [0.22, 0.78, 0.42, 0.9, 0.12, 0.62][index % 6] * height,
+    size: (8 + index * 7 % 11) * scale,
+    alpha: index % 3 === 0 ? 0.5 : 0.3,
+    driftX: (18 + index % 4 * 4) * scale,
+    driftY: (7 + index % 3 * 2) * scale,
+    speed: 0.42 + index % 4 * 0.055,
+    sizeAmplitude: 0.1,
+    hoverGrowth: 0.75,
+  }
+}
+
+function bannerBackgroundOpacity(y, height) {
+  const distance = Math.abs(y / height - 0.5)
+  const fade = Math.max(0, Math.min(1, (distance - 0.08) / 0.27))
+  return 0.25 + 0.75 * fade
+}
+
+function bannerPortraitOpacity(x, width) {
+  // Gently fade faces before the result copy, keeping the left scan clear.
+  const progress = Math.max(0, Math.min(1, (x / width - 0.32) / 0.08))
+  return 1 - 0.8 * progress * progress * (3 - 2 * progress)
+}
+
+export function AmbientParticles({ variant = 'network', motionActiveRef }) {
   const canvasRef = useRef(null)
   const [focus, setFocus] = useState(null)
+  const isBanner = variant === 'banner'
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -191,12 +222,14 @@ export function AmbientParticles() {
     let visualHover = null
     let anchor = null
     let focusBlend = 0
+    let motionBlend = motionActiveRef ? 0 : 1
+    let motionElapsed = 0
     let isVisible = false
     const start = performance.now()
     let lastFrameTime = start
     const stage = canvas.parentElement
     const cursorExclusions = Array.from(stage.querySelectorAll('.data-network__hub, .data-network__logo'))
-    const portraitImages = PORTRAITS.map(({ source, ...portrait }) => {
+    const portraitImages = (isBanner ? BANNER_PORTRAITS : PORTRAITS).map(({ source, ...portrait }) => {
       const image = new Image()
       image.decoding = 'async'
       return { ...portrait, source, image, sprites: null }
@@ -223,8 +256,9 @@ export function AmbientParticles() {
       canvas.width = Math.max(1, Math.round(width * ratio))
       canvas.height = Math.max(1, Math.round(height * ratio))
       context.setTransform(ratio, 0, 0, ratio, 0, 0)
-      const portraits = portraitImages.map((portrait, index) => makePortraitParticle(width, height, portrait, index))
-      portraitLinks = makePortraitLinks(portraits, Math.min(PORTRAIT_LINK_DISTANCE, width * 0.28), width / 2)
+      const makePortrait = isBanner ? makeBannerPortraitParticle : makePortraitParticle
+      const portraits = portraitImages.map((portrait, index) => makePortrait(width, height, portrait, index))
+      portraitLinks = makePortraitLinks(portraits, Math.min(PORTRAIT_LINK_DISTANCE, width * 0.28), isBanner ? 0 : width / 2)
       particles = [
         ...Array.from({ length: Math.round(width * height / 10000) }, () => makeParticle(width, height, 0)),
         ...Array.from({ length: Math.round(width * height / 38000) }, () => makeParticle(width, height, 1)),
@@ -243,11 +277,24 @@ export function AmbientParticles() {
         return
       }
       lastPaint = now
-      const elapsed = reduceMotion ? 0 : (now - start) / 1000
+      const scale = width / canvas.clientWidth
       const delta = Math.min(0.05, (now - lastFrameTime) / 1000)
       lastFrameTime = now
+      const motionActive = motionActiveRef?.current ?? true
+      motionBlend += ((motionActive ? 1 : 0) - motionBlend) * (1 - Math.exp(-delta * 1.6))
+      if (!reduceMotion && motionActive) motionElapsed += delta * motionBlend
+      // Start from the displayed positions and gently pick up speed after the reveal.
+      const elapsed = reduceMotion ? 0 : motionActiveRef ? motionElapsed : (now - start) / 1000
+      const particleElapsed = isBanner ? elapsed * 0.51 : elapsed
 
-      if (reduceMotion) {
+      if (isBanner) {
+        // A slow, continuous scan stays in the left column, clear of the result text.
+        visualHover = {
+          x: (282 + 112 * Math.sin(elapsed * Math.PI * 2 / 60 - 0.6)) * scale,
+          y: (4 + 6 * Math.sin(elapsed * Math.PI * 2 / 80)) * scale,
+        }
+        focusBlend = 1
+      } else if (reduceMotion) {
         focusBlend = hover ? 1 : 0
         visualHover = hover
       } else {
@@ -264,9 +311,9 @@ export function AmbientParticles() {
       }
 
       context.clearRect(0, 0, width, height)
-      const focusRadius = 100 * width / canvas.clientWidth
+      const focusRadius = 100 * scale
 
-      if (visualHover && focusBlend > 0.005) {
+      if (visualHover && focusBlend > 0.005 && !isBanner) {
         const spotlight = context.createRadialGradient(visualHover.x, visualHover.y, 0, visualHover.x, visualHover.y, focusRadius)
         spotlight.addColorStop(0, `rgba(111, 152, 194, ${0.1 * focusBlend})`)
         spotlight.addColorStop(1, 'rgba(111, 152, 194, 0)')
@@ -277,11 +324,12 @@ export function AmbientParticles() {
       }
 
       particles.forEach((particle) => {
-        const wobbleX = Math.sin(elapsed * particle.speed + particle.phase) * particle.driftX
-        const wobbleY = Math.cos(elapsed * particle.speed * 0.77 + particle.phase) * particle.driftY
-        let x = (particle.x + wobbleX + width) % width
-        let y = (particle.y + wobbleY + height) % height
-        if (visualHover && focusBlend > 0.005) {
+        const wobbleX = Math.sin(particleElapsed * particle.speed + particle.phase) * particle.driftX
+        const wobbleY = Math.cos(particleElapsed * particle.speed * 0.77 + particle.phase) * particle.driftY
+        // Let portraits drift beyond the clipped banner edge instead of wrapping and snapping their links.
+        let x = isBanner && particle.portrait ? particle.x + wobbleX : (particle.x + wobbleX + width) % width
+        let y = isBanner && particle.portrait ? particle.y + wobbleY : (particle.y + wobbleY + height) % height
+        if (visualHover && focusBlend > 0.005 && !isBanner) {
           const dx = visualHover.x - x
           const dy = visualHover.y - y
           const distance = Math.hypot(dx, dy)
@@ -297,11 +345,13 @@ export function AmbientParticles() {
           }
         }
         const distanceToCursor = visualHover ? Math.hypot(x - visualHover.x, y - visualHover.y) : Infinity
-        const proximity = Math.max(0, Math.min(1, (focusRadius - distanceToCursor) / 32))
+        const edgeInset = isBanner ? particle.size : 0
+        const edgeFade = isBanner ? 24 * scale : 32
+        const proximity = Math.max(0, Math.min(1, (focusRadius - distanceToCursor - edgeInset) / edgeFade))
         const boost = focusBlend * proximity * proximity * (3 - 2 * proximity)
         const focusSize = particle.portrait ? 1 + particle.hoverGrowth * boost : 1
-        const radius = particle.size * (1 + Math.sin(elapsed * particle.sizeSpeed + particle.phase) * particle.sizeAmplitude) * focusSize
-        if (particle.portrait) {
+        const radius = particle.size * (1 + Math.sin(particleElapsed * particle.sizeSpeed + particle.phase) * particle.sizeAmplitude) * focusSize
+        if (particle.portrait && !isBanner) {
           const clear = keepPortraitClearOfTracks(x, y, width, height, radius + 8, particle.x, particle.y)
           x = clear.x
           y = clear.y
@@ -320,26 +370,31 @@ export function AmbientParticles() {
         const distance = Math.hypot(dx, dy)
         if (distance >= maxLinkDistance || distance <= first.renderRadius + second.renderRadius + 2) return
         const boost = Math.max(first.renderBoost, second.renderBoost)
+        const backgroundOpacity = isBanner ? bannerBackgroundOpacity((first.renderY + second.renderY) / 2, height) : 1
+        const opacity = backgroundOpacity + (1 - backgroundOpacity) * boost
         const fade = 1 - distance / maxLinkDistance
         const directionX = dx / distance
         const directionY = dy / distance
         context.beginPath()
         context.moveTo(first.renderX + directionX * first.renderRadius, first.renderY + directionY * first.renderRadius)
         context.lineTo(second.renderX - directionX * second.renderRadius, second.renderY - directionY * second.renderRadius)
-        context.strokeStyle = `rgba(145, 185, 220, ${(0.12 + 0.21 * fade) * (1 + 0.3 * boost)})`
+        context.strokeStyle = `rgba(145, 185, 220, ${(0.12 + 0.21 * fade) * (1 + 0.3 * boost) * opacity})`
         context.lineWidth = 0.9 + 0.3 * boost
         context.stroke()
       })
 
       particles.forEach((particle) => {
         const { renderX: x, renderY: y, renderBoost: boost, renderRadius: radius } = particle
-        const shimmer = 0.82 + Math.sin(elapsed * 0.62 + particle.phase) * 0.18
+        const shimmer = 0.82 + Math.sin(particleElapsed * 0.62 + particle.phase) * 0.18
         const focusAlpha = 0.56 + 1.36 * boost
+        const backgroundOpacity = isBanner ? bannerBackgroundOpacity(y, height) : 1
 
         if (particle.portrait) {
           const sprites = particle.portrait.sprites
           if (!sprites) return
-          const alpha = particle.alpha + (0.9 - particle.alpha) * boost
+          const portraitOpacity = isBanner ? bannerPortraitOpacity(x, width) : 1
+          const baseAlpha = particle.alpha * backgroundOpacity
+          const alpha = (baseAlpha + (0.9 - baseAlpha) * boost) * portraitOpacity
           const diameter = radius * 2
           const blurredAlpha = alpha * (1 - boost)
           context.globalAlpha = blurredAlpha
@@ -350,7 +405,7 @@ export function AmbientParticles() {
           context.globalAlpha = 1
           context.beginPath()
           context.arc(x, y, radius, 0, Math.PI * 2)
-          context.strokeStyle = `rgba(255, 255, 255, ${particle.alpha * 0.5 + 0.4 * boost})`
+          context.strokeStyle = `rgba(255, 255, 255, ${(baseAlpha * 0.5 + 0.4 * boost) * portraitOpacity})`
           context.lineWidth = 1
           context.stroke()
           return
@@ -358,6 +413,7 @@ export function AmbientParticles() {
 
         const [r, g, b] = particle.color
         const alpha = Math.min(1, particle.alpha * (reduceMotion ? 1 : shimmer) * focusAlpha * 1.28)
+          * (backgroundOpacity + (1 - backgroundOpacity) * boost)
 
         if (particle.outline) {
           context.beginPath()
@@ -382,8 +438,8 @@ export function AmbientParticles() {
       if (visualHover && focusBlend > 0.005) {
         context.beginPath()
         context.arc(visualHover.x, visualHover.y, focusRadius, 0, Math.PI * 2)
-        context.strokeStyle = `rgba(255, 0, 50, ${focusBlend})`
-        context.lineWidth = 1
+        context.strokeStyle = isBanner ? '#A2C7FB' : `rgba(255, 0, 50, ${focusBlend})`
+        context.lineWidth = isBanner ? scale : 1
         context.stroke()
       }
       if (!reduceMotion) scheduleFrame()
@@ -519,10 +575,12 @@ export function AmbientParticles() {
     observer.observe(canvas)
     visibilityObserver.observe(stage)
     document.addEventListener('visibilitychange', handleVisibilityChange)
-    stage.addEventListener('pointerenter', handlePointerMove)
-    stage.addEventListener('pointermove', handlePointerMove)
-    stage.addEventListener('pointerleave', handlePointerLeave)
-    stage.addEventListener('pointercancel', handlePointerLeave)
+    if (!isBanner) {
+      stage.addEventListener('pointerenter', handlePointerMove)
+      stage.addEventListener('pointermove', handlePointerMove)
+      stage.addEventListener('pointerleave', handlePointerLeave)
+      stage.addEventListener('pointercancel', handlePointerLeave)
+    }
     resize()
     return () => {
       observer.disconnect()
@@ -536,14 +594,14 @@ export function AmbientParticles() {
       window.cancelAnimationFrame(frame)
       portraitImages.forEach(({ image }) => { image.onload = null })
     }
-  }, [])
+  }, [isBanner, motionActiveRef])
 
   return (
     <>
-      <canvas className="ambient-particles" ref={canvasRef} aria-hidden="true" />
-      <div className={`ambient-particles__tooltips ${focus?.visible ? 'is-visible' : ''}`} style={focus ? { left: focus.x, top: focus.y } : undefined} aria-hidden="true">
+      <canvas className={`ambient-particles${isBanner ? ' ambient-particles--banner' : ''}`} ref={canvasRef} aria-hidden="true" />
+      {!isBanner && <div className={`ambient-particles__tooltips ${focus?.visible ? 'is-visible' : ''}`} style={focus ? { left: focus.x, top: focus.y } : undefined} aria-hidden="true">
         {(focus?.hints ?? SEGMENT_HINT_GROUPS[0]).map((hint) => <span key={hint}>{hint}</span>)}
-      </div>
+      </div>}
     </>
   )
 }

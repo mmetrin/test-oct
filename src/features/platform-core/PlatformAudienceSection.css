@@ -1,0 +1,103 @@
+.platform-audience {
+  container-type: inline-size;
+  width: min(100%, 1920px);
+  margin-inline: auto;
+  color: var(--mts-txt-primary);
+  overflow: clip;
+}
+
+/* The desktop diagram keeps the Figma proportions; copy uses normal grid flow. */
+.platform-audience__layout {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 687px 753px;
+  width: 1920px;
+  padding: 170px 240px 119px;
+  zoom: calc(100cqw / 1920px);
+}
+
+.platform-audience__backdrop { position: absolute; z-index: -1; inset: 0; overflow: hidden; pointer-events: none; mask-image: linear-gradient(to bottom, transparent, #000 120px, #000 calc(100% - 120px), transparent); mask-repeat: no-repeat; }
+/* Keep the complete Figma mask inside its own box to avoid overflow seams in Chrome. */
+.platform-audience__background { position: absolute; top: -88.618px; left: -460.124px; width: 2840.239px; height: 1269.24px; opacity: 0.7; pointer-events: none; mask-repeat: no-repeat; mask-position: 0 0; mask-size: 100% 100%; }
+.platform-audience__background > div { position: absolute; top: -618.242px; left: -1454.846px; display: flex; align-items: center; justify-content: center; width: 5821.094px; height: 4217.844px; }
+.platform-audience__background img { display: block; flex: none; width: 3424.891px; height: 5352.388px; max-width: none; object-position: bottom; transform: rotate(98.97deg); }
+
+.platform-audience :is(h2, h3, p) { margin: 0; }
+.platform-audience h2, .platform-audience h3 { font-family: 'MTS Wide', Arial, sans-serif; font-weight: 500; }
+.platform-audience h2, .platform-audience h3 { transform: translateY(-2px); }
+.platform-audience h3 { font-size: 24px; line-height: 28px; }
+.platform-audience p { font-size: 17px; line-height: 24px; }
+.platform-audience__intro { grid-column: 2; }
+.platform-audience__intro h2 { font-size: 44px; line-height: 53px; }
+.platform-audience__title-accent { color: var(--mts-bg-states-action); }
+.platform-audience__intro p { margin-top: 20px; }
+.platform-audience__intro p, .platform-audience__technology p, .platform-audience__optimization p { transform: translateY(-1px); }
+
+.platform-audience__data { position: absolute; top: 85px; left: 163px; width: 660px; height: 741.076px; }
+.platform-audience__hemisphere { position: absolute; inset: 0; pointer-events: none; clip-path: inset(-100px -100px -100px 349px); }
+.platform-audience__hemisphere--blurred { clip-path: inset(-100px 311px -100px -200px); }
+.platform-audience__sphere { position: absolute; top: 68.06px; left: 38.04px; width: 604.96px; height: 604.96px; overflow: hidden; border-radius: 50%; }
+/* Blur the sphere itself so its silhouette fades without a rectangular backdrop. */
+.platform-audience__hemisphere--blurred .platform-audience__sphere { filter: blur(25.9px); opacity: 0.9; }
+.platform-audience__gradient { position: absolute; inset: 0; transform: scaleX(-1); background: linear-gradient(218.541deg, #86bbfd 15.265%, #cedbf7 46.435%, #f5eaf2 64.868%, #f5f9fe 84.978%); }
+.platform-audience__network { position: absolute; width: 285px; overflow: hidden; }
+.platform-audience__network--lower { top: 302.12px; bottom: -34.16px; left: 304.96px; }
+.platform-audience__network--upper { top: -108.88px; bottom: 376.84px; left: 174.96px; }
+.platform-audience__network img { position: absolute; top: -61.37%; left: -465.61%; width: 732.27%; height: 161.27%; max-width: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .platform-audience__network--lower img { animation: audience-network-lower 20s ease-in-out infinite; }
+  .platform-audience__network--upper img { animation: audience-network-upper 26.666s ease-in-out infinite; }
+}
+@keyframes audience-network-lower {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(18px, -14px); }
+  50% { transform: translate(4px, -20px); }
+  75% { transform: translate(-14px, 10px); }
+}
+@keyframes audience-network-upper {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-12px, 14px); }
+  50% { transform: translate(8px, 20px); }
+  75% { transform: translate(14px, -8px); }
+}
+/* Figma's mirrored blur frame casts its shadow onto the clear half of the sphere. */
+.platform-audience__glass-shadow { position: absolute; top: 68.06px; left: 0; width: 420.447px; height: 604.96px; overflow: hidden; pointer-events: none; }
+.platform-audience__glass-shadow::before { content: ''; position: absolute; top: -68.06px; left: 0; width: 349.365px; height: 741.076px; box-shadow: 4.537px 0 30.248px 0 rgb(26 55 135 / 10%); }
+.platform-audience__glass { position: absolute; top: 0; left: -163px; width: 512px; height: 741.076px; }
+.platform-audience__sources { position: absolute; top: 271.17px; left: 254px; display: flex; flex-direction: column; justify-content: space-between; width: 219px; height: 217px; margin: 0; padding: 0; list-style: none; text-align: right; font: 500 24px/28px 'MTS Wide', Arial, sans-serif; }
+.platform-audience__sources li { transform: translateY(-1.5px); }
+.platform-audience__arc { position: absolute; top: 46.668px; left: 348.704px; }
+.platform-audience__arc img { display: block; transform: scaleY(0.998326); transform-origin: top; }
+.platform-audience__fact { position: absolute; top: 257.54px; left: 382.41px; width: 167px; }
+.platform-audience__fact .platform-audience__number { display: flex; align-items: end; gap: 12px; margin-bottom: 4px; white-space: nowrap; font: 500 44px/48px 'MTS Wide', Arial, sans-serif; }
+.platform-audience__digits { flex: 0 0 101px; transform: translateY(-2px); }
+.platform-audience__number-space { letter-spacing: -6px; }
+.platform-audience__unit { flex: 0 0 54px; padding-bottom: 6px; font-size: 24px; line-height: 28px; transform: translateY(-2px); }
+
+.platform-audience__flow { position: relative; grid-column: 2; margin-top: 90px; }
+.platform-audience__connectors { position: absolute; inset: 0; pointer-events: none; }
+.platform-audience__input-line { position: absolute; left: -109px; top: 7.171875px; }
+.platform-audience__stable-line { position: absolute; left: 118px; top: 13.17px; }
+.platform-audience__loop-line { position: absolute; left: 295px; top: 14px; }
+.platform-audience__result-line { position: absolute; top: 275px; left: -116px; transform: scaleX(-1); }
+.platform-audience__technologies { position: relative; display: grid; grid-template-columns: 314px 370px; gap: 69px; }
+.platform-audience__technology h3 span, .platform-audience__launch h3 span { padding-right: 12px; }
+.platform-audience__technology p { margin-top: 12px; }
+.platform-audience__launch { position: relative; display: grid; grid-template-columns: 314px 370px; gap: 69px; align-items: center; margin-top: 50px; }
+.platform-audience__channels { display: flex; align-items: center; gap: 28px; }
+.platform-audience__vk, .platform-audience__avito { display: grid; place-items: center; width: 44px; height: 44px; }
+.platform-audience__avito { border-radius: 40px; background: var(--mts-bg-base); }
+.platform-audience__avito-mark { position: relative; width: 41.8px; height: 39.24px; mask-image: url('../../assets/figma/platform-audience/avito-mask.svg'); mask-repeat: no-repeat; mask-position: 0 0.427px; mask-size: 150.992px 38.389px; }
+.platform-audience__avito-mark img { position: absolute; }
+.platform-audience__avito-green { top: 40.13%; left: 15.65%; }
+.platform-audience__avito-red { top: 54.53%; left: 58.94%; }
+.platform-audience__avito-purple { top: 21.13%; left: 32.26%; }
+.platform-audience__avito-blue { top: 16.52%; left: 49.93%; }
+.platform-audience__optimization { margin-top: 50px; }
+.platform-audience__optimization p { margin-top: 12px; }
+
+.platform-audience__result { position: relative; grid-column: 1 / -1; display: grid; grid-template-columns: 526px 1fr; align-items: center; height: 113px; margin-top: 50px; padding: 30px 50px 31px; overflow: hidden; border-radius: var(--mts-border-radius-big-card-border-radius); background: var(--mts-white); box-shadow: 0 5px 20px rgb(0 0 0 / 10%); }
+.platform-audience__result .ambient-particles--banner { -webkit-mask-image: linear-gradient(to right, #000 35%, transparent 40%); mask-image: linear-gradient(to right, #000 35%, transparent 40%); }
+.platform-audience__result-copy { position: relative; grid-column: 2; display: grid; grid-template-columns: 86px 1fr; align-items: center; gap: 24px; }
+.platform-audience__result-copy strong { color: var(--mts-bg-states-action); font: 500 24px/28px 'MTS Wide', Arial, sans-serif; transform: translateY(-2px); }
