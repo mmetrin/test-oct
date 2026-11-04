@@ -105,7 +105,7 @@ export function PlatformInterfaceSection() {
         {!reducedMotion && <button className="platform-interface__playback" type="button" onClick={() => setPaused((value) => !value)}
           aria-label={paused ? 'Продолжить смену слайдов' : 'Приостановить смену слайдов'} aria-pressed={paused}>
           <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true">
-            {paused ? <path d="M7 5.5c0-1 1-1.5 1.8-1l11 6.3c.9.5.9 1.9 0 2.4l-11 6.3c-.8.5-1.8 0-1.8-1Z" fill="currentColor" /> : <><rect x="6" y="5" width="4" height="14" rx="1.5" fill="currentColor" /><rect x="14" y="5" width="4" height="14" rx="1.5" fill="currentColor" /></>}
+            <path d="M7 5.5c0-1 1-1.5 1.8-1l11 6.3c.9.5.9 1.9 0 2.4l-11 6.3c-.8.5-1.8 0-1.8-1Z" fill="currentColor" />
           </svg>
         </button>}
       </div>
