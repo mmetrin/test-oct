@@ -27,10 +27,10 @@
   .core-visual { right: calc(-70px - clamp(24px, 2.5vw, 44px)); transform: translateY(24px); }
   .core-visual__canvas { inset: calc(-1 * var(--core-render-padding)); }
 }
-@media (min-width: 1600px) { .platform-core-hero__main { min-height: max(820px, 100svh); } .platform-core-hero .orbital-hero__facts { bottom: 80px; } .core-visual { top: 130px; height: calc(100% - 180px); } }
+@media (min-width: 1600px) { .platform-core-hero__main { min-height: max(820px, 100svh); } .platform-core-hero .orbital-hero__facts { bottom: 112px; } .core-visual { top: 130px; height: calc(100% - 180px); } }
 @media (min-width: 1151px) and (max-width: 1599px) {
   .core-visual { right: -60px; transform: translateY(44px); }
-  .platform-core-hero .orbital-hero__facts { bottom: 48px; }
+  .platform-core-hero .orbital-hero__facts { bottom: 80px; }
 }
 @media (max-width: 1150px) and (min-width: 801px) { .platform-core-hero__main { width: calc(100% - 64px); } .platform-core-hero__copy { width: 56%; } .platform-core-hero__copy h1 { font-size: 36px; } .core-visual { right: -35px; width: 57%; top: 160px; height: 475px; min-height: 0; } .platform-core-hero .orbital-hero__facts { bottom: 65px; } }
 @media (max-width: 800px) {
