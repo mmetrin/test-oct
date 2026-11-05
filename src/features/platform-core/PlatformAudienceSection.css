@@ -92,7 +92,7 @@
 .platform-audience__stable-line { position: absolute; left: 118px; top: 13.17px; }
 .platform-audience__loop-line { position: absolute; left: 295px; top: 14px; transform: scaleY(calc(267 / 262)); transform-origin: center top; }
 .platform-audience__result-line { position: absolute; top: 275px; left: -116px; transform: scale(-1, calc(207 / 212)); transform-origin: center bottom; }
-.platform-audience__lineee { position: absolute; top: 358px; left: -117px; display: flex; align-items: center; width: 102px; height: 16px; }
+.platform-audience__lineee { position: absolute; top: 361px; left: -117px; display: flex; align-items: center; width: 102px; height: 16px; }
 .platform-audience__lineee-marker { position: relative; flex: none; width: 16px; height: 16px; }
 .platform-audience__lineee-marker img { position: absolute; inset: 0; width: 16px; height: 16px; }
 .platform-audience__lineee > img { display: block; width: 86px; height: 1px; }

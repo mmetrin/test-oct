@@ -14,7 +14,7 @@
 .platform-interface__playback { position: absolute; z-index: 1; top: 50%; left: 50%; display: grid; place-items: center; width: 60px; height: 60px; padding: 0; border: 1.5px solid rgb(103 131 173 / 28%); border-radius: 50%; background: rgb(103 131 173 / 28%); backdrop-filter: blur(3px); cursor: pointer; transform: translate(-50%, -50%); }
 .platform-interface__playback:hover { background: rgb(103 131 173 / 48%); }
 .platform-interface__playback img { display: block; }
-.platform-interface__card { position: relative; display: flex; flex: 0 0 480px; flex-direction: column; gap: 12px; margin-left: -40px; padding: 32px; border-radius: 40px; background: #fff; box-shadow: 0 5px 20px rgb(0 0 0 / 10%); text-align: center; }
+.platform-interface__card { position: relative; display: flex; flex: 0 0 480px; flex-direction: column; gap: 12px; margin-left: -40px; padding: 32px; border-radius: 40px; background: #fff; box-shadow: 0 5px 20px rgb(0 0 0 / 10%); text-align: left; }
 .platform-interface__card h3 { font: 500 24px/28px 'MTS Wide', Arial, sans-serif; letter-spacing: 0; }
 .platform-interface__card p { font: 400 17px/24px 'MTS Text', Arial, sans-serif; letter-spacing: 0; }
 @media (prefers-reduced-motion: reduce) { .platform-interface__indicator, .platform-interface__tabs button { transition: none; } }

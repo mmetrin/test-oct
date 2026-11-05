@@ -22,9 +22,11 @@ function estimatedSegmentReach(segments, column, limit) {
 
 function filteredCount(segments, filters, column, limit) {
   let base = limit
+  let upperBound = limit
   let share = 1
   for (const { id, options, chosen } of filters) {
     const selected = sumColumn(chosen, column)
+    upperBound = Math.min(upperBound, selected)
     if (id === 'children') {
       // Parents can belong to more than one child age band.
       base = Math.min(base, selected)
@@ -38,7 +40,12 @@ function filteredCount(segments, filters, column, limit) {
   if (!segments.length) return filters.length ? Math.round(base * share) : 0
   const segmentReach = estimatedSegmentReach(segments, column, limit)
   // Project segment coverage onto the selected profile in this same channel.
-  return Math.round(segmentReach * (base / limit) * share)
+  const projected = segmentReach * (base / limit) * share
+  if (!projected) return 0
+  // In the demo, reserve one person per additional contributing segment so that
+  // rounding a small marginal change never hides a click. Respect measured bounds.
+  const additionalSegments = segments.filter(item => item[column] > 0).length - 1
+  return Math.min(upperBound, sumColumn(segments, column), Math.max(1, Math.round(projected)) + additionalSegments)
 }
 
 export function estimateBudget(segments, filters = []) {

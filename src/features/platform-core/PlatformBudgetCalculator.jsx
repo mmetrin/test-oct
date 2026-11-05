@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { budgetGroups, demographics, interestCatalog } from './budgetSegments'
 import { BudgetInterestCatalog } from './BudgetInterestCatalog'
 import { BudgetMultiSelect } from './BudgetMultiSelect'
@@ -27,6 +27,25 @@ function ChannelLogo({ name }) {
   </span>
 }
 
+function ReachUnit({ people }) {
+  const available = useRef(null)
+  const fullWord = useRef(null)
+  const [short, setShort] = useState(false)
+
+  useLayoutEffect(() => {
+    const update = () => setShort(fullWord.current.getBoundingClientRect().width > available.current.getBoundingClientRect().width)
+    update()
+    const observer = new ResizeObserver(update)
+    observer.observe(available.current)
+    observer.observe(fullWord.current)
+    return () => observer.disconnect()
+  }, [])
+
+  return <small ref={available} data-short={short}>
+    <span ref={fullWord}>{people}</span>{short && 'чел'}
+  </small>
+}
+
 function BudgetResult({ estimate, multiple }) {
   const { audience, budget, channelReach, capped, modeled } = estimate
   const people = plural.select(audience) === 'few' ? 'человека' : 'человек'
@@ -34,7 +53,7 @@ function BudgetResult({ estimate, multiple }) {
   return <aside className="budget-result" aria-label="Предварительная оценка кампании">
     <div className="budget-result__metric">
       <div className="budget-result__people">
-        <span>{number.format(audience)}</span> <small>чел</small>
+        <span>{number.format(audience)}</span> <ReachUnit people={people} />
       </div>
       <p className="budget-result__secondary">Охват Big Data МТС</p>
       {capped && <p className="budget-result__limit">Достигнут предел по численности населения</p>}
