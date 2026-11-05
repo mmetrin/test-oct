@@ -84,6 +84,7 @@
 .platform-audience__technologies { position: relative; display: grid; grid-template-columns: 314px 370px; gap: 69px; }
 .platform-audience__technology h3 span, .platform-audience__launch h3 span { padding-right: 12px; }
 .platform-audience__technology p { margin-top: 12px; }
+.platform-audience__technology:first-child p { width: 370px; }
 .platform-audience__launch { position: relative; display: grid; grid-template-columns: 314px 370px; gap: 69px; align-items: center; margin-top: 50px; }
 .platform-audience__channels { display: flex; align-items: center; gap: 28px; }
 .platform-audience__vk, .platform-audience__avito { display: grid; place-items: center; width: 44px; height: 44px; }

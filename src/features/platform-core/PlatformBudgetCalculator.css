@@ -1,0 +1,100 @@
+.budget-calculator {
+  --calculator-shadow: 0 5px 20px rgb(0 0 0 / 10%);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 500px;
+  gap: 44px;
+  width: 1440px;
+  margin: 60px auto 0;
+  border-radius: 80px;
+  background: var(--mts-bg-base);
+  box-shadow: var(--calculator-shadow);
+  font: 400 17px/24px 'MTS Text', Arial, sans-serif;
+}
+
+.budget-picker { display: flex; flex-direction: column; align-items: stretch; padding: 60px 60px 40px; min-width: 0; }
+.budget-picker h3 { font-size: 24px; line-height: 28px; }
+.budget-picker__groups { display: grid; gap: 20px; margin: 32px 0 24px; }
+.budget-picker__row { display: grid; grid-template-columns: 150px minmax(0, 1fr); align-items: start; gap: 12px; padding-top: 4px; }
+.budget-picker__label { padding-top: 4px; }
+.budget-picker__options { display: flex; flex-wrap: wrap; gap: 4px; }
+.budget-chip--pink { --chip-accent: #fb2bed; }
+.budget-chip--orange { --chip-accent: #fbae2b; }
+.budget-chip--blue { --chip-accent: #4063e3; }
+.budget-chip--cyan { --chip-accent: #77d8f8; }
+.budget-chip--purple { --chip-accent: #a677f8; }
+.budget-chip--mint { --chip-accent: #0bd5c1; }
+.budget-chip--coral { --chip-accent: #d5230b; }
+.budget-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px 2px 4px;
+  border: 0;
+  border-radius: 100px;
+  background: color-mix(in srgb, var(--chip-accent) 10%, transparent);
+  color: var(--mts-txt-primary);
+  font: 400 14px/20px 'MTS Text', Arial, sans-serif;
+  cursor: pointer;
+  min-width: 0;
+}
+.budget-chip__icon { display: grid; place-items: center; width: 24px; height: 24px; flex: none; margin-right: 4px; border-radius: 50%; background: var(--chip-accent); }
+.budget-chip img { display: block; max-width: none; }
+.budget-chip__text { padding: 4px 2px; opacity: .6; }
+.budget-chip[aria-pressed="true"] { background: #fff; box-shadow: var(--calculator-shadow); }
+.budget-chip:is(:hover, [aria-pressed="true"]) .budget-chip__text { opacity: 1; }
+.budget-picker .budget-picker__note { margin-top: auto; color: var(--mts-txt-secondary); font-size: 14px; line-height: 20px; }
+.budget-picker__method { margin-top: 6px; color: var(--mts-txt-secondary); font-size: 14px; line-height: 20px; }
+.budget-picker__method summary { width: fit-content; cursor: pointer; color: var(--mts-txt-primary); }
+.budget-picker__method p { margin-top: 8px; font-size: 14px; line-height: 20px; }
+.budget-result__people { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: .25em; font: 500 40px/1.15 'MTS Wide', Arial, sans-serif; }
+.budget-result__people small { font-size: .55em; }
+.budget-result .budget-result__limit { margin-top: 6px; font-size: 14px; line-height: 20px; color: var(--mts-txt-secondary); }
+
+.budget-result { position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 34px; min-width: 0; padding: 60px; border-radius: 60px; background: var(--mts-bg-base); box-shadow: var(--calculator-shadow); }
+.budget-result__amount { display: flex; flex-wrap: wrap; align-items: end; column-gap: 12px; font: 500 44px/1.1 'MTS Wide', Arial, sans-serif; }
+.budget-result__amount span { padding-bottom: 6px; white-space: nowrap; font-size: 24px; line-height: 28px; }
+.budget-result .budget-result__caption { margin-top: 4px; }
+.budget-result__secondary { color: var(--mts-txt-secondary); }
+.budget-result__channels { display: grid; gap: 16px; }
+.budget-result__channel { display: flex; align-items: end; gap: 4px; }
+.budget-result__brand { display: flex; align-items: center; gap: 12px; min-width: 148px; white-space: nowrap; }
+.budget-result__logo { display: grid; place-items: center; width: 24px; height: 24px; flex: none; }
+.budget-result__logo img { display: block; max-width: none; }
+.budget-result__avito { position: relative; width: 24px; height: 22.53px; mask: url('../../assets/figma/platform-calculator/avito-mask.svg') left center / auto no-repeat; }
+.budget-result__avito img { position: absolute; }
+.budget-result__avito-green { left: .1%; top: 35.63%; }
+.budget-result__avito-red { left: 63.23%; top: 56.62%; }
+.budget-result__avito-purple { left: 24.32%; top: 7.91%; }
+.budget-result__avito-blue { left: 50.09%; top: 1.2%; }
+.budget-result__leader { flex: 1; height: 5px; margin-bottom: 0; background: url('../../assets/figma/platform-calculator/leader.svg') center / 100% 5px no-repeat; }
+.budget-result__channel strong { min-width: 84px; text-align: right; white-space: nowrap; font: 500 20px/24px 'MTS Wide', Arial, sans-serif; }
+.budget-result__amount--money { margin-top: 8px; }
+.budget-result .budget-result__cta { background: var(--mts-bg-base); }
+.budget-result .budget-result__cta:hover { background: #fff0f3; }
+
+@media (max-width: 1050px) {
+  .platform-sections .platform-budget { width: 100%; margin-top: 88px; padding-inline: 20px; zoom: 1; }
+  .platform-budget .platform-sections__heading { width: min(100%, 680px); }
+  .platform-budget .platform-sections__heading h2 { font-size: clamp(28px, 4vw, 40px); }
+  .platform-budget .platform-sections__heading p { margin-top: 12px; }
+  .budget-calculator { width: min(100%, 760px); grid-template-columns: 1fr; gap: 0; margin-top: 32px; border-radius: 32px; }
+  .budget-picker, .budget-result { padding: 28px; }
+  .budget-result { gap: 24px; border-radius: 32px; }
+  .budget-picker__row { grid-template-columns: 132px minmax(0, 1fr); }
+  .budget-result__amount { font-size: 36px; }
+}
+
+@media (max-width: 600px) {
+  .platform-sections .platform-budget { margin-top: 64px; padding-inline: 16px; }
+  .budget-picker, .budget-result { padding: 24px 18px; }
+  .budget-picker h3 { font-size: 20px; }
+  .budget-picker__groups { margin: 20px 0 24px; gap: 16px; }
+  .budget-picker__row { grid-template-columns: 1fr; gap: 6px; padding: 0; }
+  .budget-picker__label { padding: 0; }
+  .budget-picker__options { gap: 6px; }
+  .budget-chip { min-height: 40px; }
+  .budget-result__amount { font-size: 32px; }
+  .budget-result__people { font-size: clamp(25px, 7vw, 32px); }
+  .budget-result__amount span { font-size: 18px; line-height: 22px; padding-bottom: 4px; }
+  .budget-result__brand { min-width: 132px; gap: 8px; }
+  .budget-result__channel strong { min-width: 0; font-size: 18px; }
+}

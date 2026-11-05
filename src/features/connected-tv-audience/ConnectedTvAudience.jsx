@@ -36,9 +36,8 @@ function point(radius, angle) {
   return `${130 + radius * Math.cos(angle)} ${130 + radius * Math.sin(angle)}`
 }
 
-function ringSegment(start, end) {
+function ringSegment(start, end, inner = 111.8) {
   const outer = 130
-  const inner = 111.8
   const corner = 4
   const outerOffset = corner / outer
   const innerOffset = corner / inner
@@ -49,14 +48,39 @@ function ringSegment(start, end) {
   return `M ${point(outer, start + outerOffset)} A ${outer} ${outer} 0 ${outerLarge} 1 ${point(outer, end - outerOffset)} Q ${point(outer, end)} ${point(outer - corner, end)} L ${point(inner + corner, end)} Q ${point(inner, end)} ${point(inner, end - innerOffset)} A ${inner} ${inner} 0 ${innerLarge} 0 ${point(inner, start + innerOffset)} Q ${point(inner, start)} ${point(inner + corner, start)} L ${point(outer - corner, start)} Q ${point(outer, start)} ${point(outer, start + outerOffset)} Z`
 }
 
-function DonutChart({ title, segments }) {
+function DonutChart({ title, segments, sculpted = false }) {
   const id = useId().replaceAll(':', '')
   return <AudiencePanel className="ctv-chart--donut" label={`${title} аудитории`}>
     <svg className="ctv-donut" width="260" height="260" viewBox="0 0 260 260" aria-hidden="true">
-      <defs>{segments.map((segment, index) => <mask id={`${id}-${index}`} key={segment.label} maskUnits="userSpaceOnUse" x="0" y="0" width="260" height="260">
-        <path className="ctv-donut__reveal" d={`M ${point(120.9, segment.start)} A 120.9 120.9 0 ${segment.end - segment.start > Math.PI ? 1 : 0} 1 ${point(120.9, segment.end)}`} pathLength="100" fill="none" stroke="white" strokeWidth="24" style={{ '--delay': `${index * 170 + 180}ms` }} />
-      </mask>)}</defs>
-      {segments.map((segment, index) => <path key={segment.label} d={ringSegment(segment.start, segment.end)} fill={segment.color} mask={`url(#${id}-${index})`} />)}
+      <defs>
+        {segments.map((segment, index) => <mask id={`${id}-${index}`} key={segment.label} maskUnits="userSpaceOnUse" x="0" y="0" width="260" height="260">
+          <path className="ctv-donut__reveal" d={`M ${point(120.9, segment.start)} A 120.9 120.9 0 ${segment.end - segment.start > Math.PI ? 1 : 0} 1 ${point(120.9, segment.end)}`} pathLength="100" fill="none" stroke="white" strokeWidth={sculpted ? 36 : 24} style={{ '--delay': `${index * 170 + 180}ms` }} />
+        </mask>)}
+        {sculpted && <>
+          <radialGradient id={`${id}-surface`} gradientUnits="userSpaceOnUse" cx="130" cy="130" r="130">
+            <stop offset=".79" stopColor="#172c4a" stopOpacity=".22" />
+            <stop offset=".83" stopColor="#172c4a" stopOpacity=".06" />
+            <stop offset=".88" stopColor="#fff" stopOpacity=".06" />
+            <stop offset=".94" stopColor="#fff" stopOpacity=".4" />
+            <stop offset=".975" stopColor="#fff" stopOpacity=".16" />
+            <stop offset="1" stopColor="#172c4a" stopOpacity=".12" />
+          </radialGradient>
+          {segments.map((segment, index) => <linearGradient id={`${id}-color-${index}`} key={segment.label} gradientUnits="userSpaceOnUse" x1="30" y1="10" x2="230" y2="250">
+            <stop stopColor={`color-mix(in srgb, ${segment.color}, white 24%)`} />
+            <stop offset=".48" stopColor={segment.color} />
+            <stop offset="1" stopColor={`color-mix(in srgb, ${segment.color}, #172c4a 16%)`} />
+          </linearGradient>)}
+          <filter id={`${id}-shadow`} x="-20%" y="-20%" width="140%" height="150%" colorInterpolationFilters="sRGB">
+            <feDropShadow dx="0" dy="5" stdDeviation="4" floodColor="#3d5579" floodOpacity=".16" />
+          </filter>
+        </>}
+      </defs>
+      {segments.map((segment, index) => sculpted ? <g key={segment.label} filter={`url(#${id}-shadow)`}>
+        <g mask={`url(#${id}-${index})`}>
+          <path d={ringSegment(segment.start, segment.end, 104)} fill={`url(#${id}-color-${index})`} />
+          <path d={ringSegment(segment.start, segment.end, 104)} fill={`url(#${id}-surface)`} />
+        </g>
+      </g> : <path key={segment.label} d={ringSegment(segment.start, segment.end)} fill={segment.color} mask={`url(#${id}-${index})`} />)}
     </svg>
     <h3 className="ctv-donut__title">{title}</h3>
     <dl className="ctv-donut__legend">{segments.map((segment, index) => <div className={`ctv-donut__label ctv-donut__label--${segment.position}`} key={segment.label} style={{ '--chart-color': segment.color, '--delay': `${index * 170 + 650}ms` }}><dt>{segment.label}</dt><dd>{Math.round(segment.value)}%</dd></div>)}</dl>
@@ -71,15 +95,17 @@ function LocationChart({ locations }) {
   </AudiencePanel>
 }
 
-export function ConnectedTvAudience() {
+export function ConnectedTvAudience({ id = 'ctv-audience', variant = 'original' }) {
   const [selected, setSelected] = useState('cinema')
   const data = useAudienceTransition(audienceDatasets[selected])
-  return <section className="ctv-audience" aria-labelledby="ctv-audience-title">
-    <div className="ctv-audience__heading"><h2 id="ctv-audience-title">Охватывайте аудиторию<br />онлайн-ТВ и видеосервисов</h2><p>Размещайте рекламу среди зрителей фильмов и сериалов на бесплатных и платных видеосервисах</p></div>
+  const sculpted = variant === 'sculpted'
+  return <section id={id} className={`ctv-audience${sculpted ? ' ctv-audience--sculpted' : ''}`} aria-labelledby={`${id}-title`}>
+    {sculpted && <p className="ctv-audience__version">Вариант оформления</p>}
+    <div className="ctv-audience__heading"><h2 id={`${id}-title`}>Охватывайте аудиторию<br />онлайн-ТВ и видеосервисов</h2><p>Размещайте рекламу среди зрителей фильмов и сериалов на бесплатных и платных видеосервисах</p></div>
     <div className="ctv-audience__segments" role="group" aria-label="Источник аудитории">
-      <button type="button" className={selected === 'cinema' ? 'is-selected' : ''} aria-pressed={selected === 'cinema'} aria-controls="ctv-audience-dashboard" onClick={() => setSelected('cinema')}>Каталог сериалов и кино</button>
-      <button type="button" className={selected === 'online' ? 'is-selected' : ''} aria-pressed={selected === 'online'} aria-controls="ctv-audience-dashboard" onClick={() => setSelected('online')}>Онлайн ТВ</button>
+      <button type="button" className={selected === 'cinema' ? 'is-selected' : ''} aria-pressed={selected === 'cinema'} aria-controls={`${id}-dashboard`} onClick={() => setSelected('cinema')}>Каталог сериалов и кино</button>
+      <button type="button" className={selected === 'online' ? 'is-selected' : ''} aria-pressed={selected === 'online'} aria-controls={`${id}-dashboard`} onClick={() => setSelected('online')}>Онлайн ТВ</button>
     </div>
-    <div id="ctv-audience-dashboard" className="ctv-audience__dashboard" role="region" aria-label={selected === 'cinema' ? 'Аудитория каталога сериалов и кино' : 'Аудитория онлайн ТВ — демонстрационные данные'}><div className="ctv-audience__row"><AgeChart ages={data.ages} /><DonutChart title="Пол" segments={data.gender} /><DonutChart title="Доход" segments={data.income} /></div><LocationChart locations={data.locations} /></div>
+    <div id={`${id}-dashboard`} className="ctv-audience__dashboard" role="region" aria-label={selected === 'cinema' ? 'Аудитория каталога сериалов и кино' : 'Аудитория онлайн ТВ — демонстрационные данные'}><div className="ctv-audience__row"><AgeChart ages={data.ages} /><DonutChart title="Пол" segments={data.gender} sculpted={sculpted} /><DonutChart title="Доход" segments={data.income} sculpted={sculpted} /></div><LocationChart locations={data.locations} /></div>
   </section>
 }

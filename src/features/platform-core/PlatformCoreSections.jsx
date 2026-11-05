@@ -1,5 +1,7 @@
 import { PlatformInterfaceSection } from './PlatformInterfaceSection'
 import { PlatformFaqSection } from './PlatformFaqSection'
+import { PlatformBudgetCalculator } from './PlatformBudgetCalculator'
+import { platformChannels } from './platformChannels'
 import brandsImage from '../../assets/figma/platform-sections/audience-brands.png'
 import agenciesImage from '../../assets/figma/platform-sections/audience-agencies.png'
 import platformsBackground from '../../assets/figma/platform-sections/platforms-background.png'
@@ -13,27 +15,23 @@ const audiences = [
   {
     id: 'brands', image: brandsImage,
     title: 'Брендам: бюджет — в новый охват',
-    description: <>Управляйте частотой на трёх площадках, чтобы деньги шли на новых людей, а не на десятый показ тем же</>,
+    description: <>Управление частотой на всех площадках помогает перераспределять бюджет в пользу нового охвата</>,
   },
   {
     id: 'agencies', image: agenciesImage,
     title: 'Агентствам: медиаплан проще защитить',
-    description: <>Мультиплатформенная кампания из одного кабинета и данные<br />МТС как аргумент для клиента. Кабинет агентства — с ролями для команды</>,
+    description: <>Запуск кампаний с дополнительным охватом Big Data МТС, автоматическими ставками и контролем частоты сокращает ручную работу и усиливает кампании</>,
   },
 ]
 
-const platforms = [
-  { name: 'VK Реклама', icon: vkIcon, audience: '95,6 млн MAU' },
-  { name: 'Telegram Ads', icon: telegramIcon, audience: '75,7 млн MAU' },
-  { name: 'Avito Реклама', icon: avitoIcon, audience: '63 млн MAU' },
-]
+const platformIcons = { vk: vkIcon, telegram: telegramIcon, avito: avitoIcon }
 
 export function PlatformCoreSections() {
   return <div className="platform-sections">
-    <div className="platform-sections__canvas">
+    <div className="platform-sections__canvas platform-sections__canvas--intro">
       <section className="platform-use-cases" id="who-it-is-for" aria-labelledby="platform-use-cases-title">
         <div className="platform-sections__heading">
-          <h2 id="platform-use-cases-title">Для тех, кто считает охват в людях</h2>
+          <h2 id="platform-use-cases-title">Кому подходит</h2>
           <p>Рекламодателям и агентствам, которые запускают рекламу сразу на нескольких площадках</p>
         </div>
         <div className="platform-use-cases__cards">
@@ -51,23 +49,24 @@ export function PlatformCoreSections() {
           <p>Нативные форматы площадок-партнёров</p>
         </div>
         <div className="platform-publishers__cards">
-          {platforms.map(({ name, icon, audience }) => <article className="platform-publishers__card" key={name}>
-            <div className="platform-publishers__brand"><img src={icon} alt="" width="44" height="44" loading="lazy" /><h3>{name}</h3></div>
-            <p>{audience}</p>
+          {platformChannels.map(({ id, title, monthlyAudience }) => <article className="platform-publishers__card" key={id}>
+            <div className="platform-publishers__brand"><img src={platformIcons[id]} alt="" width="44" height="44" loading="lazy" /><h3>{title}</h3></div>
+            <p>{(monthlyAudience / 1_000_000).toLocaleString('ru-RU')} млн MAU</p>
           </article>)}
         </div>
         <a className="platform-sections__cta" href="#connection">Оставить заявку</a>
       </section>
 
-      <section className="platform-budget" id="budget" aria-labelledby="platform-budget-title">
-        <div className="platform-sections__heading">
-          <h2 id="platform-budget-title">Оценка охвата<br />и бюджета кампании</h2>
-          <p>Подберите аудиторию, чтобы получить предварительную оценку кампании</p>
-        </div>
-        {/* The calculator is intentionally a visual placeholder at this stage. */}
-        <div className="platform-budget__placeholder" aria-hidden="true" />
-      </section>
+    </div>
+    <section className="platform-budget" id="budget" aria-labelledby="platform-budget-title">
+      <div className="platform-sections__heading">
+        <h2 id="platform-budget-title">Оценка охвата<br />и бюджета кампании</h2>
+        <p>Подберите аудиторию, чтобы получить предварительную оценку кампании</p>
+      </div>
+      <PlatformBudgetCalculator />
+    </section>
 
+    <div className="platform-sections__canvas platform-sections__canvas--connection">
       <section className="platform-connection" id="connection" aria-labelledby="platform-connection-title">
         <h2 id="platform-connection-title" className="platform-sections__sr-only">Оставьте заявку на подключение</h2>
         {/* The complete form is a Figma image, as requested, until integration. */}

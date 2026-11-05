@@ -1,0 +1,89 @@
+.orbital-studio-page {
+  width: 100%;
+  min-height: 100svh;
+  color: #405a73;
+  background: #f7fafd;
+}
+
+.orbital-studio {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: min(100%, 1920px);
+  min-height: max(740px, 100svh);
+  margin-inline: auto;
+  overflow: clip;
+}
+
+.orbital-studio__visual {
+  position: relative;
+  width: 68%;
+  height: min(850px, 88svh);
+  min-height: 650px;
+  margin-right: 1%;
+}
+
+.orbital-studio__canvas { width: 100%; height: 100%; }
+.orbital-studio__canvas canvas { display: block; outline: none; }
+
+.orbital-studio__motion {
+  position: absolute;
+  right: clamp(24px, 4vw, 72px);
+  bottom: 32px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #dce4ec;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 64%);
+  color: #60768c;
+  cursor: pointer;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+.orbital-studio__motion:hover { border-color: #a1b5c9; background: #fff; }
+.orbital-studio__motion:focus-visible,
+.orbital-studio__status button:focus-visible { outline: 2px solid #1863d5; outline-offset: 5px; }
+
+.orbital-studio__status {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 32px;
+  background: #f7fafd;
+  color: #60768c;
+  font-size: 14px;
+  text-align: center;
+}
+.orbital-studio__status p { max-width: 340px; margin: 0; line-height: 1.6; }
+.orbital-studio__status button { padding: 10px 18px; border: 1px solid #dce4ec; border-radius: 24px; background: white; color: inherit; cursor: pointer; }
+.orbital-studio__loading { width: 24px; height: 24px; border: 1px solid #dce4ec; border-top-color: #71869b; border-radius: 50%; animation: studio-loading 1.5s linear infinite; }
+@keyframes studio-loading { to { transform: rotate(360deg); } }
+
+@media (min-width: 1600px) {
+  .orbital-studio__visual { width: 66%; margin-right: 3%; }
+}
+@media (max-width: 900px) {
+  .orbital-studio { min-height: 100svh; justify-content: center; }
+  .orbital-studio__visual { width: 100%; height: min(760px, 94svh); min-height: 520px; margin: 0; }
+}
+@media (max-width: 540px) {
+  .orbital-studio__visual { height: min(640px, 88svh); min-height: 400px; }
+  .orbital-studio__motion { right: 20px; bottom: max(24px, env(safe-area-inset-bottom)); }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .orbital-studio { min-height: 100svh; }
+  .orbital-studio__visual { height: 100svh; min-height: 300px; width: 75%; }
+  .orbital-studio__motion { bottom: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbital-studio__loading { animation: none; }
+  .orbital-studio__motion { transition: none; }
+}

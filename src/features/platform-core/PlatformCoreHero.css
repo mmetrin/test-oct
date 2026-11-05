@@ -3,6 +3,7 @@
 .platform-core-hero__main { position: relative; width: min(1444px, calc(100% - 124px)); min-height: max(720px, 100svh); margin: 0 auto; padding: clamp(142px, 11.1vw, 178px) 0 230px; }
 .platform-core-hero__copy { position: relative; z-index: 2; width: 60%; pointer-events: none; }
 .platform-core-hero__copy h1 { margin: 0; font-family: 'MTS Wide', Arial, sans-serif; font-size: clamp(36px, 3.125vw, 50px); font-weight: 500; line-height: 1.1; letter-spacing: 0; }
+.platform-core-hero__accent { color: var(--mts-bg-states-action); }
 .platform-core-hero__description { width: 765px; max-width: 96%; margin: 28px 0 0; color: #000814; font-family: 'MTS Wide', Arial, sans-serif; font-size: clamp(14px, 1.0625vw, 17px); line-height: 1.42; }
 .platform-core-hero__actions { margin-top: 38px; pointer-events: auto; }
 .platform-core-hero__cta.action-button { min-height: 43px; padding: 11px 13px; border: 1px solid var(--mts-bg-states-action); background: var(--mts-bg-base); color: var(--mts-bg-states-action); text-decoration: none; font-size: clamp(13px, 1vw, 16px); }
@@ -23,6 +24,11 @@
 .platform-core-hero .orbital-hero__fact p:not(.orbital-hero__number) { font-size: clamp(13px, 1.0625vw, 17px); line-height: 1.42; }
 .platform-core-hero .orbital-hero__number span { font-size: clamp(19px, 1.5vw, 24px); }
 .platform-core-hero .orbital-hero__number .platform-core-hero__fact-prefix { margin-left: 0; }
+.platform-core-hero__mau-info { position: relative; display: inline-grid; place-items: center; width: 24px; height: 24px; margin-left: 3px; padding: 0; vertical-align: middle; border: 0; background: none; cursor: help; }
+.platform-core-hero__mau-info img { display: block; width: 24px; height: 24px; }
+.platform-core-hero__mau-info:focus-visible { outline: 2px solid #1863d5; outline-offset: 3px; border-radius: 5px; }
+.platform-core-hero .platform-core-hero__mau-tooltip { position: absolute; z-index: 5; bottom: calc(100% + 10px); left: 50%; width: 290px; padding: 12px 14px; border-radius: 10px; background: #192334; box-shadow: 0 8px 24px rgb(0 0 0 / 16%); color: #fff; font: 400 15px/21px 'MTS Text', Arial, sans-serif; text-align: left; white-space: normal; opacity: 0; visibility: hidden; transform: translateX(-50%) translateY(4px); transition: opacity 150ms ease, transform 150ms ease, visibility 150ms; pointer-events: none; }
+.platform-core-hero__mau-info:is(:hover, :focus-visible) .platform-core-hero__mau-tooltip { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
 @media (min-width: 1151px) {
   .core-visual { right: calc(-70px - clamp(24px, 2.5vw, 44px)); transform: translateY(24px); }
   .core-visual__canvas { inset: calc(-1 * var(--core-render-padding)); }
@@ -47,5 +53,8 @@
   .platform-core-hero .orbital-hero__fact .orbital-hero__number { font-size: clamp(23px, 6vw, 38px); }
   .platform-core-hero .orbital-hero__number span { margin-left: 0; font-size: 13px; }
   .platform-core-hero .orbital-hero__fact p:not(.orbital-hero__number) { font-size: 11px; line-height: 15px; }
+  .platform-core-hero__mau-info, .platform-core-hero__mau-info img { width: 18px; height: 18px; }
+  .platform-core-hero .platform-core-hero__mau-tooltip { left: -80px; width: min(250px, calc(100vw - 40px)); transform: translateY(4px); }
+  .platform-core-hero__mau-info:is(:hover, :focus-visible) .platform-core-hero__mau-tooltip { transform: translateY(0); }
 }
 @media (prefers-reduced-motion: reduce) { .core-visual__loader { animation: none; } }

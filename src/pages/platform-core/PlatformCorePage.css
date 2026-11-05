@@ -3,6 +3,14 @@ html:root:has(.platform-core-page) body { background: #fff; }
 .platform-core-page { width: 100%; min-height: 100svh; background: transparent; color: var(--mts-txt-primary-on-light); }
 .platform-core-page .platform-audience { scroll-margin-top: 80px; }
 body:has(.platform-core-page) .site-header__content { width: min(1444px, calc(100% - 124px)); }
+/* The fixed header sits above animated and zoomed sections. A live backdrop blur
+   makes Chromium repaint that layer during their transitions. */
+body:has(.platform-core-page) .site-header--fixed-on .site-header__frame {
+  background: #f7fafd;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  transition: none;
+}
 body:has(.platform-core-page) .site-header .site-header__action { background: rgb(38 59 85 / 7%); color: #677fa2; }
 body:has(.platform-core-page) .site-header .site-header__action:hover { background: rgb(38 59 85 / 16%); }
 body:has(.platform-core-page) .site-header .site-header__action:focus-visible { outline-color: #263b55; }

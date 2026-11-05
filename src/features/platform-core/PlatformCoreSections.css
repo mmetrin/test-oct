@@ -45,8 +45,9 @@
 .platform-sections__cta:hover { background: #fff0f3; }
 .platform-sections :is(a, button):focus-visible { outline: 3px solid #307de6; outline-offset: 5px; }
 
-.platform-budget { margin-top: 200px; }
-.platform-budget__placeholder { width: 1055px; height: 352px; margin: 60px auto 0; border-radius: 80px; background: var(--mts-bg-base); box-shadow: 0 5px 20px rgb(0 0 0 / 10%); }
+.platform-sections__canvas--intro { padding-bottom: 0; }
+.platform-sections__canvas--connection { padding-top: 200px; }
+.platform-budget { z-index: 1; width: 1920px; margin-top: 200px; zoom: calc(100cqw / 1920px); }
 
-.platform-connection { height: 652px; margin-top: 200px; }
+.platform-connection { height: 652px; }
 .platform-connection__composition { position: absolute; z-index: -1; top: -659.62px; left: 0; display: block; width: 1920px; height: 1546px; }

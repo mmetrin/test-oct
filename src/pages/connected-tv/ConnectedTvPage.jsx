@@ -20,6 +20,7 @@ export function ConnectedTvPage() {
         <a className="connected-tv-raster-link connected-tv-placements__cta" href="#connected-tv-lead" aria-label="Оставить заявку" />
       </section>
       <ConnectedTvAudience />
+      <ConnectedTvAudience id="ctv-audience-redesign" variant="sculpted" />
       <ConnectedTvFormats />
       <section className="connected-tv-targeting" aria-labelledby="connected-tv-targeting-title">
         <h2 id="connected-tv-targeting-title">Настраивайте показы<br />на <span>целевого</span> зрителя</h2>

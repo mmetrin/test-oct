@@ -75,8 +75,7 @@ export function PlatformAudienceSection() {
         <div className="platform-audience__background" style={{ maskImage: `url("${backgroundMask}")` }}><div><img src={background} alt="" /></div></div>
       </div>
       <header className="platform-audience__intro">
-        <h2 id="platform-audience-title">От данных к <span className="platform-audience__title-accent">вашей</span> аудитории</h2>
-        <p>Вы настраиваете кампанию, а технологии МТС Ads работают на вашу цель во всех каналах</p>
+        <h2 id="platform-audience-title">Единая система, которая<br />находит <span className="platform-audience__title-accent">целевую аудиторию</span></h2>
       </header>
       <AudienceDataIllustration />
       <div className="platform-audience__flow">
@@ -93,12 +92,12 @@ export function PlatformAudienceSection() {
         <div className="platform-audience__technologies">
           <article className="platform-audience__technology" data-audience-stage="stable">
             <h3><span>Stable ID</span></h3>
-            <p>Узнаёт одного и того же человека в разных источниках и объединяет в ID</p>
+            <p>Связываем данные об одном человеке из разных источников в единый профиль</p>
             <AudienceTechnologyGraphic variant="stable" />
           </article>
           <article className="platform-audience__technology" data-audience-stage="smart">
             <h3><span>Smart Target</span></h3>
-            <p>С помощью ИИ находит сегменты, которые с большей вероятностью кликнут по рекламе</p>
+            <p>ML-модель подбирает креатив для каждого сегмента с учётом вероятности клика</p>
             <AudienceTechnologyGraphic variant="smart" />
           </article>
         </div>
@@ -107,13 +106,13 @@ export function PlatformAudienceSection() {
           <AudienceChannels />
         </div>
         <div className="platform-audience__optimization">
-          <h3>Оптимизация запуска c RecSys и Bidder</h3>
-          <p>RecSys учитывает реакции людей на рекламу и обновляет аудиторию по ходу кампании. Bidder меняет ставки на площадках, чтобы выгоднее покупать показы</p>
+          <h3>Повышение эффективности после запуска</h3>
+          <p>Пока идёт реклама, RecSys и Bidder автоматически повышают её эффективность — меняют ставки, корректируют сегменты и направляют бюджет на объявления с лучшим откликом</p>
         </div>
       </div>
       <div className="platform-audience__result">
         <AmbientParticles variant="banner" motionActiveRef={ambientMotionRef} />
-        <p className="platform-audience__result-copy"><span>Результат:</span> <strong>Целевая аудитория по оптимальной цене контакта</strong></p>
+        <p className="platform-audience__result-copy"><span>Результат:</span> <strong>Ваша целевая аудитория по оптимальной цене</strong></p>
       </div>
     </div>
   </section>
