@@ -27,23 +27,37 @@ function ChannelLogo({ name }) {
   </span>
 }
 
-function ReachUnit({ people }) {
-  const available = useRef(null)
-  const fullWord = useRef(null)
-  const [short, setShort] = useState(false)
+function FittedMetric({ className, value, unit, shortUnit }) {
+  const container = useRef(null)
+  const line = useRef(null)
+  const fullLabel = useRef(null)
+  const shortLabel = useRef(null)
 
   useLayoutEffect(() => {
-    const update = () => setShort(fullWord.current.getBoundingClientRect().width > available.current.getBoundingClientRect().width)
+    const width = element => parseFloat(getComputedStyle(element).width)
+    function update() {
+      // Layout widths keep the measurement independent of the displayed label and scale.
+      const available = width(container.current)
+      const fullWidth = width(line.current)
+      const compactWidth = fullWidth - width(fullLabel.current) + width(shortLabel.current)
+      container.current.dataset.short = fullWidth > available
+      line.current.style.transform = compactWidth > available ? `scale(${available / compactWidth})` : ''
+    }
     update()
     const observer = new ResizeObserver(update)
-    observer.observe(available.current)
-    observer.observe(fullWord.current)
+    observer.observe(container.current)
+    observer.observe(line.current)
+    observer.observe(fullLabel.current)
+    observer.observe(shortLabel.current)
     return () => observer.disconnect()
   }, [])
 
-  return <small ref={available} data-short={short}>
-    <span ref={fullWord}>{people}</span>{short && 'чел'}
-  </small>
+  return <div ref={container} className={`budget-result__value ${className}`}>
+    <div ref={line} className="budget-result__line">
+      <span>{number.format(value)}</span>{' '}
+      <small><span ref={fullLabel}>{unit}</span><span ref={shortLabel}>{shortUnit}</span></small>
+    </div>
+  </div>
 }
 
 function BudgetResult({ estimate, multiple }) {
@@ -52,9 +66,7 @@ function BudgetResult({ estimate, multiple }) {
   const description = modeled ? 'Оценка аудитории' : multiple ? 'Верхняя оценка аудитории' : 'Аудитория'
   return <aside className="budget-result" aria-label="Предварительная оценка кампании">
     <div className="budget-result__metric">
-      <div className="budget-result__people">
-        <span>{number.format(audience)}</span> <ReachUnit people={people} />
-      </div>
+      <FittedMetric className="budget-result__people" value={audience} unit={people} shortUnit="чел" />
       <p className="budget-result__secondary">Охват Big Data МТС</p>
       {capped && <p className="budget-result__limit">Достигнут предел по численности населения</p>}
     </div>
@@ -67,7 +79,7 @@ function BudgetResult({ estimate, multiple }) {
       <p className="budget-result__secondary">Охват на площадках</p>
     </div>
     <div className="budget-result__metric">
-      <div className="budget-result__amount">{number.format(budget)} <span>₽ в месяц</span></div>
+      <FittedMetric className="budget-result__amount" value={budget} unit="₽ в месяц" shortUnit="₽ в мес" />
       <p className="budget-result__secondary">Бюджет при частоте {monthlyFrequency} и среднем CPM</p>
     </div>
     <div className="budget-result__footer">
