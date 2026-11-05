@@ -53,6 +53,21 @@ const SEGMENT_TOOLTIP_WIDTH = 300
 const PORTRAIT_SPRITE_SIZE = 96
 const PORTRAIT_LINK_DISTANCE = 260
 const BANNER_PORTRAITS = Array.from({ length: 36 }, (_, index) => PORTRAITS[Math.floor(index * PORTRAITS.length / 36)])
+// Portrait anchors on the 605px sphere. Each row is a loose group.
+const SPHERE_ANCHORS = [
+  [165, 80], [197, 67], [216, 96], [258, 54], [231, 28],
+  [322, 71], [356, 48], [372, 72], [404, 36], [430, 89], [361, 117],
+  [87, 147], [117, 124], [140, 152], [108, 190], [56, 209],
+  [249, 152], [283, 157], [295, 186], [331, 139], [212, 206],
+  [465, 128], [507, 143], [481, 170], [548, 190], [438, 198],
+  [89, 270], [144, 290], [173, 260], [206, 340],
+  [338, 265], [375, 285], [398, 251], [490, 313],
+]
+const SPHERE_PORTRAITS = SPHERE_ANCHORS.map(([x, y], index) => ({
+  ...PORTRAITS[Math.floor(index * PORTRAITS.length / SPHERE_ANCHORS.length)],
+  x: x / 605,
+  y: y / 605,
+}))
 
 const HORIZONTAL_TRACKS = [
   { y: 108 / 500, from: 324 / 1920, to: 1596 / 1920 },
@@ -150,7 +165,7 @@ function makePortraitParticle(width, height, portrait, index) {
   }
 }
 
-function makePortraitLinks(portraits, maxDistance, midX) {
+function makePortraitLinks(portraits, maxDistance, midX, isSphere) {
   const links = []
   const linked = new Set()
   portraits.forEach((portrait, index) => {
@@ -162,7 +177,8 @@ function makePortraitLinks(portraits, maxDistance, midX) {
         ? [{ other, otherIndex, distance }] : []
     }).sort((first, second) => first.distance - second.distance)
 
-    nearest.slice(0, index % 2 === 0 && nearest[1]?.distance < maxDistance ? 2 : 1).forEach(({ other, otherIndex, distance }) => {
+    const twoNeighbors = (isSphere || index % 2 === 0) && nearest[1]?.distance < maxDistance
+    nearest.slice(0, twoNeighbors ? 2 : 1).forEach(({ other, otherIndex, distance }) => {
       const key = `${Math.min(index, otherIndex)}-${Math.max(index, otherIndex)}`
       if (linked.has(key)) return
       linked.add(key)
@@ -188,6 +204,19 @@ function makeBannerPortraitParticle(width, height, portrait, index) {
   }
 }
 
+function makeSpherePortraitParticle(width, height, portrait, index) {
+  const scale = width / 605
+  return {
+    ...makePortraitParticle(width, height, portrait, index),
+    x: portrait.x * width,
+    y: portrait.y * height,
+    size: (10 + (index * 7) % 16) * 0.6 * scale,
+    alpha: 0.12 + (index % 4) * 0.02,
+    driftX: (4 + index % 4) * scale,
+    driftY: (3 + index % 3) * scale,
+  }
+}
+
 function bannerBackgroundOpacity(y, height) {
   const distance = Math.abs(y / height - 0.5)
   const fade = Math.max(0, Math.min(1, (distance - 0.08) / 0.27))
@@ -204,6 +233,8 @@ export function AmbientParticles({ variant = 'network', motionActiveRef }) {
   const canvasRef = useRef(null)
   const [focus, setFocus] = useState(null)
   const isBanner = variant === 'banner'
+  const isSphere = variant === 'sphere'
+  const isInteractive = !isBanner && !isSphere
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -229,7 +260,8 @@ export function AmbientParticles({ variant = 'network', motionActiveRef }) {
     let lastFrameTime = start
     const stage = canvas.parentElement
     const cursorExclusions = Array.from(stage.querySelectorAll('.data-network__hub, .data-network__logo'))
-    const portraitImages = (isBanner ? BANNER_PORTRAITS : PORTRAITS).map(({ source, ...portrait }) => {
+    const portraitSet = isSphere ? SPHERE_PORTRAITS : isBanner ? BANNER_PORTRAITS : PORTRAITS
+    const portraitImages = portraitSet.map(({ source, ...portrait }) => {
       const image = new Image()
       image.decoding = 'async'
       return { ...portrait, source, image, sprites: null }
@@ -256,9 +288,9 @@ export function AmbientParticles({ variant = 'network', motionActiveRef }) {
       canvas.width = Math.max(1, Math.round(width * ratio))
       canvas.height = Math.max(1, Math.round(height * ratio))
       context.setTransform(ratio, 0, 0, ratio, 0, 0)
-      const makePortrait = isBanner ? makeBannerPortraitParticle : makePortraitParticle
+      const makePortrait = isSphere ? makeSpherePortraitParticle : isBanner ? makeBannerPortraitParticle : makePortraitParticle
       const portraits = portraitImages.map((portrait, index) => makePortrait(width, height, portrait, index))
-      portraitLinks = makePortraitLinks(portraits, Math.min(PORTRAIT_LINK_DISTANCE, width * 0.28), isBanner ? 0 : width / 2)
+      portraitLinks = makePortraitLinks(portraits, Math.min(PORTRAIT_LINK_DISTANCE, width * 0.28), isInteractive ? width / 2 : 0, isSphere)
       particles = [
         ...Array.from({ length: Math.round(width * height / 10000) }, () => makeParticle(width, height, 0)),
         ...Array.from({ length: Math.round(width * height / 38000) }, () => makeParticle(width, height, 1)),
@@ -351,7 +383,7 @@ export function AmbientParticles({ variant = 'network', motionActiveRef }) {
         const boost = focusBlend * proximity * proximity * (3 - 2 * proximity)
         const focusSize = particle.portrait ? 1 + particle.hoverGrowth * boost : 1
         const radius = particle.size * (1 + Math.sin(particleElapsed * particle.sizeSpeed + particle.phase) * particle.sizeAmplitude) * focusSize
-        if (particle.portrait && !isBanner) {
+        if (particle.portrait && isInteractive) {
           const clear = keepPortraitClearOfTracks(x, y, width, height, radius + 8, particle.x, particle.y)
           x = clear.x
           y = clear.y
@@ -378,8 +410,10 @@ export function AmbientParticles({ variant = 'network', motionActiveRef }) {
         context.beginPath()
         context.moveTo(first.renderX + directionX * first.renderRadius, first.renderY + directionY * first.renderRadius)
         context.lineTo(second.renderX - directionX * second.renderRadius, second.renderY - directionY * second.renderRadius)
-        context.strokeStyle = `rgba(145, 185, 220, ${(0.12 + 0.21 * fade) * (1 + 0.3 * boost) * opacity})`
-        context.lineWidth = 0.9 + 0.3 * boost
+        context.strokeStyle = isSphere
+          ? `rgba(135, 175, 211, ${0.16 + 0.20 * fade})`
+          : `rgba(145, 185, 220, ${(0.12 + 0.21 * fade) * (1 + 0.3 * boost) * opacity})`
+        context.lineWidth = isSphere ? Math.max(0.65, 0.95 * scale) : 0.9 + 0.3 * boost
         context.stroke()
       })
 
@@ -575,7 +609,7 @@ export function AmbientParticles({ variant = 'network', motionActiveRef }) {
     observer.observe(canvas)
     visibilityObserver.observe(stage)
     document.addEventListener('visibilitychange', handleVisibilityChange)
-    if (!isBanner) {
+    if (isInteractive) {
       stage.addEventListener('pointerenter', handlePointerMove)
       stage.addEventListener('pointermove', handlePointerMove)
       stage.addEventListener('pointerleave', handlePointerLeave)
@@ -594,12 +628,12 @@ export function AmbientParticles({ variant = 'network', motionActiveRef }) {
       window.cancelAnimationFrame(frame)
       portraitImages.forEach(({ image }) => { image.onload = null })
     }
-  }, [isBanner, motionActiveRef])
+  }, [isBanner, isSphere, isInteractive, motionActiveRef])
 
   return (
     <>
       <canvas className={`ambient-particles${isBanner ? ' ambient-particles--banner' : ''}`} ref={canvasRef} aria-hidden="true" />
-      {!isBanner && <div className={`ambient-particles__tooltips ${focus?.visible ? 'is-visible' : ''}`} style={focus ? { left: focus.x, top: focus.y } : undefined} aria-hidden="true">
+      {isInteractive && <div className={`ambient-particles__tooltips ${focus?.visible ? 'is-visible' : ''}`} style={focus ? { left: focus.x, top: focus.y } : undefined} aria-hidden="true">
         {(focus?.hints ?? SEGMENT_HINT_GROUPS[0]).map((hint) => <span key={hint}>{hint}</span>)}
       </div>}
     </>

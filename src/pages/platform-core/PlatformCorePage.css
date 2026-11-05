@@ -2,9 +2,10 @@ html:root:has(.platform-core-page),
 html:root:has(.platform-core-page) body { background: #fff; }
 .platform-core-page { width: 100%; min-height: 100svh; background: transparent; color: var(--mts-txt-primary-on-light); }
 .platform-core-page .platform-audience { scroll-margin-top: 80px; }
+.platform-core-page .platform-sections { margin-top: 200px; }
+.site-header.platform-core-header { position: absolute; }
 body:has(.platform-core-page) .site-header__content { width: min(1444px, calc(100% - 124px)); }
-/* The fixed header sits above animated and zoomed sections. A live backdrop blur
-   makes Chromium repaint that layer during their transitions. */
+/* Avoid repainting the backdrop blur while the header scrolls offscreen. */
 body:has(.platform-core-page) .site-header--fixed-on .site-header__frame {
   background: #f7fafd;
   -webkit-backdrop-filter: none;

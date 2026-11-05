@@ -1,0 +1,155 @@
+.budget-catalog {
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  width: min(500px, calc(100% - 24px));
+  height: min(600px, calc(100dvh - 24px));
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  padding: 32px;
+  overflow: hidden;
+  border: none;
+  border-radius: var(--mts-border-radius-big-card-border-radius);
+  background: var(--mts-bg-base);
+  color: var(--mts-txt-primary);
+  box-shadow: 0 10px 40px rgb(0 0 0 / 14%);
+  opacity: 0;
+  transform: translateY(8px) scale(.985);
+  transition: opacity 220ms ease, transform 220ms ease, overlay 220ms allow-discrete, display 220ms allow-discrete;
+}
+
+.budget-catalog[open] {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 16px;
+  opacity: 1;
+  transform: none;
+}
+
+.budget-catalog::backdrop {
+  background: rgb(0 0 0 / 28%);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 220ms ease, overlay 220ms allow-discrete, display 220ms allow-discrete;
+}
+.budget-catalog[open]::backdrop { opacity: 1; }
+@starting-style {
+  .budget-catalog[open] { opacity: 0; transform: translateY(8px) scale(.985); }
+  .budget-catalog[open]::backdrop { opacity: 0; }
+}
+html:has(.budget-catalog[open]) { overflow: hidden; }
+
+.budget-catalog__header { padding: 0 48px 8px 0; }
+.budget-catalog__header h3 { font: 500 24px/28px 'MTS Wide', Arial, sans-serif; outline: none; }
+.budget-catalog__close {
+  position: absolute;
+  inset: 24px 24px auto auto;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: solid var(--mts-stroke-neutral-0);
+  border-width: 0 1px;
+  border-radius: 50%;
+  background: rgb(247 250 253 / 32%);
+  backdrop-filter: blur(2px);
+  cursor: pointer;
+}
+.budget-catalog__close:hover { background: var(--mts-bg-dark); }
+.budget-catalog__close img, .budget-catalog__group-heading img { display: block; opacity: .7; }
+
+.budget-catalog__frame { position: relative; min-height: 0; }
+.budget-catalog__frame::before, .budget-catalog__frame::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset-inline: 0 8px;
+  height: min(60px, 14%);
+  background: url('../../assets/figma/budget-catalog/list-fade.png') center / 100% 100% no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 140ms ease;
+}
+.budget-catalog__frame::before { top: 0; transform: rotate(180deg); }
+.budget-catalog__frame::after { bottom: 0; }
+.budget-catalog__frame[data-top-fade="true"]::before,
+.budget-catalog__frame[data-bottom-fade="true"]::after { opacity: 1; }
+.budget-catalog__scroll {
+  height: 100%;
+  padding-right: 8px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: var(--mts-bg-logo-monochrome) var(--mts-neutral-1);
+}
+@supports selector(::-webkit-scrollbar) {
+  .budget-catalog__scroll { scrollbar-width: auto; scrollbar-color: auto; }
+  .budget-catalog__scroll::-webkit-scrollbar { width: 4px; }
+  .budget-catalog__scroll::-webkit-scrollbar-track { border-radius: 20px; background: var(--mts-neutral-1); }
+  .budget-catalog__scroll::-webkit-scrollbar-thumb { border-radius: 20px; background: var(--mts-bg-logo-monochrome); }
+}
+.budget-catalog__content, .budget-catalog__items { display: grid; gap: 16px; }
+.budget-catalog__content { color: #1d2023; font: 400 14px/20px 'MTS Compact', 'MTS Text', Arial, sans-serif; }
+.budget-catalog__content p[role="status"] { font: inherit; }
+.budget-catalog__group-heading, .budget-catalog__items label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+}
+.budget-catalog__group-heading button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.budget-catalog__group-heading img { transition: transform 160ms ease; }
+.budget-catalog__group-heading [aria-expanded="false"] img { transform: rotate(180deg); }
+.budget-catalog__items { margin-top: 8px; padding-left: 28px; gap: 8px; }
+.budget-catalog__items[hidden] { display: none; }
+.budget-catalog__items label { cursor: pointer; }
+.budget-catalog input[type="checkbox"] {
+  appearance: none;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  border: 0;
+  border-radius: 6px;
+  background: url('../../assets/figma/budget-catalog/checkbox-empty.svg') center no-repeat;
+  cursor: pointer;
+}
+.budget-catalog input:checked, .budget-catalog input:indeterminate {
+  --mark: url('../../assets/figma/budget-catalog/checkbox-check.svg');
+  background: var(--mark) center no-repeat, url('../../assets/figma/budget-catalog/checkbox-fill.svg') center no-repeat;
+}
+.budget-catalog input:indeterminate { --mark: url('../../assets/figma/budget-catalog/checkbox-dash.svg'); }
+.budget-catalog input:is(:checked, :indeterminate):hover {
+  background-image: url('../../assets/figma/budget-catalog/checkbox-hover.svg'), var(--mark), url('../../assets/figma/budget-catalog/checkbox-fill.svg');
+  background-blend-mode: multiply, normal, normal;
+}
+.budget-catalog input:focus-visible, .budget-catalog .budget-catalog__group-heading button:focus-visible { outline: 2px solid var(--mts-bg-states-link-action); outline-offset: -1px; }
+.budget-catalog input[type="search"] { width: 100%; padding: 10px 12px; border: 1px solid var(--mts-stroke-neutral-0); border-radius: 12px; background: white; color: inherit; font: inherit; }
+.budget-catalog .budget-catalog__apply { width: 100%; background: var(--mts-bg-base); line-height: 1; cursor: pointer; }
+.budget-catalog__apply span { padding-bottom: 2px; }
+.budget-catalog .budget-catalog__apply:hover { background: #fff0f3; }
+
+@media (max-width: 600px) {
+  .budget-catalog { padding: 24px; border-radius: 28px; }
+  .budget-catalog__close { inset: 16px 16px auto auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .budget-catalog, .budget-catalog::backdrop, .budget-catalog__frame::before, .budget-catalog__frame::after, .budget-catalog__group-heading img { transition: none; }
+}

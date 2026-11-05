@@ -1,6 +1,10 @@
 import { useId } from 'react'
 import stableId from '../../assets/figma/platform-audience/stable-id.png'
 import smartTarget from '../../assets/figma/platform-audience/smart-target.png'
+import stableTelegram from '../../assets/figma/platform-audience/stable-telegram.svg'
+import stableVk from '../../assets/figma/platform-audience/stable-vk.svg'
+import stableAvito from '../../assets/figma/platform-audience/stable-avito.svg'
+import stableBrand from '../../assets/figma/platform-audience/stable-brand.svg'
 import './AudienceTechnologyGraphics.css'
 
 // Keep the original Figma portraits, cropped into independently animated SVG layers.
@@ -59,6 +63,10 @@ function StableIdGraphic() {
       <ellipse className="stable-id__result-ring" rx="36.15" ry="36.88" />
       <ellipse className="stable-id__confirmation" rx="36.15" ry="36.88" />
     </g>
+    <image href={stableTelegram} x="24" y="33" width="16" height="16" />
+    <image href={stableVk} x="66" y="50" width="16" height="16" />
+    <image href={stableAvito} x="34" y="81" width="16" height="16" />
+    <image className="stable-id__mts-logo" href={stableBrand} x="144" y="62" width="24" height="25" />
   </svg>
 }
 

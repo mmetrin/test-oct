@@ -28,26 +28,41 @@
 .platform-use-cases { width: 1440px; margin-inline: auto; }
 .platform-use-cases__cards { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 60px; }
 .platform-use-cases__card { display: flex; flex-direction: column; align-items: center; height: 290px; overflow: hidden; border-radius: 40px; background: var(--mts-bg-dark); }
-.platform-use-cases__image { display: block; flex-shrink: 0; width: 474.667px; height: 170px; }
-.platform-use-cases__copy { padding: 0 32px 32px; text-align: center; }
+.platform-use-cases__copy { flex: 0 0 auto; width: 100%; padding: 32px 32px 24px; text-align: center; }
 .platform-use-cases__copy h3 { font-size: 24px; line-height: 28px; }
 .platform-use-cases__copy p { margin-top: 12px; }
+.platform-use-cases__image-wrap { position: relative; flex: 1 1 auto; align-self: stretch; min-height: 0; overflow: hidden; }
+.platform-use-cases__image { position: absolute; top: 0; display: block; height: 146px; max-width: none; transform: translateX(-50%); }
+.platform-use-cases__image--brands { left: 50%; width: 602px; }
+.platform-use-cases__image--agencies { left: calc(50% - 8px); width: 526px; }
 
-.platform-publishers { display: flex; flex-direction: column; align-items: center; gap: 60px; min-height: 482px; margin-top: 248px; }
-.platform-publishers__background { position: absolute; z-index: -1; left: 1px; top: -81px; width: 1919px; height: 616.5px; pointer-events: none; }
-.platform-publishers__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 860px; }
-.platform-publishers__card { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 32px; border-radius: 40px; background: #fff; }
+.platform-publishers { display: flex; flex-direction: column; align-items: center; gap: 60px; margin-top: 248px; padding-right: 2px; }
+.platform-publishers .platform-sections__heading h2 { line-height: 53px; }
+.platform-publishers__background { position: absolute; z-index: -1; left: 0; top: -81px; width: 1919px; height: auto; pointer-events: none; }
+.platform-publishers__cards { display: flex; justify-content: center; gap: 8px; }
+.platform-publishers__card { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding: 32px; border-radius: 40px; background: var(--mts-white); }
 .platform-publishers__brand { display: flex; align-items: center; gap: 12px; }
-.platform-publishers__brand img { display: block; width: 44px; height: 44px; object-fit: contain; }
+.platform-publishers__brand img { display: block; }
 .platform-publishers__brand h3 { white-space: nowrap; font: 400 17px/24px 'MTS Text', Arial, sans-serif; }
-.platform-publishers__card > p { white-space: nowrap; font: 500 24px/28px 'MTS Wide', Arial, sans-serif; }
+.platform-publishers__card .platform-publishers__audience { display: flex; align-items: flex-end; gap: 8px; white-space: nowrap; font: 500 24px/28px 'MTS Wide', Arial, sans-serif; }
+.platform-publishers__audience span { padding-bottom: 2px; font-size: 20px; line-height: 24px; }
 .platform-sections__cta { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 14px 24px; border: 1px solid var(--mts-bg-states-action); border-radius: 40px; background: #fff; color: var(--mts-bg-states-action); text-decoration: none; font: 500 16px/20px 'MTS Wide', Arial, sans-serif; transition: background-color 180ms ease; }
 .platform-sections__cta:hover { background: #fff0f3; }
 .platform-sections :is(a, button):focus-visible { outline: 3px solid #307de6; outline-offset: 5px; }
 
-.platform-sections__canvas--intro { padding-bottom: 0; }
+.platform-sections__canvas--intro { padding-top: 0; padding-bottom: 0; }
 .platform-sections__canvas--connection { padding-top: 200px; }
 .platform-budget { z-index: 1; width: 1920px; margin-top: 200px; zoom: calc(100cqw / 1920px); }
 
 .platform-connection { height: 652px; }
-.platform-connection__composition { position: absolute; z-index: -1; top: -659.62px; left: 0; display: block; width: 1920px; height: 1546px; }
+.platform-connection img { position: absolute; display: block; height: auto; pointer-events: none; }
+.platform-connection__office,
+.platform-connection__gradient { z-index: -1; left: 0; width: 1920px; }
+/* Offsets are relative to the top of the card, as on the enterprise homepage. */
+.platform-connection__office { top: -134px; }
+.platform-connection__gradient {
+  top: -1121.62px;
+  /* The separate export includes the page colour. Fade it into the photograph. */
+  mask-image: linear-gradient(to bottom, #000 69%, rgb(0 0 0 / 92%) 73%, rgb(0 0 0 / 55%) 80%, rgb(0 0 0 / 21%) 87%, rgb(0 0 0 / 3%) 94%, transparent 98%);
+}
+.platform-connection__form { top: -15px; left: 220px; width: 740px; }

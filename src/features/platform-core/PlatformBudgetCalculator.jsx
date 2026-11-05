@@ -1,15 +1,22 @@
 import { useState } from 'react'
-import { budgetGroups } from './budgetSegments'
+import { budgetGroups, demographics, interestCatalog } from './budgetSegments'
+import { BudgetInterestCatalog } from './BudgetInterestCatalog'
+import { BudgetMultiSelect } from './BudgetMultiSelect'
 import { platformChannels } from './platformChannels'
-import { estimateBudget, populationLimit, monthlyFrequency, exampleCpm } from './budgetEstimate'
+import { estimateBudget, monthlyFrequency } from './budgetEstimate'
 import './PlatformBudgetCalculator.css'
 
-const icons = import.meta.glob('../../assets/figma/platform-calculator/*.svg', { eager: true, import: 'default' })
-const icon = (name) => icons[`../../assets/figma/platform-calculator/${name}.svg`]
-const segments = budgetGroups.flatMap(group => group.items)
-const initialSelection = segments.filter(segment => segment.selected).map(segment => segment.label)
+const artwork = import.meta.glob('../../assets/figma/platform-calculator/*.svg', { eager: true, import: 'default' })
+const icon = name => artwork[`../../assets/figma/platform-calculator/${name}.svg`]
+const segments = [...budgetGroups, ...interestCatalog].flatMap(group => group.items)
+const initialSelection = segments.filter(segment => segment.selected).map(segment => segment.row)
+const initialProfile = {
+  sex: demographics.find(group => group.id === 'sex').items.map(item => item.row),
+  age: demographics.find(group => group.id === 'age').items.map(item => item.row),
+  income: demographics.find(group => group.id === 'income').items.slice(-2).map(item => item.row),
+}
 const number = new Intl.NumberFormat('ru-RU')
-const millions = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 2 })
+const plural = new Intl.PluralRules('ru-RU')
 
 function ChannelLogo({ name }) {
   if (name !== 'avito') return <img src={icon(name)} alt="" />
@@ -21,65 +28,91 @@ function ChannelLogo({ name }) {
 }
 
 function BudgetResult({ estimate, multiple }) {
-  const { audience, budget, channelReach, capped } = estimate
-  const qualifier = multiple ? 'до ' : ''
+  const { audience, budget, channelReach, capped, modeled } = estimate
+  const people = plural.select(audience) === 'few' ? 'человека' : 'человек'
+  const description = modeled ? 'Оценка аудитории' : multiple ? 'Верхняя оценка аудитории' : 'Аудитория'
   return <aside className="budget-result" aria-label="Предварительная оценка кампании">
-    <div>
-      <div className="budget-result__people"><small>{qualifier}</small>{number.format(audience)}</div>
-      <p className="budget-result__caption">{audience ? 'человек в выбранной аудитории' : 'Выберите хотя бы один сегмент'}</p>
+    <div className="budget-result__metric">
+      <div className="budget-result__people">
+        <span>{number.format(audience)}</span> <small>чел</small>
+      </div>
+      <p className="budget-result__secondary">Охват Big Data МТС</p>
       {capped && <p className="budget-result__limit">Достигнут предел по численности населения</p>}
     </div>
     <div className="budget-result__channels">
-      <p className="budget-result__secondary">{multiple ? 'Верхняя оценка по площадкам' : 'Аудитория на площадках'}</p>
       {platformChannels.map(({ title, id }) => <div className="budget-result__channel" key={id}>
         <span className="budget-result__brand"><span className="budget-result__logo"><ChannelLogo name={id} /></span>{title}</span>
-        <span className="budget-result__leader" aria-hidden="true" />
+        <span className="budget-result__leader" style={{ backgroundImage: `url(${icon(id + '-leader')})` }} aria-hidden="true" />
         <strong>{number.format(channelReach[id])}</strong>
       </div>)}
+      <p className="budget-result__secondary">Охват на площадках</p>
     </div>
-    <div>
-      <p className="budget-result__secondary">Бюджет при {monthlyFrequency} показах на человека<br />и условном CPM {exampleCpm} ₽</p>
-      <div className="budget-result__amount budget-result__amount--money">{millions.format(budget / 1_000_000)} <span>млн ₽ в месяц</span></div>
+    <div className="budget-result__metric">
+      <div className="budget-result__amount">{number.format(budget)} <span>₽ в месяц</span></div>
+      <p className="budget-result__secondary">Бюджет при частоте {monthlyFrequency} и среднем CPM</p>
     </div>
-    <a className="platform-sections__cta budget-result__cta" href="#connection">Обсудить запуск</a>
-    <span className="platform-sections__sr-only" role="status">Аудитория {qualifier}{number.format(audience)} человек. Сценарный бюджет {number.format(budget)} рублей в месяц.</span>
+    <div className="budget-result__footer">
+      <a className="platform-sections__cta budget-result__cta" href="#connection">Обсудить запуск</a>
+      <p className="budget-result__legal">Охват рассчитан без учёта географии. При запуске кампании можно выбрать города и регионы показа. Расчёт ориентировочный, параметры зависят от настроек и сезона. Не является офертой.</p>
+    </div>
+    <span className="platform-sections__sr-only" role="status">{description} — {number.format(audience)} {people}. Сценарный бюджет {number.format(budget)} рублей в месяц.</span>
   </aside>
 }
 
-export function PlatformBudgetCalculator() {
+export function PlatformBudgetCalculator({ dialogHost }) {
   const [selected, setSelected] = useState(initialSelection)
-  const activeSegments = segments.filter(item => selected.includes(item.label))
-  const estimate = estimateBudget(activeSegments)
+  const [profile, setProfile] = useState(initialProfile)
+  const filters = demographics.flatMap(group => {
+    const chosen = group.items.filter(item => profile[group.id]?.includes(item.row))
+    return chosen.length ? [{ id: group.id, chosen, options: group.items }] : []
+  })
+  const activeSegments = segments.filter(item => selected.includes(item.row))
+  const hasSelection = activeSegments.length > 0 || filters.length > 0
+  const estimate = estimateBudget(activeSegments, filters)
 
-  function toggle(label) {
-    setSelected(current => current.includes(label) ? current.filter(value => value !== label) : [...current, label])
+  function toggle(row) {
+    setSelected(current => current.includes(row) ? current.filter(value => value !== row) : [...current, row])
+  }
+
+  function profileField({ id, title, placeholder, items }) {
+    return <BudgetMultiSelect key={id} compact title={title} placeholder={placeholder}
+      groups={[{ items }]} value={profile[id] || []}
+      onChange={rows => setProfile(current => ({ ...current, [id]: rows }))} />
   }
 
   return <div className="budget-calculator">
     <div className="budget-picker">
-      <h3>Выберите аудиторию</h3>
+      <div className="budget-picker__heading">
+        <h3>Подберите аудиторию</h3>
+        <div className="budget-picker__actions">
+          {hasSelection && <button type="button" className="budget-picker__reset" onClick={() => {
+            setSelected([])
+            setProfile({})
+          }}>Сбросить выбор</button>}
+          <BudgetInterestCatalog dialogHost={dialogHost} selected={selected} childAges={profile.children ?? []} onApply={(rows, childAges) => {
+            setSelected(rows)
+            setProfile(current => ({ ...current, children: childAges }))
+          }} />
+        </div>
+      </div>
       <div className="budget-picker__groups">
         {budgetGroups.map(group => <div className="budget-picker__row" key={group.title} role="group" aria-label={group.title}>
           <span className="budget-picker__label">{group.title}</span>
           <div className="budget-picker__options">
-            {group.items.map(item => <button key={item.label} type="button" className={`budget-chip budget-chip--${item.tone ?? group.tone}`}
-              aria-pressed={selected.includes(item.label)} title={`${item.source} · ${number.format(item.audience)} чел.`} onClick={() => toggle(item.label)}>
-              <span className="budget-chip__icon"><img src={icon(item.icon)} alt="" /></span>
+            {group.items.map(item => <button key={item.row} type="button" className="budget-chip" data-tone={item.tone}
+              aria-pressed={selected.includes(item.row)} title={`${item.source} · ${number.format(item.audience)} чел.`} onClick={() => toggle(item.row)}>
+              <span className="budget-chip__icon" aria-hidden="true">{item.icon && <img src={icon(item.icon)} alt="" />}</span>
               <span className="budget-chip__text">{item.label}</span>
-              {selected.includes(item.label) && <img className="budget-chip__close" src={icon('close')} alt="" />}
+              {selected.includes(item.row) && <img className="budget-chip__close" src={icon('close')} alt="" />}
             </button>)}
           </div>
         </div>)}
+        <div className="budget-profile">
+          {demographics.filter(field => field.id !== 'children').map(profileField)}
+        </div>
       </div>
-      <p className="budget-picker__note">Человек может входить в несколько сегментов. Для такого выбора показана верхняя оценка аудитории.</p>
-      <details className="budget-picker__method">
-        <summary>Как считаем</summary>
-        <p>Выбор включает людей хотя бы из одного сегмента. Складываем размеры выбранных сегментов. Если один человек входит в несколько, сумма учитывает его повторно. Для каждой площадки считаем отдельно и ограничиваем результат её месячной аудиторией из блока «Площадки».</p>
-        {activeSegments.length > 1 && <p>Сумма по вашему выбору — {number.format(estimate.gross)} вхождений. В крупнейшем сегменте — {number.format(Math.max(...activeSegments.map(item => item.audience)))} человек.</p>}
-        <p>Предел оценки — {number.format(populationLimit)} жителей России без Крыма и Севастополя на 1 января 2025 года. Предел применяется к итогу. Чтобы исключить жителей этих территорий из каждого сегмента, нужны данные по регионам.</p>
-        <p>Бюджет рассчитан для показа рекламы всей указанной аудитории по {monthlyFrequency} раза за месяц. Для примера берём {exampleCpm} ₽ за 1 000 показов. Фактический охват и стоимость зависят от размещения.</p>
-      </details>
+
     </div>
-    <BudgetResult estimate={estimate} multiple={activeSegments.length > 1} />
+    <BudgetResult estimate={estimate} multiple={activeSegments.length > 1 || estimate.bounded} />
   </div>
 }
